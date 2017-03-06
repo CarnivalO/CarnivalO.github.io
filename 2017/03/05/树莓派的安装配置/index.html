@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            树莓派的安装配置 | 
+        
+        CarnivalO
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="WangJianian">
+    <meta name="description" content="简介">
+    <meta name="keywords" content="null,linux,树莓派">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="CarnivalO">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://carnivalo.top">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="树莓派的安装配置 | CarnivalO">
+    <meta property="og:description" content="简介">
+    <meta property="og:article:tag" content="linux,树莓派"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+    <!-- Baidu Analytics -->
+    <script>
+        var _hmt = _hmt || [];
+        (function() {var hm = document.createElement('script');
+        hm.src = 'https://hm.baidu.com/hm.js?d220d8526af469bfaa3808cc40570e14';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#系统选择"><span class="post-toc-number">1.</span> <span class="post-toc-text">系统选择:</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-配置apt源"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.配置apt源</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-系统命令"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2.系统命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-一些必要的软件"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3.一些必要的软件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-screen"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">1.screen</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-vim"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">2.vim</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-aria2"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">3.aria2</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-一些技巧性的操作"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">4.一些技巧性的操作</span></a></li></ol></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                树莓派的安装配置
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>WangJianian</strong>
+        <span>3月 05, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/linux-树莓派/">linux,树莓派</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=树莓派的安装配置&url=http://carnivalo.top//2017/03/05/树莓派的安装配置/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=树莓派的安装配置&url=http://carnivalo.top//2017/03/05/树莓派的安装配置/index.html&via=WangJianian" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://carnivalo.top//2017/03/05/树莓派的安装配置/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://carnivalo.top//2017/03/05/树莓派的安装配置/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h1 id="系统选择"><a href="#系统选择" class="headerlink" title="系统选择:"></a>系统选择:</h1><p>dietpi,轻量,迅速,适合树莓派这样的机器<br>具体烧录的事就不多说了~<br>先进入系统它会自动安装,等安装好后会让你配置,这里有个apt-update的操作,如果速度慢,可以ctrl+c终止,先把源改了,或者等装完了再改.</p>
+<h2 id="1-配置apt源"><a href="#1-配置apt源" class="headerlink" title="1.配置apt源"></a>1.配置apt源</h2><p>在这里有一个坑,要注意自己的系统版本是否与源里面的对应,在网上搜到的阿里云是wheezy版,现在最新稳定版是jessie.  </p>
+<p>编辑:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/apt/source.list</div></pre></td></tr></table></figure></p>
+<p>下面放了两个源地址,选其中一个就好了:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ jessie main non-free contrib rpi</div><div class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ jessie main non-free contrib rpi</div><div class="line"></div><div class="line">deb http://mirrors.zju.edu.cn/raspbian/raspbian/ jessie main contrib non-free rpi</div><div class="line">deb-src http://mirrors.zju.edu.cn/raspbian/raspbian/ jessie main contrib non-free rpi</div></pre></td></tr></table></figure></p>
+<h2 id="2-系统命令"><a href="#2-系统命令" class="headerlink" title="2.系统命令"></a>2.系统命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">更新版本：dietpi-update  </div><div class="line">更新内核：rpi-update  </div><div class="line">日常更新：update</div></pre></td></tr></table></figure>
+<h2 id="3-一些必要的软件"><a href="#3-一些必要的软件" class="headerlink" title="3.一些必要的软件"></a>3.一些必要的软件</h2><h3 id="1-screen"><a href="#1-screen" class="headerlink" title="1.screen"></a>1.screen</h3><p>现在ssh远程连接上去最好再用screen建一个会话,避免ssh断开造成会话结束.<br>安装:<code>apt install screen</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">screen -S xxx //创建一个会话</div><div class="line">screen -r xxx //恢复一个会话</div><div class="line">screen -x xxx //同步观看xxx的操作</div><div class="line">exit</div></pre></td></tr></table></figure></p>
+<h3 id="2-vim"><a href="#2-vim" class="headerlink" title="2.vim"></a>2.vim</h3><p>dietpi没有默认装vim..太精简了..<br>安装:<code>apt install vim</code><br>创建编辑配置文件:vim ~/.vimrc<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">syntax on              //语法检查</div><div class="line">colorscheme koehler    //设置主题</div><div class="line">filetype on            //开启文件监测</div><div class="line">set clipboard+=unnamed //使用系统剪贴板</div><div class="line">set nu</div><div class="line">if has(&apos;mouse&apos;)</div><div class="line">set mouse=a</div><div class="line">endif</div></pre></td></tr></table></figure></p>
+<h3 id="3-aria2"><a href="#3-aria2" class="headerlink" title="3.aria2"></a>3.aria2</h3><p>下载工作交给低功耗电脑最好了,现在还是推荐买个路由刷pandavan,用路由下载更方便~<br>安装:<code>apt install aria2</code><br>在家目录创建.aria2文件夹,在里面创建aria2.conf和aria2.session文件<br><a href="http://aria2c.com/usage.html" target="_blank" rel="external">aria2.conf系统配置</a><br>使用screen启动,避免会话结束后aria2被关闭:screen -dmS aria2 aria2c –conf-path=/root/.aria2/aria2.conf<br>查询使用状态:netstat -anp|grep 6800</p>
+<h2 id="4-一些技巧性的操作"><a href="#4-一些技巧性的操作" class="headerlink" title="4.一些技巧性的操作"></a>4.一些技巧性的操作</h2><p>删除除了哪个文件之外的:<code>rm -rf !(zh_CN|en_GB)</code></p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+    <!-- 使用 DISQUS -->
+    <div id="disqus-comment">
+        <div id="disqus_thread"></div>
+<script>
+    queue.offer(function() {
+            var disqus_config = function () {
+                this.page.url = 'http://carnivalo.top/2017/03/05/树莓派的安装配置/index.html';  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document;
+                var s = d.createElement('script');
+                s.src = '//carnivalo.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', + new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        });
+</script>
+
+    </div>
+    <style>
+        #disqus-comment{
+            background-color: #eee;
+            padding: 2pc;
+        }
+    </style>
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/02/08/mac环境备份/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="WangJianian's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmwjn15@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;CarnivalO
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- 使用 DISQUS js 代码 -->
+    <script id="dsq-count-scr" src="//carnivalo.disqus.com/count.js" async></script>
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div>
+        </body>
+    
+</html>
