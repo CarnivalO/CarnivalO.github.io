@@ -10,7 +10,7 @@
     
     <title>
         
-            标签: mac,软件 | 
+            搭建sspanel的问题记录 | 
         
         CarnivalO
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://carnivalo.top">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="标签: mac,软件 | CarnivalO">
+    <meta property="og:title" content="搭建sspanel的问题记录 | CarnivalO">
     <meta property="og:description" content="web前端,linux运维,nba火箭队,硬件">
     
 
@@ -218,93 +218,255 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
-    <!-- Pin on top -->
     
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
 
-    <!-- Normal Post -->
-    
-        
-        
-            <!-- Paradox Thumbnail -->
-            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-解决pip-install-时locale-Error-unsupported-locale-setting"><span class="post-toc-number">1.</span> <span class="post-toc-text">1.解决pip install 时locale.Error: unsupported locale setting</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-直接访问首页会有500错误"><span class="post-toc-number">2.</span> <span class="post-toc-text">2.直接访问首页会有500错误</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-chacha20不能用"><span class="post-toc-number">3.</span> <span class="post-toc-text">3.chacha20不能用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-ssr只能用ssr客户端"><span class="post-toc-number">4.</span> <span class="post-toc-text">4.ssr只能用ssr客户端</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-启动后只有rc4-md5加密"><span class="post-toc-number">5.</span> <span class="post-toc-text">5.启动后只有rc4-md5加密</span></a></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
     
         
             <!-- Random Thumbnail -->
             <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2017/02/08/mac环境备份/">mac环境备份</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2017/02/08/mac环境备份/" target="_self">继续阅读</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.png" width="44px" height="44px" alt="WangJianian's avatar">
-            </div>
-            <div>
-                <strong>WangJianian</strong>
-                <span>2月 08, 2017</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-            <!-- Category -->
-            <span class="post_entry-category">
-                
-            </span>
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-        
-        
-        
-    
-
-    
-
-    
-        <script>
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')')
-
-        locatePost = locatePost.next();
-    }
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
 </script>
 
+        
+    
+            <p class="article-headline-p">
+                搭建sspanel的问题记录
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>WangJianian</strong>
+        <span>3月 08, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=搭建sspanel的问题记录&url=http://carnivalo.top//2017/03/08/搭建sspanel的问题记录/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=搭建sspanel的问题记录&url=http://carnivalo.top//2017/03/08/搭建sspanel的问题记录/index.html&via=WangJianian" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://carnivalo.top//2017/03/08/搭建sspanel的问题记录/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://carnivalo.top//2017/03/08/搭建sspanel的问题记录/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>具体的搭建,照着官网文档就好,在这里主要记录下官网里没提到的问题<br><a href="https://github.com/orvice/ss-panel" target="_blank" rel="external">sspanel</a><br><a href="https://github.com/breakwa11/shadowsocks-rss/wiki/Server-Setup(manyuser-with-mysql" target="_blank" rel="external">ssr数据库多用户</a>)  </p>
+<h2 id="1-解决pip-install-时locale-Error-unsupported-locale-setting"><a href="#1-解决pip-install-时locale-Error-unsupported-locale-setting" class="headerlink" title="1.解决pip install 时locale.Error: unsupported locale setting"></a>1.解决pip install 时locale.Error: unsupported locale setting</h2><p>输入<br><code># locale</code><br>最下面LC_ALL=如果为空,就输入<br><code>#export LC_ALL=C</code></p>
+<h2 id="2-直接访问首页会有500错误"><a href="#2-直接访问首页会有500错误" class="headerlink" title="2.直接访问首页会有500错误"></a>2.直接访问首页会有500错误</h2><p>这是因为默认的basedir只是public目录下,上一级目录无法访问,修改以下文件<br><code>vim /usr/local/nginx/conf/fastcgi.conf</code><br>最下面 open basedir 加上/home/wwwroot/ss-panel/</p>
+<h2 id="3-chacha20不能用"><a href="#3-chacha20不能用" class="headerlink" title="3.chacha20不能用"></a>3.chacha20不能用</h2><p>这里要装libsodium<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">apt-get install build-essential</div><div class="line">wget https://github.com/jedisct1/libsodium/releases/download/1.0.10/libsodium-1.0.10.tar.gz</div><div class="line">tar xf libsodium-1.0.10.tar.gz &amp;&amp; cd libsodium-1.0.10</div><div class="line">./configure &amp;&amp; make -j2 &amp;&amp; make install</div><div class="line">ldconfig</div></pre></td></tr></table></figure></p>
+<h2 id="4-ssr只能用ssr客户端"><a href="#4-ssr只能用ssr客户端" class="headerlink" title="4.ssr只能用ssr客户端"></a>4.ssr只能用ssr客户端</h2><p>修改user-config.json中的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot;Protocol&quot;:&quot;origin&quot;</div><div class="line">&quot;obfs&quot;:&quot;plain&quot;</div></pre></td></tr></table></figure></p>
+<p>加密方式在这里修改没用</p>
+<h2 id="5-启动后只有rc4-md5加密"><a href="#5-启动后只有rc4-md5加密" class="headerlink" title="5.启动后只有rc4-md5加密"></a>5.启动后只有rc4-md5加密</h2><p>在ss-panel的用户设置中修改</p>
+
+    
+
     
 </div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+    <!-- 使用 DISQUS -->
+    <div id="disqus-comment">
+        <div id="disqus_thread"></div>
+<script>
+    queue.offer(function() {
+            var disqus_config = function () {
+                this.page.url = 'http://carnivalo.top/2017/03/08/搭建sspanel的问题记录/index.html';  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+
+            (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document;
+                var s = d.createElement('script');
+                s.src = '//carnivalo.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', + new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        });
+</script>
+
+    </div>
+    <style>
+        #disqus-comment{
+            background-color: #eee;
+            padding: 2pc;
+        }
+    </style>
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/03/07/sspanel/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     
@@ -450,6 +612,14 @@ It will not impact the appearance and can give developers a lot of support :)
 </aside>
 
                     
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
 
                     
 
