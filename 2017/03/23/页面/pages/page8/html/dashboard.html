@@ -417,26 +417,39 @@
 			]
 			};
 			myChart.setOption(option);
-			$.getJSON('../device/getonedata').done(function(data) {
-					option.series[0].data[0].value=data[0].dvalue;
-					option.series[1].data[0].value=data[1].dvalue;
-					option.series[2].data[0].value=data[2].dvalue;
-					option.series[3].data[0].value=data[3].dvalue;
-					myChart.setOption(option);
-					deferred();
-			})
-			var clientid=Math.random()*100000000000;
-			function deferred(){
-			    $.getJSON("../device/poll/last/"+clientid, function(result) {	
-					option.series[0].data[0].value=result.sd;
-					option.series[1].data[0].value=result.wd;
-					option.series[2].data[0].value=result.pm;
-					option.series[3].data[0].value=result.xh;
-					$("#console").prepend(new Date().toLocaleString()+"\n"+"湿度: "+result.sd+", 温度: "+result.wd+", PM2.5: "+result.pm+", 信号强度: "+ -result.xh+"\n");
-					myChart.setOption(option);
-					deferred();
-				});
-			}			
+			// $.getJSON('../device/getonedata').done(function(data) {
+			// 		option.series[0].data[0].value=data[0].dvalue;
+			// 		option.series[1].data[0].value=data[1].dvalue;
+			// 		option.series[2].data[0].value=data[2].dvalue;
+			// 		option.series[3].data[0].value=data[3].dvalue;
+			// 		myChart.setOption(option);
+			// 		deferred();
+			// })
+			setInterval(function (){
+				var num1 = parseInt((Math.random()*100));
+				var num2 = parseInt((Math.random()*100));
+				var num3 = parseInt((Math.random()*100));
+				var num4 = parseInt((Math.random()*100));
+    option.series[0].data[0].value = num1;
+    option.series[1].data[0].value = num2;
+    option.series[2].data[0].value = num3;
+    option.series[3].data[0].value = num4;
+		$("#console").prepend(new Date().toLocaleString()+"\n"+"湿度: "+num1+", 温度: "+num2+", PM2.5: "+num3+", 信号强度: "+ -num4+"\n");
+	
+    myChart.setOption(option);
+},2000)
+			// var clientid=Math.random()*100000000000;
+			// function deferred(){
+			//     $.getJSON("../device/poll/last/"+clientid, function(result) {	
+			// 		option.series[0].data[0].value=result.sd;
+			// 		option.series[1].data[0].value=result.wd;
+			// 		option.series[2].data[0].value=result.pm;
+			// 		option.series[3].data[0].value=result.xh;
+			// 		$("#console").prepend(new Date().toLocaleString()+"\n"+"湿度: "+result.sd+", 温度: "+result.wd+", PM2.5: "+result.pm+", 信号强度: "+ -result.xh+"\n");
+			// 		myChart.setOption(option);
+			// 		deferred();
+			// 	});
+			// }			
 			
 			myChart.on('click', function(params) {
 				window.open('./linechart.html?type=' + params.data.type+'&max='+params.data.max);
