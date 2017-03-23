@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cmn-Hans">
+<meta charset="UTF-8">
+<title>智慧猪场Demo-闪龙科技</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+
+<link rel="stylesheet" href="../css/bootstrap.min.css" />
+<link rel="stylesheet" href="../css/font-awesome.min.css" />
+<link rel="stylesheet" href="../css/AdminLTE.min.css" />
+<link rel="stylesheet" href="../css/skin-blue.min.css" />
+<link rel="stylesheet" href="../css/style.min.css" />
+</head>
+<input type="hidden" value="12" id="number"/>
+<input type="hidden" value="0" id="parent"/>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+ <header class="main-header">
+	<a href="index.html" class="logo">
+		<span class="logo-mini">闪龙</span>
+		<span class="logo-lg">Sanlogic 闪龙科技</span>
+	</a>
+	<nav class="navbar navbar-static-top" role="navigation">
+		<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+			<span class="sr-only">Toggle navigation</span>
+		</a>
+		<div class="navbar-custom-menu">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown" id="userControl">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">管理员<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li>
+							<a href="#">警报管理</a>
+						</li>
+						<li>
+							<a href="#">用户管理</a>
+						</li>
+						<li>
+							<a href="#">日志</a>
+						</li>
+						<li>
+							<a href="#">报表查询</a>
+						</li>
+						<li>
+							<a href="#">系统配置</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="#">注销</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</header>
+<aside class="main-sidebar">
+	<section class="sidebar">
+		<ul class="sidebar-menu">
+			<li id="li-1">
+				<a href="./index.html"><i class="fa fa-map"></i> <span>GIS</span></a>
+			</li>
+			<li class="treeview">
+				<a href="#"><i class="fa fa-camera"></i> <span>视频监控</span>
+					<span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+				</a>
+				<ul class="treeview-menu">
+					<li id="li-2">
+						<a href="./video.html">总览</a>
+					</li>
+					<li>
+						<a href="#">猪舍</a>
+					</li>
+					<li>
+						<a href="#">育成舍</a>
+					</li>
+					<li>
+						<a href="#">办公楼</a>
+					</li>
+					<li>
+						<a href="#">大门</a>
+					</li>
+				</ul>
+			</li>
+			<li class="treeview">
+				<a href="#"><i class="fa fa-link"></i> <span>环境监测</span>
+					<span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+				</a>
+				<ul class="treeview-menu">
+					<li id="li-3">
+						<a href="./gauge.html">数据监控</a>
+					</li>
+					<li>
+						<a href="#">猪舍</a>
+					</li>
+					<li>
+						<a href="#">育成舍</a>
+					</li>
+					<li>
+						<a href="#">办公楼</a>
+					</li>
+					<li>
+						<a href="#">大门</a>
+					</li>
+				</ul>
+			</li>
+			<li id="li-4">
+				<a href="#"><i class="fa fa-key"></i> <span>门禁管理</span></a>
+			</li>
+			<li id="li-5">
+				<a href="./data1.html"><i class="fa fa-key"></i> <span>数据展示1</span></a>
+			</li>
+			<li id="li-6">
+				<a href="./data2.html"><i class="fa fa-key"></i> <span>数据展示2</span></a>
+			</li>
+			<li id="li-7">
+				<a href="./data3.html"><i class="fa fa-key"></i> <span>数据展示3</span></a>
+			</li>
+			<li id="li-8">
+				<a href="./data4.html"><i class="fa fa-key"></i> <span>数据展示4</span></a>
+			</li>
+			<li id="li-9">
+				<a href="./data5.html"><i class="fa fa-key"></i> <span>数据展示5</span></a>
+			</li>
+			<li id="li-10">
+				<a href="./data6.html"><i class="fa fa-key"></i> <span>数据展示6</span></a>
+			</li>
+			<li id="li-11">
+				<a href="./data7.html"><i class="fa fa-key"></i> <span>数据展示7</span></a>
+			</li>
+			<li id="li-12">
+				<a href="./data8.html"><i class="fa fa-key"></i> <span>数据展示8</span></a>
+			</li>
+		</ul>
+	</section>
+</aside>
+  <div class="content-wrapper">
+    <section class="content">
+		<div id="main"></div>
+    </section>
+  </div>
+</div>
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/app.min.js"></script>
+
+
+<script src="../js/echarts.min.js"></script>
+
+
+<script>
+$(document).ready(function(){
+	$('#userControl').mouseover(function() {
+		$(this).addClass('open');
+	}).mouseout(function() {
+		$(this).removeClass('open');
+	});
+	var index = parseInt($("#number").val());
+	var parent = parseInt($("#parent").val());
+	if(parent == 0){
+		$("#li-"+index).addClass("active");
+	}else{
+		$("#li-"+index).addClass("active");
+		$("#li-"+index).parent().parent().addClass("active");
+	}
+})
+	
+</script>
+<script>
+$("#main").height(document.body.scrollHeight-80)
+ var myChart = echarts.init(document.getElementById('main'));
+var colorList = [
+    '#c23531', '#2f4554', '#61a0a8',
+    '#d48265', '#91c7ae','#749f83',
+    '#ca8622', '#bda29a','#6e7074',
+    '#546570', '#c4ccd3'
+];
+
+var originalData = [
+    {value: 335, name: '直接访问'},
+    {value: 310, name: '邮件营销'},
+    {value: 234, name: '联盟广告'},
+    {value: 135, name: '视频广告'},
+    {value: 1548, name: '搜索引擎'}
+];
+echarts.util.each(originalData, function (item, index) {
+    item.itemStyle = {
+        normal: {color: colorList[index]}
+    };
+});
+
+var data = [];
+var legendData = [];
+
+var dragging;
+var draggingDataIndex;
+var dx;
+var dy;
+var zr = myChart.getZr();
+
+resetOption();
+
+myChart.on('mousedown', function (params) {
+    draggingDataIndex = getHoveredDataIndex(params);
+    if (draggingDataIndex != null) {
+
+        var srcSector = params.event.target;
+        dragging = new echarts.graphic.Sector({
+            shape: echarts.util.extend({}, srcSector.shape),
+            style: {
+                fill: srcSector.style.fill,
+                opacity: 0.5
+            },
+            silent: true,
+            z: 10000
+        });
+
+        dx = params.event.offsetX - srcSector.shape.cx;
+        dy = params.event.offsetY - srcSector.shape.cy;
+
+        zr.add(dragging);
+    }
+});
+
+myChart.on('mouseup', function (params) {
+    if (dragging) {
+        var targetDataIndex = getHoveredDataIndex(params);
+        if (targetDataIndex != null
+            && targetDataIndex !== draggingDataIndex
+        ) {
+            data[targetDataIndex].value += data[draggingDataIndex].value;
+            data[targetDataIndex].name += '\n' + data[draggingDataIndex].name;
+            legendData[targetDataIndex] = data[targetDataIndex].name;
+            data.splice(draggingDataIndex, 1);
+            legendData.splice(draggingDataIndex, 1);
+            myChart.setOption({
+                legend: {data: legendData},
+                series: {data: data}
+            });
+        }
+    }
+});
+
+zr.on('mousemove', function (e) {
+    if (dragging) {
+        dragging.setShape({
+            cx: e.offsetX - dx,
+            cy: e.offsetY - dy
+        });
+    }
+});
+
+zr.on('mouseup', function (e) {
+    if (dragging) {
+        zr.remove(dragging);
+        dragging = null;
+    }
+});
+
+function getHoveredDataIndex(params) {
+    return params.componentType === 'series'
+        && params.componentSubType === 'pie'
+        && params.dataIndex;
+}
+
+function resetOption() {
+    data.length = 0;
+    legendData.length = 0;
+    echarts.util.each(originalData, function (item, index) {
+        data.push({
+            value: item.value, 
+            name: item.name,
+            itemStyle: {
+                normal: {color: item.itemStyle.normal.color}
+            }
+        });
+        legendData.push(item.name);
+    });
+    
+    option = {
+        legend: {
+            data: legendData,
+            formatter: function (name) {
+                return name.replace(/\n/g, ' + ');
+            }
+        },
+        title: {
+            bottom: 0,
+            left: 'center',
+            text: '将一个扇区拖到另一个扇区 可以合并它们',
+            textStyle: {
+                fontSize: 14,
+                color: '#777'
+            }
+        },
+        toolbox: {
+            left: 'left',
+            feature: {
+                dataView: {},
+                saveAsImage: {},
+                myRestore: {
+                    show: true,
+                    title: '还原',
+                    icon: 'M3.8,33.4 M47,18.9h9.8V8.7 M56.3,20.1 C52.1,9,40.5,0.6,26.8,2.1C12.6,3.7,1.6,16.2,2.1,30.6 M13,41.1H3.1v10.2 M3.7,39.9c4.2,11.1,15.8,19.5,29.5,18 c14.2-1.6,25.2-14.1,24.7-28.5',
+                    onclick: resetOption
+                },
+            }
+        },
+        tooltip: {},
+        series: [{
+            name: 'pie',
+            type: 'pie',
+            selectedMode: 'single',
+            selectedOffset: 30,
+            clockwise: true,
+            label: {
+                normal: {
+                    textStyle: {
+                        fontSize: 18,
+                        color: '#333'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    lineStyle: {
+                        color: '#333'
+                    }
+                }
+            },
+            data: data
+        }]
+    };  
+    myChart.setOption(option, true);
+}
+myChart.setOption(option);
+</script>
+</body>
+</html>

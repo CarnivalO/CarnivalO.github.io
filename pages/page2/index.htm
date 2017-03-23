@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>用户登录</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+	<img id="logo" src="./img/logo.png">
+	<div class="main">
+		<h1>阅读服务系统</h1>
+		<form method="post" action="http://localhost:8080/basic/j_spring_security_check" class="flp" onsubmit="return check()">
+			
+			<div style="margin-bottom:30px;">
+				<input type="text" id="username" name="j_username" class="input" value=""> <label for="username" class="label">账号登录</label>
+			</div>
+			<div style="margin-bottom:30px;">
+				<input type="password" id="password" name="j_password" class="input" value=""> <label for="password" class="label">密码</label>
+			</div>
+			<div style="margin-bottom:20px;">
+				<input type="text" name="random" class="input" id="random" maxlength="4" onfocus="this.select();" style="float: left; width: 240px"> <label for="random" class="label">验证码</label> <img src="./用户登录_files/RandomNumUtil.jsp" id="randomImg" onclick="changeValidateCodee()" title="点击刷新">
+			</div>
+			<div style="margin-bottom:20px;">
+				<p class="error" id="errormsg">&nbsp;</p>
+				<a id="link" href="http://localhost:8080/basic/pages/home/retrieve_password.jsp">忘记密码?</a>
+			</div>
+			<input id="login" type="submit" name="dosubmit" value="登录" class="input"> 
+		<button id="reg" class="input">注册</button>
+		</form>
+	</div>
+	<script type="text/javascript">
+	$(function(){changeValidateCode()})
+	function changeValidateCode() {		
+		var img = document.getElementById('randomImg');
+		//获取当前的时间作为参数，无具体意义    
+		var timenow = new Date().getTime();
+		//每次请求需要一个不同的参数，否则可能会返回同样的验证码    
+		//这和浏览器的缓存机制有关系，也可以把页面设置为不缓存，这样就不用这个参数了。    
+		img.src = "/basic/RandomNumUtil.jsp?d=" + timenow;
+		 var mess=/* request.getParameter("mess"); */"null";
+			if (mess != "null") {
+				$("#errormsg").html("<p style='color:red'>请输入正确的验证码！</p>");
+			}
+		}
+		function changeValidateCodee() {
+			var img = document.getElementById('randomImg');
+			//获取当前的时间作为参数，无具体意义    
+			var timenow = new Date().getTime();
+			//每次请求需要一个不同的参数，否则可能会返回同样的验证码    
+			//这和浏览器的缓存机制有关系，也可以把页面设置为不缓存，这样就不用这个参数了。    
+			img.src = "/basic/RandomNumUtil.jsp?d=" + timenow;
+		}
+		function check(data) {
+			var a;
+			var cc = $("#username").attr("value");
+
+			if ($("#username").val() == "") {
+				$("#errormsg").html("<p style='color:red'>请输入用户名</p>");
+				changeValidateCodee();
+				return false;
+			}
+			if ($("#password").val() == "") {
+				$("#errormsg").html("<p style='color:red'>请输入密码</p>");
+				changeValidateCodee();
+				return false;
+			}
+			var findIsUser = $("#username").val();
+
+			$
+					.ajax({
+						url : "/basic/products/isUserLogin.do?findIsUser="
+								+ findIsUser,
+						async : false,
+						dataType : 'json',
+						success : function(data) {
+							a = data;
+						}
+					});
+
+			if (a.flag == "0") {
+				return true;
+			} else if (a.flag == "1") {
+				changeValidateCodee();
+				$("#errormsg").html("<p style='color:red'>用户名不存在</p>");
+				return false;
+			}
+		}
+	</script>
+
+</body></html>

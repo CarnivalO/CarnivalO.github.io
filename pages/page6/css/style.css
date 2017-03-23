@@ -1,0 +1,309 @@
+body {
+	margin: 0 auto;
+	padding: 0;
+	font-family: "microsoft yahei";
+	min-width: 1280px;
+	width: 1280px;
+	overflow-x: hidden;
+}
+
+nav {
+	height: 50px;
+}
+
+#logo {
+	margin-left: 60px;
+	display: inline;
+}
+
+#logo img {
+	position: relative;
+	top: 5px;
+	display: inline;
+}
+
+#logo h1 {
+	display: inline;
+	font-weight: 100;
+}
+
+nav ul {
+	float: right;
+	margin-right: 65px;
+	display: inline;
+}
+
+nav ul li {
+	float: left;
+	margin-left: 30px;
+	list-style: none;
+	font-size: 14px;
+}
+
+nav ul li a:hover {
+	color: #E74F4D;
+	padding-bottom: 10px;
+	border-bottom: 3px solid #E74F4D;
+}
+
+nav ul li a {
+	text-decoration: none;
+	color: #787B83;
+}
+
+#section1 img {
+	z-index: -1;
+}
+
+#section1 h3 {
+	position: absolute;
+	color: #FFF;
+	font-size: 60px;
+	top: 220px;
+	margin-left: 150px;
+}
+
+#section1 p {
+	position: absolute;
+	color: #FFF;
+	font-size: 21px;
+	margin-left: 160px;
+}
+
+#section1 .p1 {
+	top: 340px;
+}
+
+#section1 .p2 {
+	top: 370px;
+}
+
+#section1 button {
+	position: absolute;
+	width: 330px;
+	background-color: #E7504D;
+	color: #FFF;
+	font-size: 30px;
+	border: 0;
+	padding: 10px 0;
+	top: 470px;
+	margin-left: 160px;
+}
+
+#section2 div {
+	height: 200px;
+	display: inline-block;
+}
+
+#section2 div img {
+	position: relative;
+	left: 150px;
+	top: 30px;
+}
+
+#section2 div p {
+	position: relative;
+	top: 50px;
+	left: 15px;
+	font-size: 14px;
+	color: #787B83;
+	width: 160px;
+	padding: 0 77px;
+	text-align: center;
+}
+
+.border-right {
+	border-right: 1px solid #000;
+}
+
+#section3 {
+	height: 300px;
+	width: 100%;
+	background-color: #EDEDED;
+	text-align: center;
+}
+
+#section3 img {
+	margin-top: 70px;
+}
+
+#section3 p {
+	font-size: 53px;
+	text-align: center;
+	color: #A1A1A1;
+	margin-top: 20px;
+}
+
+#section4 {
+	height: 342px;
+}
+
+#section4 p {
+	position: relative;
+	color: #FFF;
+}
+
+.font1 {
+	font-size: 21px;
+	top: -300px;
+	left: 550px;
+}
+
+.font2 {
+	font-size: 12px;
+	top: -300px;
+	left: 500px;
+}
+
+#section4 select {
+	position: relative;
+	width: 235px;
+	padding: 7px 5px;
+	top: -270px;
+	margin: 0 10px;
+	color: #A1A1A1;
+}
+
+#section4 option {
+	background-color: #E3E2E4;
+	margin: 10px;
+}
+
+#section4 button {
+	position: relative;
+	width: 235px;
+	padding: 7px 5px;
+	top: -270px;
+	width: 235px;
+	margin-left: 10px;
+	background-color: #BE4F48;
+	color: #FFF;
+	border: 0;
+	font-family: "microsoft yahei";
+}
+
+#section6 #left {
+	width: 851px;
+	height: 568px;
+	background: url(../img/section6.png) no-repeat;
+	float: left;
+}
+
+#section6 #left p {
+	position: relative;
+	color: #FFF;
+	text-align: center;
+	margin: 0;
+}
+
+#section6 .font61 {
+	font-size: 50px;
+	padding-top: 100px;
+}
+
+#section6 .font62 {
+	font-size: 157px;
+}
+
+#section6 .font63 {
+	font-size: 22px;
+}
+
+#section6 .font64 {
+	font-size: 22px;
+}
+
+#section6 #right {
+	width: 429px;
+	height: 100%;
+	float: left;
+}
+
+#section6 #right p {
+	position: relative;
+}
+
+#section6 .font65 {
+	font-size: 20px;
+	margin-top: 150px;
+	text-align: center;
+}
+
+#section6 .font66 {
+	font-size: 12px;
+	margin-top: 50px;
+	margin-left: 80px;
+	width: 290px;
+	color: #AAA;
+	letter-spacing: 6px;
+	line-height: 20px;
+}
+
+#section6 #right button {
+	margin: 30px 160px;
+	padding: 10px 25px;
+	border: 2px solid #E77B7D;
+	background-color: #FFF;
+	color: #E77B7D;
+}
+
+.triangle {
+	position: relative;
+	top: -160px;
+	float: right;
+	border-top: 13px solid transparent;
+	border-right: 25px solid #FFF;
+	border-bottom: 13px solid transparent;
+}
+
+#section7 {
+	clear: both;
+}
+
+#section7 #block1 {
+	height: 520px;
+	width: 426px;
+	background-color: #E74F4D;
+	float: left;
+	text-align: center;
+}
+#section7 #block1 p{
+	margin-top: 120px;
+	color: #FFF;
+}
+#section7 #block1 .line{
+	margin-top: -10px;
+	margin-bottom: 10px;
+	color: #FFF;
+}
+#section7 #block1 button{
+	color: #FFF;
+	background-color: #E74F4D;
+	border: 1px solid #FFF;
+	padding:7px 35px ;
+}
+#section7 #block2 {
+	height: 520px;
+	width: 426px;
+	float: left;
+	text-align: center;
+}
+#section7 #block2 p{
+	margin-top: 120px;
+}
+#section7 #block2 .line{
+	margin-top: -10px;
+	margin-bottom: 10px;
+}
+#section7 #block2 button{
+	color: #E74F4D;
+	background-color: #FFF;
+	border: 1px solid #E74F4D;
+	padding:7px 35px ;
+}
+#section7 #block3 {
+	height: 520px;
+	width: 426px;
+	float: left;
+	background: url(../img/section7.png);
+}

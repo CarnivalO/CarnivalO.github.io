@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>安全生产演示demo</title>
+<meta charset="utf-8" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+</head>
+<div id="msg_from_server"></div>
+<script type="text/javascript">
+	var clientid = Math.random() * 100000000000;
+	if (!!window.EventSource) {
+		var source = new EventSource("../device/poll3/push2/" + clientid);
+		source.addEventListener('message', function(e) {
+			$("#msg_from_server").prepend(e.data);
+
+		});
+	} else {
+		console.log("没有sse");
+	}
+</script>
+</html>

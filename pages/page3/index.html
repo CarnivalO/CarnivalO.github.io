@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>登陆demo</title>
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+
+	<body>
+		<a class="theme-login" href="javascript:;">登录</a>
+		<div class="theme-popover">
+			<div class="theme-poptit">
+				<h3>用户登录</h3>
+			<div class="theme-poptit-close"><a href="javascript:;" title="关闭">×</a></div>
+			</div>
+			<div class="theme-popbod">
+				<form class="flp" action="" method="post">
+					<div>
+						<input id="username" class="input"/>
+						<label for="username" class="inputtip">请输入账号</label>
+					</div>
+					<div>
+						<input type="password" id="password" class="input" type="password"/>
+						<label for="password" class="inputtip">请输入密码</label>
+					</div>
+					<div style="margin-top: 50px;">
+						<input type="submit" id="dosubmit" name="dosubmit" value="登录" class="input" style="background: white;"/>
+					</div>
+					<fieldset class="oth-type-tit">
+						<legend class="oth-type-txt">其他方式登录</legend>
+					</fieldset>
+				</form>
+				<div class="other-login">
+					<a href="#" class="login-icon"><i class="iconfont">&#xe62d;</i></a>
+					<a href="#" class="login-icon"><i class="iconfont">&#xe63b;</i></a>
+					<a href="#" class="login-icon"><i class="iconfont">&#xe65a;</i></a>
+				</div>
+				<div id="link">
+					<a href="register">用户注册</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="">忘记密码?</a>
+				</div>
+			</div>
+		</div>
+		<div class="theme-popover-mask"></div>
+		<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.easing.min.js"></script>
+		<script type="text/javascript" src="js/input.js"></script>
+
+		<script>
+			$(document).ready(function($) {
+				$('.theme-login').click(function() {
+					$('.theme-popover-mask').fadeIn(500);
+					$('.theme-popover').slideDown(500);
+				})
+				$('.theme-poptit-close').click(function() {
+					$('.theme-popover-mask').fadeOut(500);
+					$('.theme-popover').slideUp(500);
+				})
+			})
+		</script>
+	</body>
+
+</html>

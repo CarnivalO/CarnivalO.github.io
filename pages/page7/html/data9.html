@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cmn-Hans">
+<meta charset="UTF-8">
+<title>智慧猪场Demo-闪龙科技</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+
+<link rel="stylesheet" href="../css/bootstrap.min.css" />
+<link rel="stylesheet" href="../css/font-awesome.min.css" />
+<link rel="stylesheet" href="../css/AdminLTE.min.css" />
+<link rel="stylesheet" href="../css/skin-blue.min.css" />
+<link rel="stylesheet" href="../css/style.min.css" />
+</head>
+<input type="hidden" value="12" id="number"/>
+<input type="hidden" value="0" id="parent"/>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+ <header class="main-header">
+	<a href="index.html" class="logo">
+		<span class="logo-mini">闪龙</span>
+		<span class="logo-lg">Sanlogic 闪龙科技</span>
+	</a>
+	<nav class="navbar navbar-static-top" role="navigation">
+		<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+			<span class="sr-only">Toggle navigation</span>
+		</a>
+		<div class="navbar-custom-menu">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown" id="userControl">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">管理员<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li>
+							<a href="#">警报管理</a>
+						</li>
+						<li>
+							<a href="#">用户管理</a>
+						</li>
+						<li>
+							<a href="#">日志</a>
+						</li>
+						<li>
+							<a href="#">报表查询</a>
+						</li>
+						<li>
+							<a href="#">系统配置</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="#">注销</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</header>
+<aside class="main-sidebar">
+	<section class="sidebar">
+		<ul class="sidebar-menu">
+			<li id="li-1">
+				<a href="./index.html"><i class="fa fa-map"></i> <span>GIS</span></a>
+			</li>
+			<li class="treeview">
+				<a href="#"><i class="fa fa-camera"></i> <span>视频监控</span>
+					<span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+				</a>
+				<ul class="treeview-menu">
+					<li id="li-2">
+						<a href="./video.html">总览</a>
+					</li>
+					<li>
+						<a href="#">猪舍</a>
+					</li>
+					<li>
+						<a href="#">育成舍</a>
+					</li>
+					<li>
+						<a href="#">办公楼</a>
+					</li>
+					<li>
+						<a href="#">大门</a>
+					</li>
+				</ul>
+			</li>
+			<li class="treeview">
+				<a href="#"><i class="fa fa-link"></i> <span>环境监测</span>
+					<span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+				</a>
+				<ul class="treeview-menu">
+					<li id="li-3">
+						<a href="./gauge.html">数据监控</a>
+					</li>
+					<li>
+						<a href="#">猪舍</a>
+					</li>
+					<li>
+						<a href="#">育成舍</a>
+					</li>
+					<li>
+						<a href="#">办公楼</a>
+					</li>
+					<li>
+						<a href="#">大门</a>
+					</li>
+				</ul>
+			</li>
+			<li id="li-4">
+				<a href="#"><i class="fa fa-key"></i> <span>门禁管理</span></a>
+			</li>
+			<li id="li-5">
+				<a href="./data1.html"><i class="fa fa-key"></i> <span>数据展示1</span></a>
+			</li>
+			<li id="li-6">
+				<a href="./data2.html"><i class="fa fa-key"></i> <span>数据展示2</span></a>
+			</li>
+			<li id="li-7">
+				<a href="./data3.html"><i class="fa fa-key"></i> <span>数据展示3</span></a>
+			</li>
+			<li id="li-8">
+				<a href="./data4.html"><i class="fa fa-key"></i> <span>数据展示4</span></a>
+			</li>
+			<li id="li-9">
+				<a href="./data5.html"><i class="fa fa-key"></i> <span>数据展示5</span></a>
+			</li>
+			<li id="li-10">
+				<a href="./data6.html"><i class="fa fa-key"></i> <span>数据展示6</span></a>
+			</li>
+			<li id="li-11">
+				<a href="./data7.html"><i class="fa fa-key"></i> <span>数据展示7</span></a>
+			</li>
+			<li id="li-12">
+				<a href="./data8.html"><i class="fa fa-key"></i> <span>数据展示8</span></a>
+			</li>
+		</ul>
+	</section>
+</aside>
+  <div class="content-wrapper">
+    <section class="content">
+		<div id="main"></div>
+    </section>
+  </div>
+</div>
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/app.min.js"></script>
+
+
+<script src="../js/echarts.min.js"></script>
+
+
+<script>
+$(document).ready(function(){
+	$('#userControl').mouseover(function() {
+		$(this).addClass('open');
+	}).mouseout(function() {
+		$(this).removeClass('open');
+	});
+	var index = parseInt($("#number").val());
+	var parent = parseInt($("#parent").val());
+	if(parent == 0){
+		$("#li-"+index).addClass("active");
+	}else{
+		$("#li-"+index).addClass("active");
+		$("#li-"+index).parent().parent().addClass("active");
+	}
+})
+	
+</script>
+<script>
+$("#main").height(document.body.scrollHeight-80)
+ var myChart = echarts.init(document.getElementById('main'));
+var uploadedDataURL = "/asset/get/s/data-1469178154210-H1GNZvkO.json";
+
+function randomData() {
+	return Math.round(Math.random()*1000);
+}
+$.get(uploadedDataURL, function(d){
+	echarts.registerMap('china', d);
+	option = {
+		title: {
+			text: 'iphone销量---数据纯属虚构',
+		    subtext:'data-visual.cn',
+		    sublink:'http://data-visual.cn',
+			left: 'center'
+		},
+		tooltip: {
+			trigger: 'item'
+		},
+		toolbox: {
+			show: true,
+			orient: 'vertical',
+			left: 'right',
+			top: 'center',
+			feature: {
+				dataView: {readOnly: false},
+				restore: {},
+				saveAsImage: {}
+			}
+		},
+		series: [
+			{
+				name: 'iphone3',
+				type: 'map',
+				mapType: 'china',
+				roam: false,
+				label: {
+					normal: {
+						show: true
+					},
+					emphasis: {
+						show: true
+					}
+				},
+				data:[
+					{name: '北京',value: randomData() },
+					{name: '天津',value: randomData() },
+					{name: '上海',value: randomData() },
+					{name: '重庆',value: randomData() },
+					{name: '河北',value: randomData() },
+					{name: '河南',value: randomData() },
+					{name: '云南',value: randomData() },
+					{name: '辽宁',value: randomData() },
+					{name: '黑龙江',value: randomData() },
+					{name: '湖南',value: randomData() },
+					{name: '安徽',value: randomData() },
+					{name: '山东',value: randomData() },
+					{name: '新疆',value: randomData() },
+					{name: '江苏',value: randomData() },
+					{name: '浙江',value: randomData() },
+					{name: '江西',value: randomData() },
+					{name: '湖北',value: randomData() },
+					{name: '广西',value: randomData() },
+					{name: '甘肃',value: randomData() },
+					{name: '山西',value: randomData() },
+					{name: '内蒙古',value: randomData() },
+					{name: '陕西',value: randomData() },
+					{name: '吉林',value: randomData() },
+					{name: '福建',value: randomData() },
+					{name: '贵州',value: randomData() },
+					{name: '广东',value: randomData() },
+					{name: '青海',value: randomData() },
+					{name: '西藏',value: randomData() },
+					{name: '四川',value: randomData() },
+					{name: '宁夏',value: randomData() },
+					{name: '海南',value: randomData() },
+					{name: '台湾',value: randomData() },
+					{name: '香港',value: randomData() },
+					{name: '澳门',value: randomData() }
+				]
+			}
+		]
+	};
+	if (option && typeof option === "object") 
+	{
+		var startTime = +new Date();
+		myChart.setOption(option, true);
+		var endTime = +new Date();
+		var updateTime = endTime - startTime;
+		console.log("Time used:", updateTime);
+	}
+});
+myChart.setOption(option);
+</script>
+</body>
+</html>

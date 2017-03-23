@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>历史数据</title>
+		<script type="text/javascript" src="../js/echarts.js"></script>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				font-family: "microsoft yahei";
+			}
+			
+			.left {
+				float: left;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="main" class="left" style="width: 75%;height: 800px;"></div>
+		<div id="pie" class="left" style="width: 25%;height: 800px;"></div>
+		<script>
+			$("#main,#pie").height(document.body.scrollHeight);
+			var myChart1 = echarts.init(document.getElementById('main'));
+			var myChart2 = echarts.init(document.getElementById('pie'));
+
+			var _lineChartConfig = {
+				"data": [],
+				"datatmp": [],
+				"numTmp": 0,
+				"now": 0,
+				"max":_Get("max"),
+				"title": ['湿度','温度','PM2.5','信号强度'],
+				"greenCount": 0,
+				"yellowCount": 0,
+				"redCount": 0,
+				"sign" :["安全", "警告", "危险"],
+				"type":_Get("type")
+			}
+			function _Get(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+				var r = window.location.search.substr(1).match(reg);
+				if(r != null) return unescape(r[2]);
+				return null;
+			}
+			
+			var schema = [{
+				name: 'date',
+				index: 0,
+				text: '日'
+			}, {
+				name: 'data',
+				index: 1,
+				text: _lineChartConfig.title[_lineChartConfig.type]
+			}];
+			option1 = {
+				backgroundColor: '#404a59',
+				title: {
+					top: "6%",
+					textStyle: {
+						color: '#FFF',
+						fontSize: 38,
+					},
+					left: 'center',
+				},
+				grid: {
+					x: '11%',
+					x2: '2%',
+					y: '20%',
+					y2: '15%'
+				},
+				tooltip: {
+					trigger: 'axis',
+					padding: 10,
+					backgroundColor: '#222',
+					borderColor: '#777',
+					borderWidth: 1,
+					formatter: function(obj) {
+						var value = obj[0].data;
+						return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">' +
+							(value[0].getMonth() + 1) + '/' + value[0].getDate() + '  ' + value[0].getHours() + ':' + value[0].getMinutes() + '</div>' + schema[1].text + '：' + value[1] + '<br>' + value[2]
+					}
+				},
+				xAxis: {
+					type: 'time',
+					nameGap: 10,
+					splitNumber: 9,
+					nameTextStyle: {
+						color: '#fff',
+						fontSize: 18
+					},
+					splitLine: {
+						show: false
+					},
+					axisLine: {
+						lineStyle: {
+							color: '#eee'
+						}
+					}
+				},
+				yAxis: {
+					type: 'value',
+					name: '数值',
+					nameLocation: 'end',
+					nameGap: 20,
+					nameTextStyle: {
+						color: '#fff',
+						fontSize: 18
+					},
+					axisLine: {
+						lineStyle: {
+							color: '#eee'
+						}
+					},
+					splitLine: {
+						show: true
+					}
+				},
+				dataZoom: [{
+					type: 'slider',
+					show: true,
+					xAxisIndex: [0],
+					start: 0,
+					end: 100
+				}, {
+					type: 'inside',
+					xAxisIndex: [0],
+					start: 0,
+					end: 100
+				}],
+				visualMap: [{
+					bottom: '10%',
+					left: '3%',
+					itemHeight: 500,
+					itemWidth: 20,
+					dimension: 1,
+					min: 0,
+					max: _lineChartConfig.max,
+					calculable: true,
+					text: ['危险', '安全'],
+					textGap: 20,
+					textStyle: {
+						color: '#fff'
+					},
+					inRange: {
+						color: ['green', 'yellow', 'red'],
+					}
+				}],
+				series: [{
+					type: 'line',
+					showSymbol: false,
+					data: _lineChartConfig.data
+				}]
+			};
+			option1.title.text = _lineChartConfig.title[_lineChartConfig.type] + "数据分布";
+			myChart1.setOption(option1);
+
+			option2 = {
+				backgroundColor: '#404a59',
+				title: {
+					text: "数据统计",
+					top: "20%",
+					textStyle: {
+						color: '#FFF',
+						fontSize: 20,
+					},
+					left: 'center',
+				},
+				series: [{
+					name: '数据统计',
+					type: 'pie',
+					radius: '90%',
+					center: ['49%', '50%'],
+					label: {
+						normal: {
+							position: "inside",
+							formatter: '{b}: {d}%',
+							textStyle: {
+								fontFamily: 'microsoft yahei',
+								fontSize: 15,
+							},
+						}
+					},
+					itemStyle: {
+						emphasis: {
+							shadowBlur: 10,
+							shadowOffsetX: 0,
+							shadowColor: 'rgba(0, 0, 0, 0.5)'
+						}
+					}
+				}]
+			};
+			myChart2.setOption(option2);
+			$.get('../device/bydate?deviceId=11&deviceType='+_lineChartConfig.type).done(function(data) {
+			//$.get('../js/bydate.json?deviceType='+_lineChartConfig.type).done(function(data) {
+				$.each(data, function(i, item) {
+					console.log(data);
+					_lineChartConfig.now = new Date(item.senddate);
+					var dValue = item.dvalue;
+					if(dValue <= _lineChartConfig.max/2) {
+						_lineChartConfig.numTmp = 0;
+						_lineChartConfig.greenCount++;
+					} else if(dValue >= _lineChartConfig.max) {
+						_lineChartConfig.numTmp = 2;
+						_lineChartConfig.redCount++;
+					} else {
+						_lineChartConfig.numTmp = 1;
+						_lineChartConfig.yellowCount++;
+					}
+					_lineChartConfig.datatmp = [_lineChartConfig.now, dValue, _lineChartConfig.sign[_lineChartConfig.numTmp]];
+					_lineChartConfig.data.push(_lineChartConfig.datatmp);
+				})
+				option1.series[0].data[0].value = _lineChartConfig.data;
+				option1.visualMap[0].max=_lineChartConfig.max;
+				myChart1.setOption(option1);
+				myChart2.setOption({
+					series: [{
+						data: [{
+							value: _lineChartConfig.redCount,
+							name: '危险',
+							label: {
+								normal: {
+									show: function() {
+										if(_lineChartConfig.redCount == 0) {
+											return false;
+										};
+									}(),
+									textStyle: {
+										color: '#000',
+									},
+								}
+							},
+							itemStyle: {
+								normal: {
+									color: 'red'
+								}
+							}
+						}, {
+							value: _lineChartConfig.yellowCount,
+							name: '警告',
+							label: {
+								normal: {
+									show: function() {
+										if(_lineChartConfig.yellowCount == 0) {
+											return false;
+										};
+									}(),
+									textStyle: {
+										color: '#000',
+									},
+								}
+							},
+							itemStyle: {
+								normal: {
+									color: 'yellow'
+								}
+							}
+						}, {
+							value: _lineChartConfig.greenCount,
+							name: '安全',
+							label: {
+								normal: {
+									show: function() {
+										if(_lineChartConfig.greenCount == 0) {
+											return false;
+										}
+									}(),
+									textStyle: {
+										color: '#000',
+									},
+								}
+							},
+							itemStyle: {
+								normal: {
+									color: 'green'
+								}
+							}
+						}]
+					}]
+				});
+			})
+		</script>
+	</body>
+
+</html>

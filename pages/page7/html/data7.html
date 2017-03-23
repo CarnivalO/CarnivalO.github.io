@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cmn-Hans">
+<meta charset="UTF-8">
+<title>智慧猪场Demo-闪龙科技</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+
+<link rel="stylesheet" href="../css/bootstrap.min.css" />
+<link rel="stylesheet" href="../css/font-awesome.min.css" />
+<link rel="stylesheet" href="../css/AdminLTE.min.css" />
+<link rel="stylesheet" href="../css/skin-blue.min.css" />
+<link rel="stylesheet" href="../css/style.min.css" />
+</head>
+<input type="hidden" value="11" id="number"/>
+<input type="hidden" value="0" id="parent"/>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+ <header class="main-header">
+	<a href="index.html" class="logo">
+		<span class="logo-mini">闪龙</span>
+		<span class="logo-lg">Sanlogic 闪龙科技</span>
+	</a>
+	<nav class="navbar navbar-static-top" role="navigation">
+		<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+			<span class="sr-only">Toggle navigation</span>
+		</a>
+		<div class="navbar-custom-menu">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown" id="userControl">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">管理员<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li>
+							<a href="#">警报管理</a>
+						</li>
+						<li>
+							<a href="#">用户管理</a>
+						</li>
+						<li>
+							<a href="#">日志</a>
+						</li>
+						<li>
+							<a href="#">报表查询</a>
+						</li>
+						<li>
+							<a href="#">系统配置</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="#">注销</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</header>
+<aside class="main-sidebar">
+	<section class="sidebar">
+		<ul class="sidebar-menu">
+			<li id="li-1">
+				<a href="./index.html"><i class="fa fa-map"></i> <span>GIS</span></a>
+			</li>
+			<li class="treeview">
+				<a href="#"><i class="fa fa-camera"></i> <span>视频监控</span>
+					<span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+				</a>
+				<ul class="treeview-menu">
+					<li id="li-2">
+						<a href="./video.html">总览</a>
+					</li>
+					<li>
+						<a href="#">猪舍</a>
+					</li>
+					<li>
+						<a href="#">育成舍</a>
+					</li>
+					<li>
+						<a href="#">办公楼</a>
+					</li>
+					<li>
+						<a href="#">大门</a>
+					</li>
+				</ul>
+			</li>
+			<li class="treeview">
+				<a href="#"><i class="fa fa-link"></i> <span>环境监测</span>
+					<span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+				</a>
+				<ul class="treeview-menu">
+					<li id="li-3">
+						<a href="./gauge.html">数据监控</a>
+					</li>
+					<li>
+						<a href="#">猪舍</a>
+					</li>
+					<li>
+						<a href="#">育成舍</a>
+					</li>
+					<li>
+						<a href="#">办公楼</a>
+					</li>
+					<li>
+						<a href="#">大门</a>
+					</li>
+				</ul>
+			</li>
+			<li id="li-4">
+				<a href="#"><i class="fa fa-key"></i> <span>门禁管理</span></a>
+			</li>
+			<li id="li-5">
+				<a href="./data1.html"><i class="fa fa-key"></i> <span>数据展示1</span></a>
+			</li>
+			<li id="li-6">
+				<a href="./data2.html"><i class="fa fa-key"></i> <span>数据展示2</span></a>
+			</li>
+			<li id="li-7">
+				<a href="./data3.html"><i class="fa fa-key"></i> <span>数据展示3</span></a>
+			</li>
+			<li id="li-8">
+				<a href="./data4.html"><i class="fa fa-key"></i> <span>数据展示4</span></a>
+			</li>
+			<li id="li-9">
+				<a href="./data5.html"><i class="fa fa-key"></i> <span>数据展示5</span></a>
+			</li>
+			<li id="li-10">
+				<a href="./data6.html"><i class="fa fa-key"></i> <span>数据展示6</span></a>
+			</li>
+			<li id="li-11">
+				<a href="./data7.html"><i class="fa fa-key"></i> <span>数据展示7</span></a>
+			</li>
+			<li id="li-12">
+				<a href="./data8.html"><i class="fa fa-key"></i> <span>数据展示8</span></a>
+			</li>
+		</ul>
+	</section>
+</aside>
+  <div class="content-wrapper">
+    <section class="content">
+		<div id="main"></div>
+    </section>
+  </div>
+</div>
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/app.min.js"></script>
+
+
+<script src="../js/echarts.min.js"></script>
+
+
+<script>
+$(document).ready(function(){
+	$('#userControl').mouseover(function() {
+		$(this).addClass('open');
+	}).mouseout(function() {
+		$(this).removeClass('open');
+	});
+	var index = parseInt($("#number").val());
+	var parent = parseInt($("#parent").val());
+	if(parent == 0){
+		$("#li-"+index).addClass("active");
+	}else{
+		$("#li-"+index).addClass("active");
+		$("#li-"+index).parent().parent().addClass("active");
+	}
+})
+	
+</script>
+<script>
+$("#main").height(document.body.scrollHeight-80)
+ var myChart = echarts.init(document.getElementById('main'));
+var dataStyle = { 
+    normal: {
+        label: {show:false},
+        labelLine: {show:false},
+        shadowBlur: 40,
+        shadowColor: 'rgba(40, 40, 40, 0.5)',
+    }
+};
+var placeHolderStyle = {
+    normal : {
+        color: 'rgba(0,0,0,0)',
+        label: {show:false},
+        labelLine: {show:false}
+    },
+    emphasis : {
+        color: 'rgba(0,0,0,0)'
+    }
+};
+option = {
+	title: {
+        text: '海南省产猪量地区比例',
+    },
+   backgroundColor: '#f4f2e3',
+     color: ['#85b6b2', '#6d4f8d','#cd5e7e', '#e38980','#f7db88'],
+    tooltip : {
+        show: true,
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        itemGap:12,
+        data:['海口市','三亚市','文昌市','万宁市','东方市','五指山市']
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    series : [
+        {
+            name:'海口市',
+            type:'pie',
+            clockWise:false,
+            radius : [180,200],
+            itemStyle : dataStyle,
+            hoverAnimation: false,
+       
+            data:[
+                {
+                    value:300,
+                    name:'01'
+                },
+                {
+                    value:50,
+                    name:'invisible',
+                    itemStyle : placeHolderStyle
+                }
+         
+            ]
+        }, 
+         {
+            name:'三亚市',
+            type:'pie',
+            clockWise:false,
+            radius : [160, 180],
+            itemStyle : dataStyle,
+            hoverAnimation: false,
+           
+            data:[
+                {
+                    value:150, 
+                    name:'02'
+                },
+                {
+                    value:60,
+                    name:'invisible',
+                    itemStyle : placeHolderStyle
+                }
+            ]
+        },
+        {
+            name:'文昌市',
+            type:'pie',
+            clockWise:false,
+            hoverAnimation: false,
+            radius : [140, 160],
+            itemStyle : dataStyle,
+           
+            data:[
+                {
+                    value:80, 
+                    name:'03'
+                },
+                {
+                    value:50,
+                    name:'invisible',
+                    itemStyle : placeHolderStyle
+                }
+            ]
+        },
+        {
+            name:'万宁市',
+            type:'pie',
+            clockWise:false,
+            hoverAnimation: false,
+            radius : [120, 140],
+            itemStyle : dataStyle,
+           
+            data:[
+                {
+                    value:45, 
+                    name:'04'
+                },
+                {
+                    value:30,
+                    name:'invisible',
+                    itemStyle : placeHolderStyle
+                }
+            ]
+        },
+         {
+            name:'东方市',
+            type:'pie',
+            clockWise: false,
+            hoverAnimation: false,
+            radius : [100, 120],
+            itemStyle : dataStyle,
+            
+            data:[
+                {
+                    value:30, 
+                    name:'05'
+                },
+                {
+                    value:30,
+                    name:'invisible',
+                    itemStyle : placeHolderStyle
+                }
+            ]
+        },
+         {
+            name:'五指山市',
+            type:'pie',
+            clockWise: false,
+            hoverAnimation: false,
+            radius : [80, 100],
+            itemStyle : dataStyle,
+            
+            data:[
+                {
+                    value:10, 
+                    name:'06'
+                },
+                {
+                    value:20,
+                    name:'invisible',
+                    itemStyle : placeHolderStyle
+                }
+            ]
+        },
+    ]
+};
+myChart.setOption(option);
+</script>
+</body>
+</html>

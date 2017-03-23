@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>安全生产GIS</title>
+		<style>
+			body,
+			html {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+				font-family: "microsoft yahei";
+			}
+			
+			#container {
+				float: right;
+				width: 85%;
+				height: 100%;
+			}
+			
+			#control {
+				float: left;
+				width: 15%;
+				text-align: center;
+				padding-top: 2%;
+			}
+			
+			#control div {
+				margin: 10px 0;
+			}
+			
+			.checkbox {
+				width: 17px;
+				height: 17px;
+				line-height: 13px;
+				vertical-align: -2px;
+				*vertical-align: middle;
+				_vertical-align: 3px;
+			}
+			
+			button {
+				padding: 7px 20px;
+				margin-top: 10px;
+				opacity: .9;
+				border-radius: 2px;
+				font-family: "microsoft yahei";
+				background-color: #494949;
+				border: 1px solid transparent;
+				color: #fff
+			}
+			
+			button:hover {
+				cursor: pointer;
+				opacity: 1
+			}
+		</style>
+		<link rel="stylesheet" href="../css/map.css" />
+		<link rel="stylesheet" href="../css/thickbox.css" />
+		<script type="text/javascript" src="../js/jquery-1.8.3.js"></script>
+		<script type="text/javascript" src="../js/thickbox-compressed.js"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=vbK7NE0vGruUzs4gxG4p9Xsaz0qEcv0l"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/library/DistanceTool/1.2/src/DistanceTool_min.js"></script>
+
+	</head>
+
+	<body>
+		<div id="control">
+			<h2>显示图标</h2>
+			<div>
+				<i class="iconfont icon-duichang"></i>&nbsp;<label for="company">公司</label>&nbsp;<input type="checkbox" id="company" onchange="companyStatusChange(this)" class="checkbox">
+			</div>
+			<div>
+				<i class="iconfont icon-gonglu"></i>&nbsp;<label for="companyRange">公司范围</label>&nbsp;<input type="checkbox" id="companyRange" onchange="companyRangeStatusChange(this)" class="checkbox">
+			</div>
+			<div>
+				<i class="iconfont icon-shexiangtou"></i>&nbsp;<label for="camera">摄像头</label>&nbsp;<input type="checkbox" id="camera" onchange="cameraStatusChange(this)" class="checkbox">
+			</div>
+			<div>
+				<i class="iconfont icon-wendu"></i>&nbsp;<label for="sensor">传感器</label>&nbsp;<input type="checkbox" id="sensor" onchange="sensorStatusChange(this)" class="checkbox">
+			</div>
+			<div>
+				<i class="iconfont icon-xiaofang"></i>&nbsp;<label for="fire">消防物资</label>&nbsp;<input type="checkbox" id="fire" onchange="fireDeviceStatusChange(this)" class="checkbox">
+			</div>
+			<div>
+				<i class="iconfont icon-weixian"></i>&nbsp;<label for="dangerous">危化品</label>&nbsp;<input type="checkbox" id="dangerous" onchange="dangerousStatusChange(this)" class="checkbox">
+			</div>
+			<div>
+				<button type="button" id="addCompany" onclick="winCompany()">增加公司</button>
+			</div>
+			<div>
+				<button type="button" id="addLine" onclick="winLine()">增加公司</button>
+			</div>
+			<div>
+				<button type="button" id="addCamera" onclick="winCamera()">增加摄像头</button>
+			</div>
+			<div>
+				<button type="button" id="addSensor" onclick="winSensor()">增加传感器</button>
+			</div>
+			<div>
+				<button type="button" id="addFireDevices" onclick="winFireDevice()">增加消防物资</button>
+			</div>
+			<div>
+				<button type="button" id="addDangerous" onclick="winDangerous()">增加危化品</button>
+			</div>
+
+		</div>
+		<div id="container"></div>
+		<div id="winCompany" style="display: none;">
+			<form id="fmCompany" class="form" action="" method="post">
+				<ul id="fields" class="fields">
+					<li><label class="desc">企业名称 <span class="req">*</span></label>
+						<div class="content"><input id="companyName" type="text" maxlength="256" name="companyName" class="input fld m" value="浙江传化合成材料公司"></div>
+					</li>
+					<li><label class="desc">危化分类 <span class="req">*</span></label>
+						<div class="content"><input id="companyClassify" type="text" maxlength="256" name="classify" class="input fld m" value="易燃气体"></div>
+					</li>
+					<li><label class="desc">危化等级 <span class="req">*</span></label>
+						<div class="content"><input id="companyGrade" type="text" maxlength="256" name="grade" class="input fld m" value="3级"></div>
+					</li>
+					<li><label class="desc">详细地址 <span class="req">*</span></label>
+						<div class="content"><input id="companyAddress" type="text" maxlength="256" name="address" class="input fld m" value="嘉兴港区东方大道1号嘉兴出口加工区"></div>
+					</li>
+					<li><label class="desc">经度坐标 <span class="req">*</span></label>
+						<div class="content"><input id="companyLat" type="text" maxlength="256" name="companyLat" class="input fld m" value="121.056352"></div>
+					</li>
+					<li><label class="desc">纬度坐标 <span class="req">*</span></label>
+						<div class="content"><input id="companyLng" type="text" maxlength="256" name="companyLng" class="input fld m" value="30.585748"></div>
+					</li>
+					<li class="pc-submit"><button type="button" class="btn-submit" onclick="addCompany();">提交</button></li>
+				</ul>
+			</form>
+		</div>
+		<div id="winLine" style="display: none;">
+			<form id="fmLine" class="form" action="" method="post">
+				<ul id="fields" class="fields">
+					<li><label class="desc">所属企业 <span class="req">*</span></label>
+						<div class="content"><input id="ownedCompanyName" type="text" maxlength="256" name="ownedCompanyName" class="input fld m" value="浙江传化合成材料公司"></div>
+					</li>
+					<li><label class="desc">地址 <span class="req">*</span></label>
+						<div class="content"><input id="address" type="text" maxlength="256" name="address" class="input fld m" value="厂区西北"></div>
+					</li>
+					<li><label class="desc">纬度坐标 <span class="req">*</span></label>
+						<div class="content"><input id="dangerousLat" type="text" maxlength="256" name="dangerousLat" class="input fld m" value="121.057564"></div>
+					</li>
+					<li><label class="desc">经度坐标 <span class="req">*</span></label>
+						<div class="content"><input id="dangerousLng" type="text" maxlength="256" name="dangerousLng" class="input fld m" value="30.592991"></div>
+					</li>
+					<li class="pc-submit"><button type="button" class="btn-submit" onclick="addDangerous();">提交</button></li>
+				</ul>
+			</form>
+		</div>
+		<div id="winCamera" style="display: none;">
+			<form id="fmCamera" class="form" action="" method="post">
+				<ul id="fields" class="fields">
+					<li><label class="desc">网关 <span class="req">*</span></label>
+						<div class="content"><input id="gateWay" type="text" maxlength="256" name="gateWay" class="input fld m" value="192.168.1.1"></div>
+					</li>
+					<li><label class="desc">授权 <span class="req">*</span></label>
+						<div class="content"><input id="authorize" type="text" maxlength="256" name="authorize" class="input fld m" value="企业"></div>
+					</li>
+					<li><label class="desc">所属企业 <span class="req">*</span></label>
+						<div class="content"><input id="ownedCompanyName" type="text" maxlength="256" name="ownedCompanyName" class="input fld m" value="浙江传化合成材料公司"></div>
+					</li>
+					<li><label class="desc">地址 <span class="req">*</span></label>
+						<div class="content"><input id="address" type="text" maxlength="256" name="address" class="input fld m" value="厂区西北"></div>
+					</li>
+					<li><label class="desc">纬度坐标 <span class="req">*</span></label>
+						<div class="content"><input id="cameraLat" type="text" maxlength="256" name="cameraLat" class="input fld m" value="121.058525"></div>
+					</li>
+					<li><label class="desc">经度坐标 <span class="req">*</span></label>
+						<div class="content"><input id="cameraLng" type="text" maxlength="256" name="cameraLng" class="input fld m" value="30.594079"></div>
+					</li>
+					<li class="pc-submit"><button type="button" class="btn-submit" onclick="addCamera();">提交</button></li>
+				</ul>
+			</form>
+		</div>
+		<div id="winSensor" style="display: none;">
+			<form id="fmSensor" class="form" action="" method="post">
+				<ul id="fields" class="fields">
+					<li><label class="desc">网关 <span class="req">*</span></label>
+						<div class="content"><input id="gateWay" type="text" maxlength="256" name="gateWay" class="input fld m" value="192.168.1.1"></div>
+					</li>
+					<li><label class="desc">授权 <span class="req">*</span></label>
+						<div class="content"><input id="authorize" type="text" maxlength="256" name="authorize" class="input fld m" value="企业"></div>
+					</li>
+					<li><label class="desc">所属企业 <span class="req">*</span></label>
+						<div class="content"><input id="ownedCompanyName" type="text" maxlength="256" name="ownedCompanyName" class="input fld m" value="浙江传化合成材料公司"></div>
+					</li>
+					<li><label class="desc">地址 <span class="req">*</span></label>
+						<div class="content"><input id="address" type="text" maxlength="256" name="address" class="input fld m" value="厂区西北"></div>
+					</li>
+					<li><label class="desc">纬度坐标 <span class="req">*</span></label>
+						<div class="content"><input id="sensorLat" type="text" maxlength="256" name="sensorLat" class="input fld m" value="121.057034"></div>
+					</li>
+					<li><label class="desc">经度坐标 <span class="req">*</span></label>
+						<div class="content"><input id="sensorLng" type="text" maxlength="256" name="sensorLng" class="input fld m" value="30.592548"></div>
+					</li>
+					<li class="pc-submit"><button type="button" class="btn-submit" onclick="addSensor();">提交</button></li>
+				</ul>
+			</form>
+		</div>
+		<div id="winFireDevice" style="display: none;">
+			<form id="fmFireDevice" class="form" action="" method="post">
+				<ul id="fields" class="fields">
+					<li><label class="desc">所属企业 <span class="req">*</span></label>
+						<div class="content"><input id="ownedCompanyName" type="text" maxlength="256" name="ownedCompanyName" class="input fld m" value="浙江传化合成材料公司"></div>
+					</li>
+					<li><label class="desc">地址 <span class="req">*</span></label>
+						<div class="content"><input id="address" type="text" maxlength="256" name="address" class="input fld m" value="厂区西北"></div>
+					</li>
+					<li><label class="desc">纬度坐标 <span class="req">*</span></label>
+						<div class="content"><input id="fireDeviceLat" type="text" maxlength="256" name="fireDeviceLat" class="input fld m" value="121.056828"></div>
+					</li>
+					<li><label class="desc">经度坐标 <span class="req">*</span></label>
+						<div class="content"><input id="fireDeviceLng" type="text" maxlength="256" name="fireDeviceLng" class="input fld m" value="30.591693"></div>
+					</li>
+					<li class="pc-submit"><button type="button" class="btn-submit" onclick="addFireDevice();">提交</button></li>
+				</ul>
+			</form>
+		</div>
+		<div id="winDangerous" style="display: none;">
+			<form id="fmDangerous" class="form" action="" method="post">
+				<ul id="fields" class="fields">
+					<li><label class="desc">所属企业 <span class="req">*</span></label>
+						<div class="content"><input id="ownedCompanyName" type="text" maxlength="256" name="ownedCompanyName" class="input fld m" value="浙江传化合成材料公司"></div>
+					</li>
+					<li><label class="desc">地址 <span class="req">*</span></label>
+						<div class="content"><input id="address" type="text" maxlength="256" name="address" class="input fld m" value="厂区西北"></div>
+					</li>
+					<li><label class="desc">纬度坐标 <span class="req">*</span></label>
+						<div class="content"><input id="dangerousLat" type="text" maxlength="256" name="dangerousLat" class="input fld m" value="121.057564"></div>
+					</li>
+					<li><label class="desc">经度坐标 <span class="req">*</span></label>
+						<div class="content"><input id="dangerousLng" type="text" maxlength="256" name="dangerousLng" class="input fld m" value="30.592991"></div>
+					</li>
+					<li class="pc-submit"><button type="button" class="btn-submit" onclick="addDangerous();">提交</button></li>
+				</ul>
+			</form>
+		</div>
+		
+		<script>
+			var _mapdata = {
+				"bdmap": {},
+				"company": [],
+				"line": [],
+				"camera": [],
+				"dangerous": [],
+				"fireDevices": [],
+				"sensors": []
+			};
+
+			$(function() {
+				initBaiduMap(121.064607, 30.592525);
+				//initAddress();
+				//initLine("../js/line.json?companyId=-1&dataType=0");
+				//initCamera("../js/camera.json?companyId=-1&dataType=0");
+				//listenCheckBox(_mapdata.bdmap);
+			});
+			
+			//初始化baidumapdui对象
+			function initBaiduMap(x,y) {
+				_mapdata.bdmap = new BMap.Map("container", {
+					mapType: BMAP_HYBRID_MAP, //使用全景地图
+					enableMapClick: false //关闭鼠标点击
+				});
+				_mapdata.bdmap.centerAndZoom(new BMap.Point(x,y), 16); // 初始化地图,设置中心点坐标和地图级别
+				_mapdata.bdmap.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
+				
+				var myDis = new BMapLib.DistanceTool(_mapdata.bdmap);
+				var top_left_control = new BMap.ScaleControl({
+					anchor: BMAP_ANCHOR_TOP_LEFT
+				}); // 左上角，添加比例尺
+				_mapdata.bdmap.addControl(top_left_control);
+
+				// 定义一个控件类,即function
+				var DistantControl = function() {
+					this.defaultAnchor = BMAP_ANCHOR_TOP_LEFT;
+					this.defaultOffset = new BMap.Size(10, 10);
+				};
+				// 通过JavaScript的prototype属性继承于BMap.Control
+				DistantControl.prototype = new BMap.Control();
+				// 自定义控件必须实现自己的initialize方法,并且将控件的DOM元素返回
+				// 在本方法中创建个div元素作为控件的容器,并将其添加到地图容器中
+				DistantControl.prototype.initialize = function() {
+						// 创建一个DOM元素
+						var button = document.createElement("button");
+						// 添加文字说明
+						button.appendChild(document.createTextNode("测距"));
+						// 设置样式
+						button.style.cursor = "pointer";
+						button.style.padding = "2px 10px";
+						// 绑定事件
+						button.onclick = function(e) {
+								myDis.open();
+							}
+							// 添加DOM元素到地图中
+						_mapdata.bdmap.getContainer().appendChild(button);
+						// 将DOM元素返回
+						return button;
+					}
+					// 添加到地图当中
+				_mapdata.bdmap.addControl(new DistantControl());			
+			}
+			
+			//公司
+			function initCompany(url) {
+				$.getJSON(url, function(result) {
+					$.each(result, function(i, e) {
+						showCompany(e);
+					});
+				});
+			}
+			function companyStatusChange(e){
+				return (e.checked)?initCompany("../js/company.json?companyId=-1&dataType=0"):removeAllCompany();
+			}	
+			function removeAllCompany() {
+				$.each(_mapdata.company, function(i,e) {
+					_mapdata.bdmap.removeOverlay(e);
+				});
+				_mapdata.company = [];
+			}			
+			function showCompany(data) {
+				var point=new BMap.Point(data.lat, data.lng);
+				var marker = new BMap.Marker(point);
+				var myLable = new BMap.Label(data.label, {
+					offset: new BMap.Size(20, -10)
+				}); //设置标签提示
+				myLable.setStyle({
+					border: "0", //边
+					cursor: "pointer",
+					background: "rgba(0,0,0,0.5)",
+					color: "white"
+				});
+				marker.setLabel(myLable);
+				//添加点击事件
+				marker.addEventListener("click", function(e) {
+					// 创建信息窗口对象 						
+					_mapdata.bdmap.openInfoWindow(new BMap.InfoWindow(data.info, {
+					width: 250, // 信息窗口宽度
+					height: 180, // 信息窗口高度
+				}), point); //开启信息窗口
+				});
+				_mapdata.bdmap.addOverlay(marker);
+				_mapdata.company.push(marker);
+			}
+			function addCompany() {
+				var company={
+					"lat": $('#companyLat').val(), 
+					"lng": $('#companyLng').val(),
+					"info": "",
+					"label": $('#companyName').val(),
+					"url":""
+				};
+				showCompany(company);
+				tb_remove();
+				$("#fmCompany")[0].reset();
+			}
+			//设置边框
+			function initLine(url) {
+				$.getJSON(url, function(result) {
+					$.each(result, function(i, e) {
+						showLine(e);
+					});
+				});
+			}
+			function companyRangeStatusChange(e){
+				return (e.checked)?initLine("../js/line.json?companyId=-1&dataType=5"):removeAllLine();
+			}
+			function removeAllLine() {
+				$.each(_mapdata.line, function(i,e) {
+					_mapdata.bdmap.removeOverlay(e);
+				});
+				_mapdata.line = [];
+			}	
+			function addLine() {
+				var camera={
+					"lat": $('#cameraLat').val(), 
+					"lng": $('#cameraLng').val(),
+					"info": "",
+					"label": "",
+					"url":""
+				};
+				showCamera(camera);
+				tb_remove();
+				$("#fmCamera")[0].reset();
+			}
+			function showLine(data) {
+				var points = [];
+				$.each(data.line, function(i, e) {
+					points.push(new BMap.Point(e[0], e[1]));
+				});
+				var polyline1 = new BMap.Polyline(points, {
+					strokeColor: "blue",
+					strokeWeight: 5
+				}); //创建多边形
+				_mapdata.bdmap.addOverlay(polyline1);
+				_mapdata.line.push(polyline1);
+			}
+			
+			//摄像头
+			function initCamera(url){
+				$.getJSON(url, function(result) {
+					$.each(result, function(i, e) {
+						showCamera(e);
+					});
+				});
+			}
+			function cameraStatusChange(e){
+				return (e.checked)?initCamera("../js/camera.json?companyId=-1&dataType=1"):removeAllCamera();
+			}		
+			function showCamera(data) {
+				var myIcon = new BMap.Icon("../images/camera.png", new BMap.Size(50, 50));
+				var marker = new BMap.Marker(new BMap.Point(data.lat, data.lng), {
+							icon: myIcon
+						}); //添加概览点
+				_mapdata.camera.push(marker);
+				_mapdata.bdmap.addOverlay(marker);
+				marker.addEventListener("click", function(e) {
+					//加载视频
+					tb_show("视频播放中.....","#TB_inline?height=420&width=640&inlineId=vd");
+					
+				});				
+			}
+			function removeAllCamera() {
+				$.each(_mapdata.camera, function(i,e) {
+					_mapdata.bdmap.removeOverlay(e);
+				});
+				_mapdata.camera = [];
+			}			
+			function addCamera() {
+				var camera={
+					"lat": $('#cameraLat').val(), 
+					"lng": $('#cameraLng').val(),
+					"info": "",
+					"label": "",
+					"url":""
+				};
+				showCamera(camera);
+				tb_remove();
+				$("#fmCamera")[0].reset();
+			}
+			//消防物资
+			function initFireDevice(url){
+				$.getJSON(url, function(result) {
+					$.each(result, function(i, e) {
+						showFireDevice(e);
+					});
+				});
+			}
+			function fireDeviceStatusChange(e){
+				return (e.checked)?initFireDevice("../js/firedevice.json?companyId=-1&dataType=0"):removeAllFireDevice();
+			}		
+			function showFireDevice(data){
+				var myIcon = new BMap.Icon("../images/firedevice.png", new BMap.Size(50, 50));
+				var marker = new BMap.Marker(new BMap.Point(data.lat, data.lng), {
+							icon: myIcon
+						}); //添加概览点
+				_mapdata.fireDevices.push(marker);
+				_mapdata.bdmap.addOverlay(marker);
+				marker.addEventListener("click", function(e) {
+					alert("消防物资");
+				});				
+			}
+			function addFireDevice() {
+				var fireDevice={
+					"lat": $('#fireDeviceLat').val(), 
+					"lng": $('#fireDeviceLng').val(),
+					"info": "",
+					"label": "",
+					"url":""
+				};
+				showFireDevice(fireDevice);
+				tb_remove();
+				$("#fmFireDevice")[0].reset();
+			}
+
+			function removeAllFireDevice(amap) {
+				$.each(_mapdata.fireDevices, function(i,e) {
+					_mapdata.bdmap.removeOverlay(e);
+				});
+				_mapdata.fireDevices = [];
+			}
+			//危化品
+			function initDangerous(url){
+				$.getJSON(url, function(result) {
+					$.each(result, function(i, e) {
+						showDangerous(e);
+					});
+				});
+			}
+			function dangerousStatusChange(e){
+				return (e.checked)?initDangerous("../js/dangerous.json?companyId=-1&dataType=3"):removeAllDangerous();
+			}		
+			function showDangerous(data){
+				var myIcon = new BMap.Icon("../images/danger.png", new BMap.Size(50, 50));
+				var marker = new BMap.Marker(new BMap.Point(data.lat, data.lng), {
+							icon: myIcon
+						}); //添加概览点
+				_mapdata.dangerous.push(marker);
+				_mapdata.bdmap.addOverlay(marker);
+				marker.addEventListener("click", function(e) {
+					window.open("./title.html");
+				});				
+			}
+			function addDangerous() {
+				var dangerous={
+					"lat": $('#dangerousLat').val(), 
+					"lng": $('#dangerousLng').val(),
+					"info": "",
+					"label": "",
+					"url":""
+				};
+				showDangerous(dangerous);
+				tb_remove();
+				$("#fmDangerous")[0].reset();
+			}
+
+			function removeAllDangerous(amap) {
+				$.each(_mapdata.dangerous, function(i,e) {
+					_mapdata.bdmap.removeOverlay(e);
+				});
+				_mapdata.dangerous = [];
+			}
+			//传感器
+			function initSensor(url){
+				$.getJSON(url, function(result) {
+					$.each(result, function(i, e) {
+						showSensor(e);
+					});
+				});
+			}
+			function sensorStatusChange(e){
+				return (e.checked)?initSensor("../js/sensor.json?companyId=-1&dataType=4"):removeAllSensor();
+			}		
+			function showSensor(data){
+				var myIcon = new BMap.Icon("../images/sensor.png", new BMap.Size(50, 50));
+				var marker = new BMap.Marker(new BMap.Point(data.lat, data.lng), {
+							icon: myIcon
+						}); //添加概览点
+				_mapdata.sensors.push(marker);
+				_mapdata.bdmap.addOverlay(marker);
+				marker.addEventListener("click", function(e) {
+				window.open("./dashboard.html");
+				});				
+			}
+			function addSensor() {
+				var sensor={
+					"lat": $('#sensorLat').val(), 
+					"lng": $('#sensorLng').val(),
+					"info": "",
+					"label": "",
+					"url":""
+				};
+				showSensor(sensor);
+				tb_remove();
+				$("#fmFireDevice")[0].reset();
+			}
+
+			function removeAllSensor(amap) {
+				$.each(_mapdata.sensors, function(i,e) {
+					_mapdata.bdmap.removeOverlay(e);
+				});
+				_mapdata.sensors = [];
+			}
+
+			function openInfo(content, e) {
+				var p = e.target;
+				var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+				// 创建信息窗口对象 
+				var infoWindow = new BMap.InfoWindow(content, {
+					width: 250, // 信息窗口宽度
+					height: 180, // 信息窗口高度
+				});
+				map.openInfoWindow(infoWindow, point); //开启信息窗口
+			}
+
+			function winCompany() {
+				tb_show("增加公司", "#TB_inline?height=480&width=400&inlineId=winCompany");
+			}
+
+			function winCamera() {
+				tb_show("增加摄像头", "#TB_inline?height=480&width=400&inlineId=winCamera");
+			}
+
+			function winSensor() {
+				tb_show("增加传感器", "#TB_inline?height=480&width=400&inlineId=winSensor");
+			}
+
+			function winFireDevice() {
+				tb_show("增加消防物资", "#TB_inline?height=350&width=400&inlineId=winFireDevice");
+			}
+
+			function winDangerous() {
+				tb_show("增加危化品", "#TB_inline?height=350&width=400&inlineId=winDangerous");
+			}
+		</script>
+		<div style="display: none" id="vd">
+			<iframe src="/vd"  height="420px" width="650px"></iframe>
+		</div>
+	</body>
+</html>

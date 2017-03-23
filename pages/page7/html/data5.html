@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cmn-Hans">
+<meta charset="UTF-8">
+<title>智慧猪场Demo-闪龙科技</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+
+<link rel="stylesheet" href="../css/bootstrap.min.css" />
+<link rel="stylesheet" href="../css/font-awesome.min.css" />
+<link rel="stylesheet" href="../css/AdminLTE.min.css" />
+<link rel="stylesheet" href="../css/skin-blue.min.css" />
+<link rel="stylesheet" href="../css/style.min.css" />
+</head>
+<input type="hidden" value="9" id="number"/>
+<input type="hidden" value="0" id="parent"/>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+ <header class="main-header">
+	<a href="index.html" class="logo">
+		<span class="logo-mini">闪龙</span>
+		<span class="logo-lg">Sanlogic 闪龙科技</span>
+	</a>
+	<nav class="navbar navbar-static-top" role="navigation">
+		<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+			<span class="sr-only">Toggle navigation</span>
+		</a>
+		<div class="navbar-custom-menu">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown" id="userControl">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">管理员<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li>
+							<a href="#">警报管理</a>
+						</li>
+						<li>
+							<a href="#">用户管理</a>
+						</li>
+						<li>
+							<a href="#">日志</a>
+						</li>
+						<li>
+							<a href="#">报表查询</a>
+						</li>
+						<li>
+							<a href="#">系统配置</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="#">注销</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</header>
+<aside class="main-sidebar">
+	<section class="sidebar">
+		<ul class="sidebar-menu">
+			<li id="li-1">
+				<a href="./index.html"><i class="fa fa-map"></i> <span>GIS</span></a>
+			</li>
+			<li class="treeview">
+				<a href="#"><i class="fa fa-camera"></i> <span>视频监控</span>
+					<span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+				</a>
+				<ul class="treeview-menu">
+					<li id="li-2">
+						<a href="./video.html">总览</a>
+					</li>
+					<li>
+						<a href="#">猪舍</a>
+					</li>
+					<li>
+						<a href="#">育成舍</a>
+					</li>
+					<li>
+						<a href="#">办公楼</a>
+					</li>
+					<li>
+						<a href="#">大门</a>
+					</li>
+				</ul>
+			</li>
+			<li class="treeview">
+				<a href="#"><i class="fa fa-link"></i> <span>环境监测</span>
+					<span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+				</a>
+				<ul class="treeview-menu">
+					<li id="li-3">
+						<a href="./gauge.html">数据监控</a>
+					</li>
+					<li>
+						<a href="#">猪舍</a>
+					</li>
+					<li>
+						<a href="#">育成舍</a>
+					</li>
+					<li>
+						<a href="#">办公楼</a>
+					</li>
+					<li>
+						<a href="#">大门</a>
+					</li>
+				</ul>
+			</li>
+			<li id="li-4">
+				<a href="#"><i class="fa fa-key"></i> <span>门禁管理</span></a>
+			</li>
+			<li id="li-5">
+				<a href="./data1.html"><i class="fa fa-key"></i> <span>数据展示1</span></a>
+			</li>
+			<li id="li-6">
+				<a href="./data2.html"><i class="fa fa-key"></i> <span>数据展示2</span></a>
+			</li>
+			<li id="li-7">
+				<a href="./data3.html"><i class="fa fa-key"></i> <span>数据展示3</span></a>
+			</li>
+			<li id="li-8">
+				<a href="./data4.html"><i class="fa fa-key"></i> <span>数据展示4</span></a>
+			</li>
+			<li id="li-9">
+				<a href="./data5.html"><i class="fa fa-key"></i> <span>数据展示5</span></a>
+			</li>
+			<li id="li-10">
+				<a href="./data6.html"><i class="fa fa-key"></i> <span>数据展示6</span></a>
+			</li>
+			<li id="li-11">
+				<a href="./data7.html"><i class="fa fa-key"></i> <span>数据展示7</span></a>
+			</li>
+			<li id="li-12">
+				<a href="./data8.html"><i class="fa fa-key"></i> <span>数据展示8</span></a>
+			</li>
+		</ul>
+	</section>
+</aside>
+  <div class="content-wrapper">
+    <section class="content">
+		<div id="main"></div>
+    </section>
+  </div>
+</div>
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/app.min.js"></script>
+
+
+<script src="../js/echarts.min.js"></script>
+
+<script src="../js/hainan.js"></script>
+
+
+<script>
+$(document).ready(function(){
+	$('#userControl').mouseover(function() {
+		$(this).addClass('open');
+	}).mouseout(function() {
+		$(this).removeClass('open');
+	});
+	var index = parseInt($("#number").val());
+	var parent = parseInt($("#parent").val());
+	if(parent == 0){
+		$("#li-"+index).addClass("active");
+	}else{
+		$("#li-"+index).addClass("active");
+		$("#li-"+index).parent().parent().addClass("active");
+	}
+})
+	
+</script>
+<script>
+$("#main").height(document.body.scrollHeight-80);
+ var myChart = echarts.init(document.getElementById('main'));
+
+var geoCoordMap = {
+    "文昌":[110.72,19.61],	
+    "琼海":[110.46,19.25],
+    "万宁":[110.39,18.80],
+    "海口":[110.35,20.02],
+    "琼山":[110.33,19.98],
+    "定安":[110.31,19.68],
+    "琼中":[109.83,19.05],
+    "儋县":[109.57,19.52],
+    "三亚":[109.41,18.24],
+    "临高":[109.69,19.91]
+};
+
+var data = [
+    {name: "文昌", value:12312 },
+    {name: "琼海", value:22345 },
+    {name: "万宁", value:13567 },
+    {name: "海口", value:67543 },
+    {name: "琼山", value:23456 },
+    {name: "定安", value:6474 },
+    {name: "琼中", value:2346 },
+    {name: "儋县", value:3473 },
+    {name: "三亚", value:43566 },
+    {name: "临高", value:23566 }
+];
+
+var convertData = function (data) {
+    var res = [];
+    for (var i = 0; i < data.length; i++) {
+        var geoCoord = geoCoordMap[data[i].name];
+        if (geoCoord) {
+            res.push({
+                name: data[i].name,
+                value: geoCoord.concat(data[i].value)
+            });
+        }
+    }
+    return res;
+};
+
+var convertedData = [
+    convertData(data),
+    convertData(data.sort(function (a, b) {
+        return b.value - a.value;
+    }).slice(0, 6))
+];
+
+
+option = {
+    backgroundColor: '#404a59',
+    animation: true,
+    animationDuration: 1000,
+    animationEasing: 'cubicInOut',
+    animationDurationUpdate: 1000,
+    animationEasingUpdate: 'cubicInOut',
+    title: [
+        {
+            text: '海南省2016年各地存栏量图示',
+            left: 'center',
+            textStyle: {
+                color: '#fff'
+            }
+        },
+        {
+            id: 'statistic',
+            right: 120,
+            top: 40,
+            width: 100,
+            textStyle: {
+                color: '#fff',
+                fontSize: 16
+            }
+        }
+    ],
+    toolbox: {
+        iconStyle: {
+            normal: {
+                borderColor: '#fff'
+            },
+            emphasis: {
+                borderColor: '#b1e4ff'
+            }
+        }
+    },
+    brush: {
+        outOfBrush: {
+            color: '#abc'
+        },
+        brushStyle: {
+            borderWidth: 2,
+            color: 'rgba(0,0,0,0.2)',
+            borderColor: 'rgba(0,0,0,0.5)',
+        },
+        seriesIndex: [0, 1],
+        throttleType: 'debounce',
+        throttleDelay: 300,
+        geoIndex: 0
+    },
+    geo: {
+        map: '海南',
+        left: '10',
+        right: '35%',
+        center:  [109.782, 19.230],
+        zoom: 2.5,
+        label: {
+            emphasis: {
+                show: false
+            }
+        },
+        roam: true,
+        itemStyle: {
+            normal: {
+                areaColor: '#323c48',
+                borderColor: '#111'
+            },
+            emphasis: {
+                areaColor: '#2a333d'
+            }
+        }
+    },
+    tooltip : {
+        trigger: 'item'
+    },
+    grid: {
+        right: 40,
+        top: 100,
+        bottom: 40,
+        width: '30%'
+    },
+    xAxis: {
+        type: 'value',
+        scale: true,
+        position: 'top',
+        boundaryGap: false,
+        splitLine: {show: false},
+        axisLine: {show: false},
+        axisTick: {show: false},
+        axisLabel: {margin: 2, textStyle: {color: '#aaa'}},
+    },
+    yAxis: {
+        type: 'category',
+        name: 'TOP 10',
+        nameGap: 16,
+        axisLine: {show: false, lineStyle: {color: '#ddd'}},
+        axisTick: {show: false, lineStyle: {color: '#ddd'}},
+        axisLabel: {interval: 0, textStyle: {color: '#ddd'}},
+        data: []
+    },
+    series : [
+        {
+            name: 'pm2.5',
+            type: 'scatter',
+            coordinateSystem: 'geo',
+            data: convertedData[0],
+            symbolSize: function (val) {
+                return Math.max(val[2] / 2500, 8);
+            },
+            label: {
+                normal: {
+                    formatter: '{b}',
+                    position: 'right',
+                    show: false
+                },
+                emphasis: {
+                    show: true
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#ddb926'
+                }
+            }
+        },
+        {
+            name: 'Top 5',
+            type: 'effectScatter',
+            coordinateSystem: 'geo',
+            data: convertedData[1],
+            symbolSize: function (val) {
+                return Math.max(val[2] / 2500, 8);
+            },
+            showEffectOn: 'emphasis',
+            rippleEffect: {
+                brushType: 'stroke'
+            },
+            hoverAnimation: true,
+            label: {
+                normal: {
+                    formatter: '{b}',
+                    position: 'right',
+                    show: true
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#f4e925',
+                    shadowBlur: 10,
+                    shadowColor: '#333'
+                }
+            },
+            zlevel: 1
+        },
+        {
+            id: 'bar',
+            zlevel: 2,
+            type: 'bar',
+            symbol: 'none',
+            itemStyle: {
+                normal: {
+                    color: '#ddb926'
+                }
+            },
+            data: []
+        }
+    ]
+};
+
+
+myChart.on('brushselected', renderBrushed);
+
+setTimeout(function () {
+    myChart.dispatchAction({
+        type: 'brush',
+        areas: [
+            {
+                geoIndex: 0,
+                brushType: 'polygon',
+                coordRange: [[110.36,20.02],[110.82,19.61],[110.39,18.70],[109.32,18.15],[109.57,19.52],[109.69,19.91],[110.35,20.02]]
+            }
+        ]
+    });
+}, 0);
+
+
+function renderBrushed(params) {
+    var mainSeries = params.batch[0].selected[0];
+
+    var selectedItems = [];
+    var categoryData = [];
+    var barData = [];
+    var maxBar = 300;
+    var sum = 0;
+    var count = 0;
+
+    for (var i = 0; i < mainSeries.dataIndex.length; i++) {
+        var rawIndex = mainSeries.dataIndex[i];
+        var dataItem = convertedData[0][rawIndex];
+        var pmValue = dataItem.value[2];
+
+        sum += pmValue;
+        count++;
+
+        selectedItems.push(dataItem);
+    }
+
+    selectedItems.sort(function (a, b) {
+        return a.value[2] - b.value[2];
+    });
+
+    for (var i = 0; i < Math.min(selectedItems.length, maxBar); i++) {
+        categoryData.push(selectedItems[i].name);
+        barData.push(selectedItems[i].value[2]);
+    }
+
+    this.setOption({
+        yAxis: {
+            data: categoryData
+        },
+        xAxis: {
+            axisLabel: {show: !!count}
+        },
+        title: {
+            id: 'statistic',
+            text: count ? '平均: ' + (sum / count).toFixed(4) : ''
+        },
+        series: {
+            id: 'bar',
+            data: barData
+        }
+    });
+}
+myChart.setOption(option);
+</script>
+</body>
+</html>

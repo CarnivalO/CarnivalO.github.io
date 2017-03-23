@@ -390,7 +390,7 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>具体的搭建,照着官网文档就好,在这里主要记录下官网里没提到的问题<br><a href="https://github.com/orvice/ss-panel" target="_blank" rel="external">sspanel</a><br><a href="https://github.com/breakwa11/shadowsocks-rss/wiki/Server-Setup(manyuser-with-mysql" target="_blank" rel="external">ssr数据库多用户</a>)  </p>
+        <p>具体的搭建,照着官网文档就好,在这里主要记录下官网里没提到的问题<br><a href="https://github.com/orvice/ss-panel" target="_blank" rel="external">sspanel</a><br><a href="https://github.com/breakwa11/shadowsocks-rss/wiki" target="_blank" rel="external">ssr数据库多用户</a>  </p>
 <h2 id="1-解决pip-install-时locale-Error-unsupported-locale-setting"><a href="#1-解决pip-install-时locale-Error-unsupported-locale-setting" class="headerlink" title="1.解决pip install 时locale.Error: unsupported locale setting"></a>1.解决pip install 时locale.Error: unsupported locale setting</h2><p>输入<br><code># locale</code><br>最下面LC_ALL=如果为空,就输入<br><code>#export LC_ALL=C</code></p>
 <h2 id="2-直接访问首页会有500错误"><a href="#2-直接访问首页会有500错误" class="headerlink" title="2.直接访问首页会有500错误"></a>2.直接访问首页会有500错误</h2><p>这是因为默认的basedir只是public目录下,上一级目录无法访问,修改以下文件<br><code>vim /usr/local/nginx/conf/fastcgi.conf</code><br>最下面 open basedir 加上/home/wwwroot/ss-panel/</p>
 <h2 id="3-chacha20不能用"><a href="#3-chacha20不能用" class="headerlink" title="3.chacha20不能用"></a>3.chacha20不能用</h2><p>这里要装libsodium<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">apt-get install build-essential</div><div class="line">wget https://github.com/jedisct1/libsodium/releases/download/1.0.10/libsodium-1.0.10.tar.gz</div><div class="line">tar xf libsodium-1.0.10.tar.gz &amp;&amp; cd libsodium-1.0.10</div><div class="line">./configure &amp;&amp; make -j2 &amp;&amp; make install</div><div class="line">ldconfig</div></pre></td></tr></table></figure></p>
@@ -447,6 +447,14 @@
             <!-- Post Prev & Next Nav -->
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
+    
+        <a href="/2017/03/23/页面/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
     
 
     <!-- Section Spacer -->
@@ -546,7 +554,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">二月 2017<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         

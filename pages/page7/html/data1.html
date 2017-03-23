@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cmn-Hans">
+<meta charset="UTF-8">
+<title>智慧猪场Demo-闪龙科技</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+
+<link rel="stylesheet" href="../css/bootstrap.min.css" />
+<link rel="stylesheet" href="../css/font-awesome.min.css" />
+<link rel="stylesheet" href="../css/AdminLTE.min.css" />
+<link rel="stylesheet" href="../css/skin-blue.min.css" />
+<link rel="stylesheet" href="../css/style.min.css" />
+</head>
+<input type="hidden" value="5" id="number"/>
+<input type="hidden" value="0" id="parent"/>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+ <header class="main-header">
+	<a href="index.html" class="logo">
+		<span class="logo-mini">闪龙</span>
+		<span class="logo-lg">Sanlogic 闪龙科技</span>
+	</a>
+	<nav class="navbar navbar-static-top" role="navigation">
+		<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+			<span class="sr-only">Toggle navigation</span>
+		</a>
+		<div class="navbar-custom-menu">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown" id="userControl">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">管理员<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li>
+							<a href="#">警报管理</a>
+						</li>
+						<li>
+							<a href="#">用户管理</a>
+						</li>
+						<li>
+							<a href="#">日志</a>
+						</li>
+						<li>
+							<a href="#">报表查询</a>
+						</li>
+						<li>
+							<a href="#">系统配置</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="#">注销</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</header>
+<aside class="main-sidebar">
+	<section class="sidebar">
+		<ul class="sidebar-menu">
+			<li id="li-1">
+				<a href="./index.html"><i class="fa fa-map"></i> <span>GIS</span></a>
+			</li>
+			<li class="treeview">
+				<a href="#"><i class="fa fa-camera"></i> <span>视频监控</span>
+					<span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+				</a>
+				<ul class="treeview-menu">
+					<li id="li-2">
+						<a href="./video.html">总览</a>
+					</li>
+					<li>
+						<a href="#">猪舍</a>
+					</li>
+					<li>
+						<a href="#">育成舍</a>
+					</li>
+					<li>
+						<a href="#">办公楼</a>
+					</li>
+					<li>
+						<a href="#">大门</a>
+					</li>
+				</ul>
+			</li>
+			<li class="treeview">
+				<a href="#"><i class="fa fa-link"></i> <span>环境监测</span>
+					<span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+				</a>
+				<ul class="treeview-menu">
+					<li id="li-3">
+						<a href="./gauge.html">数据监控</a>
+					</li>
+					<li>
+						<a href="#">猪舍</a>
+					</li>
+					<li>
+						<a href="#">育成舍</a>
+					</li>
+					<li>
+						<a href="#">办公楼</a>
+					</li>
+					<li>
+						<a href="#">大门</a>
+					</li>
+				</ul>
+			</li>
+			<li id="li-4">
+				<a href="#"><i class="fa fa-key"></i> <span>门禁管理</span></a>
+			</li>
+			<li id="li-5">
+				<a href="./data1.html"><i class="fa fa-key"></i> <span>数据展示1</span></a>
+			</li>
+			<li id="li-6">
+				<a href="./data2.html"><i class="fa fa-key"></i> <span>数据展示2</span></a>
+			</li>
+			<li id="li-7">
+				<a href="./data3.html"><i class="fa fa-key"></i> <span>数据展示3</span></a>
+			</li>
+			<li id="li-8">
+				<a href="./data4.html"><i class="fa fa-key"></i> <span>数据展示4</span></a>
+			</li>
+			<li id="li-9">
+				<a href="./data5.html"><i class="fa fa-key"></i> <span>数据展示5</span></a>
+			</li>
+			<li id="li-10">
+				<a href="./data6.html"><i class="fa fa-key"></i> <span>数据展示6</span></a>
+			</li>
+			<li id="li-11">
+				<a href="./data7.html"><i class="fa fa-key"></i> <span>数据展示7</span></a>
+			</li>
+			<li id="li-12">
+				<a href="./data8.html"><i class="fa fa-key"></i> <span>数据展示8</span></a>
+			</li>
+		</ul>
+	</section>
+</aside>
+  <div class="content-wrapper">
+    <section class="content">
+		<div id="main"></div>
+    </section>
+  </div>
+</div>
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/app.min.js"></script>
+
+
+<script src="../js/echarts.min.js"></script>
+
+
+<script>
+$(document).ready(function(){
+	$('#userControl').mouseover(function() {
+		$(this).addClass('open');
+	}).mouseout(function() {
+		$(this).removeClass('open');
+	});
+	var index = parseInt($("#number").val());
+	var parent = parseInt($("#parent").val());
+	if(parent == 0){
+		$("#li-"+index).addClass("active");
+	}else{
+		$("#li-"+index).addClass("active");
+		$("#li-"+index).parent().parent().addClass("active");
+	}
+})
+	
+</script>
+<script>
+$("#main").height(document.body.scrollHeight-80)
+ var myChart = echarts.init(document.getElementById('main'));
+	var xData = function() {
+    var data = [];
+    for (var i = 1; i < 15; i++) {
+        data.push(i + "月份");
+    }
+    return data;
+}();
+
+option = {
+    backgroundColor: "#344b58",
+    "title": {
+        "text": "海南省2016年新增猪数量",
+        x: "4%",
+
+        textStyle: {
+            color: '#fff',
+            fontSize: '22'
+        },
+        subtextStyle: {
+            color: '#90979c',
+            fontSize: '16',
+
+        },
+    },
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "shadow",
+            textStyle: {
+                color: "#fff"
+            }
+
+        },
+    },
+    "grid": {
+        "borderWidth": 0,
+        "top": 110,
+        "bottom": 95,
+        textStyle: {
+            color: "#fff"
+        }
+    },
+    "legend": {
+        x: '4%',
+        top: '11%',
+        textStyle: {
+            color: '#90979c',
+        },
+        "data": ['母', '公', '平均']
+    },
+     
+
+    "calculable": true,
+    "xAxis": [{
+        "type": "category",
+        "axisLine": {
+            lineStyle: {
+                color: '#90979c'
+            }
+        },
+        "splitLine": {
+            "show": false
+        },
+        "axisTick": {
+            "show": false
+        },
+        "splitArea": {
+            "show": false
+        },
+        "axisLabel": {
+            "interval": 0,
+
+        },
+        "data": xData,
+    }],
+    "yAxis": [{
+        "type": "value",
+        "splitLine": {
+            "show": false
+        },
+        "axisLine": {
+            lineStyle: {
+                color: '#90979c'
+            }
+        },
+        "axisTick": {
+            "show": false
+        },
+        "axisLabel": {
+            "interval": 0,
+
+        },
+        "splitArea": {
+            "show": false
+        },
+
+    }],
+    "dataZoom": [{
+        "show": true,
+        "height": 30,
+        "xAxisIndex": [
+            0
+        ],
+        bottom: 30,
+        "start": 0,
+        "end": 120,
+        handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
+        handleSize: '110%',
+        handleStyle:{
+            color:"#d3dee5",
+            
+        },
+           textStyle:{
+            color:"#fff"},
+           borderColor:"#90979c"
+        
+        
+    }, {
+        "type": "inside",
+        "show": true,
+        "height": 15,
+        "start": 1,
+        "end": 35
+    }],
+    "series": [{
+            "name": "母",
+            "type": "bar",
+            "stack": "总量",
+            "barMaxWidth": 35,
+            "barGap": "10%",
+            "itemStyle": {
+                "normal": {
+                    "color": "rgba(255,144,128,1)",
+                    "label": {
+                        "show": true,
+                        "textStyle": {
+                            "color": "#fff"
+                        },
+                        "position": "insideTop",
+                        formatter: function(p) {
+                            return p.value > 0 ? (p.value) : '';
+                        }
+                    }
+                }
+            },
+            "data": [
+                709,
+                1917,
+                2455,
+                2610,
+                1719,
+                1433,
+                1544,
+                3285,
+                5208,
+                3372,
+                2484,
+                4078
+            ],
+        },
+
+        {
+            "name": "公",
+            "type": "bar",
+            "stack": "总量",
+            "itemStyle": {
+                "normal": {
+                    "color": "rgba(0,191,183,1)",
+                    "barBorderRadius": 0,
+                    "label": {
+                        "show": true,
+                        "position": "top",
+                        formatter: function(p) {
+                            return p.value > 0 ? (p.value) : '';
+                        }
+                    }
+                }
+            },
+            "data": [
+                327,
+                1776,
+                507,
+                1200,
+                800,
+                482,
+                204,
+                1390,
+                1001,
+                951,
+                381,
+                220
+            ]
+        }, {
+            "name": "总数",
+            "type": "line",
+            "stack": "总量",
+            symbolSize:10,
+            symbol:'circle',
+            "itemStyle": {
+                "normal": {
+                    "color": "rgba(252,230,48,1)",
+                    "barBorderRadius": 0,
+                    "label": {
+                        "show": true,
+                        "position": "top",
+                        formatter: function(p) {
+                            return p.value > 0 ? (p.value) : '';
+                        }
+                    }
+                }
+            },
+            "data": [
+                1036,
+                3693,
+                2962,
+                3810,
+                2519,
+                1915,
+                1748,
+                4675,
+                6209,
+                4323,
+                2865,
+                4298
+            ]
+        },
+    ]
+}
+myChart.setOption(option);
+</script>
+</body>
+</html>

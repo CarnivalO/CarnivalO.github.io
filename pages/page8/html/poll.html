@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>安全生产演示demo</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../css/overview.min.css" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+</head>
+<script type="application/javascript">
+	var clientid=Math.random()*100000000000;
+	deferred();
+	function deferred(){
+	    $.getJSON("../device/poll2/last2/"+clientid, function(result) {	
+			$("#console").prepend(result);
+			deferred();
+		});
+	}
+	</script>
+<body>
+	<textarea id="console" style="height: 400px;width: 800px"></textarea>
+</body>
+
+</html>

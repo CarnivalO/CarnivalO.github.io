@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>青少年阅读体验大世界</title>
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+
+	<body>
+		<header> <img src="images/logo.png" />
+			<div id="app">
+				<b>APP下载&nbsp;&nbsp;</b>
+				<div class="appdownload" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+					<img src="images/ios.png">
+					<p class="download">IOS版下载</p>
+				</div>
+				<div class="appdownload" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+					<img src="images/android.png">
+					<p class="download">安卓版下载</p>
+				</div>
+			</div>
+		</header>
+
+		<div class="main-im">
+			<div id="open_im" class="open-im" onclick="service()">&nbsp;</div>
+			<div class="im_main" id="im_main">
+				<div id="close_im" class="close-im">
+					<a href="javascript:void(0);">&nbsp;</a>
+				</div>
+				<a id="serviceNumber1" href="#" target="_blank" class="im-qq qq-a" style="height: 116px">
+					<div class="qq-hover-c">
+						<img class="img-qq" src="images/qq.png" />
+					</div>
+					<div class="qq-container">
+						<span id="serviceName1"></span>
+					</div>
+				</a>
+				<a id="serviceNumber2" href="#" target="_blank" class="im-qq qq-a" style="height: 26px"> <span id="serviceName2"></span>
+				</a>
+				<a id="serviceNumber3" href="#
+					" target="_blank" class="im-qq qq-a" style="height: 26px"> <span id="serviceName3"></span>
+				</a>
+
+				<div class="im-tel">
+					<div style="color: red;">电话客服</div>
+					<span id="serviceNumber4" style="color: red;"></span> <span id="serviceNumber5" style="color: red;"></span>
+				</div>
+			</div>
+		</div>
+		<nav id="menu" class="navbar">
+			<div class="navbar-header">
+				<span id="heading" class="visible-xs">点击右侧按钮展开折叠</span>
+				<button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+			<i class="glyphicon glyphicon-th-list"></i>
+		</button>
+			</div>
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav" style="width:700px">
+					<li class="dropdown" style="margin-left:120px">
+						<a class="dropdown-toggle" data-toggle="dropdown">客户服务平台 <i class="caret"></i></a>
+						<div class="dropdown-menu">
+							<div class="dropdown-inner">
+								<ul class="list-unstyled">
+									<li><a onclick="Persona(this);">个性化书单</a></li>
+									<li class="divider"></li>
+									<li><a>按需印刷平台</a></li>
+									<li class="divider"></li>
+									<li><a href="">阅读能力评价</a></li>
+									<li class="divider"></li>
+									<li><a onclick="guiHua(this)">指数规划系统</a></li>
+									<li class="divider"></li>
+									<li><a onclick="videoplay()">在线课堂</a></li>
+									<li class="divider"></li>
+									<li><a onclick="document.getElementById('_form6').submit();">中少论坛</a></li>
+								</ul>
+							</div>
+						</div>
+					</li>
+
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">阅读服务平台<i class="caret"></i></a>
+						<div class="dropdown-menu">
+							<div class="dropdown-inner">
+								<ul class="list-unstyled">
+									<li><a onclick="onlinessurvy(this)">需求调研系统</a></li>
+									<li class="divider"></li>
+									<li><a onclick="task(this)">产品交付查询系统</a></li>
+									<li class="divider"></li>
+									<li><a onclick="schoolReport(this)">学校指数报告系统</a></li>
+									<li class="divider"></li>
+									<li><a onclick="eshop()">在线电子商城</a></li>
+									<li class="divider"></li>
+									<li><a onclick="createReview()">创建读后感</a></li>
+									<li class="divider"></li>
+									<li><a onclick="listReview()">查看读后感</a></li>
+									<li class="divider"></li>
+									<li><a onclick="read(this)">在线阅读</a></li>
+								</ul>
+							</div>
+						</div>
+					</li>
+
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown">交流展示平台</a>
+					</li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" onclick="footplatform(this)">工作平台</a>
+					</li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" id="yes" onclick="dataService(this)">数据服务平台</a>
+					</li>
+					<li class="dropdown" style="position:absolute;left:84%"><a class="dropdown-toggle" href="${ctx}/main.do">进入后台</a></li>
+
+					<li class="dropdown" style="position:absolute;left:76%">
+						<a class="dropdown-toggle" data-toggle="dropdown">
+							<i class="glyphicon glyphicon-user"></i>
+							<i style="margin: 4px;">admin</i>
+							<i class="caret"></i>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="">个人中心</a></li>
+							<li class="divider"></li>
+							<li><a href="">退出</a></li>
+						</ul>
+					</li>
+
+				</ul>
+			</div>
+		</nav>
+		<div class="intro-header">
+			<div id="banner_tabs" class="flexslider">
+				<ul class="slides">
+					<li>
+						<a href="#"> <img style="background: url(images/banner1.jpg)no-repeat center;" src="images/alpha.png">
+						</a>
+					</li>
+					<li>
+						<a href="#"> <img style="background: url(images/banner2.jpg) no-repeat center;" src="images/alpha.png">
+						</a>
+					</li>
+					<li>
+						<a href="#"> <img style="background: url(images/banner3.jpg) no-repeat center;" src="images/alpha.png">
+						</a>
+					</li>
+				</ul>
+				<ul class="flex-direction-nav">
+					<li><a class="flex-prev" href="javascript:;">Previous</a></li>
+					<li><a class="flex-next" href="javascript:;">Next</a></li>
+				</ul>
+				<ol id="bannerCtrl" class="flex-control-nav flex-control-paging">
+					<li><a>1</a></li>
+					<li><a>2</a></li>
+					<li><a>2</a></li>
+				</ol>
+			</div>
+		</div>
+		<div class="goto">
+			<ul>
+				<li class="gotolink"><img src="images/gotolink/3.png" />
+					<p>按需印刷平台</p>
+				</li>
+				<li class="gotolink" onclick="videoplay()"><img src="images/gotolink/4.png" />
+					<p>在线课堂</p>
+				</li>
+				<li class="gotolink"><img src="images/gotolink/7.png" />
+					<p>交流展示平台</p>
+				</li>
+				<li class="gotolink" target="_blank"><img src="images/gotolink/8.png" class="p6" />
+					<p>中少论坛</p>
+				</li>
+				<li class="gotolink" onclick="onlinessurvy(this)"><img src="images/gotolink/9.png" />
+					<p>需求调研系统</p>
+				</li>
+				<li class="gotolink" onclick="eshop()"><img src="images/gotolink/11.png" />
+					<p>在线电子商城</p>
+				</li>
+				<li class="gotolink" onclick="schoolReport(this)"><img src="images/gotolink/12.png" />
+					<p>学校指数报告系统</p>
+				</li>
+				<li class="gotolink" onclick="footplatform(this)"><img src="images/gotolink/13.png" />
+					<p>工作平台</p>
+				</li>
+				<li class="gotolink"><img src="images/gotolink/1.png" />
+					<p>阅读能力评价</p>
+				</li>
+				<li class="gotolink" onclick="Persona(this);"><img src="images/gotolink/2.png" />
+					<p>个性化书单</p>
+				</li>
+				<li class="gotolink" onclick="guiHua(this)"><img src="images/gotolink/5.png" />
+					<p>指数规划系统</p>
+				</li>
+				<li class="gotolink" onclick="dataService(this)"><img src="images/gotolink/6.png" />
+					<p>数据服务平台</p>
+				</li>
+				<li class="gotolink" onclick="task(this)"><img src="images/gotolink/10.png" />
+					<p>产品交付查询系统</p>
+				</li>
+				<li class="gotolink" onclick="listReview()"><img src="images/gotolink/16.png" />
+					<p>查看读后感</p>
+				</li>
+				<li class="gotolink" onclick="createReview()"><img src="images/gotolink/15.png" />
+					<p>创建读后感</p>
+				</li>
+				<li class="gotolink" onclick="read(this)" style="margin-bottom: 30px;"><img src="images/gotolink/14.png" />
+					<p>在线阅读</p>
+				</li>
+			</ul>
+		</div>
+		<footer>
+			<div class="part1">
+				<h4>合作伙伴</h4>
+				<hr />
+				<ul class="list-inline">
+					<li>
+						<a href="http://www.ccppg.com.cn/baokan/xinwenzhongxin/zhongguoshaonianbao/" target="_blank" title="中国少年报"><img src="images/down/zgsnb.gif" /> </a>
+					</li>
+					<li>
+						<a href="http://www.ccppg.com.cn/baokan/xinwenzhongxin/zhongguoertongbao/" target="_blank" title="中国儿童报"><img src="images/down/zgetb.gif" /> </a>
+					</li>
+					<li>
+						<a href="http://www.ccppg.com.cn/baokan/xinwenzhongxin/zhongguoertongbao/" target="_blank" title="中国中学生报"><img src="images/down/zgzxsb.gif" /> </a>
+					</li>
+					<li>
+						<a href="http://www.ccppg.com.cn/baokan/xinwenzhongxin/zxs/" target="_blank" title="中国少年英语报"><img src="images/down/zgsnyyb.gif" /> </a>
+					</li>
+					<li>
+						<a href="http://www.ccppg.com.cn/baokan/zhongguokatong" target="_blank" title="中国卡通"><img src="images/down/katong.gif" /> </a>
+					</li>
+					<li>
+						<a href="http://www.hongdaishu.com/yehb/Index.aspx" target="_blank" title="婴儿画报"><img src="images/down/yingerhuabao.gif" /> </a>
+					</li>
+					<li>
+						<a href="http://www.youerhuabao.com/" target="_blank" title="幼儿画报"><img src="images/down/youerhuabao.gif" /> </a>
+					</li>
+					<li>
+						<a href="http://www.hongdaishu.com/ddx/Index.aspx" target="_blank" title="嘟嘟熊画报"><img src="images/down/duduxiong.gif" /> </a>
+					</li>
+					<li>
+						<a href="http://www.hongdaishu.com/ethb/index.aspx" target="_blank" title="中国儿童画报"><img src="images/down/ertonghuabao.gif" /> </a>
+					</li>
+					<li>
+						<a href="http://www.ccppg.com.cn/baokan/zhongxuesheng" target="_blank" title="中学生"><img src="images/down/zhongxuesheng.gif" /> </a>
+					</li>
+					<li>
+						<a href="http://www.ccppg.com.cn/baokan/etwx" target="_blank" title="儿童文学"><img src="images/down/ertongwenxue.gif" /> </a>
+					</li>
+					<li>
+						<a href="http://www.ccppg.com.cn/baokan/womenaikexue" target="_blank" title="我们爱科学"><img src="http://www.ccppg.com.cn/images/index/baokan/aikexue.gif" /> </a>
+					</li>
+					<li>
+						<a href="http://www.ccppg.com.cn/baokan/zhixinjiejie" target="_blank" title="知心姐姐"><img src="http://www.ccppg.com.cn/images/index/baokan/zhixinjiejie.gif" />
+						</a>
+					</li>
+					<li>
+						<a href="http://www.ccppg.com.cn/baokan/zhongguoshaonianertong" target="_blank" title="中国少年儿童"><img src="http://www.ccppg.com.cn/images/index/baokan/zgsnet.gif" /> </a>
+					</li>
+					<li>
+						<a href="http://wz.ccppg.com.cn" target="_blank" title="中国少年文摘"><img src="http://www.ccppg.com.cn/images/index/baokan/wenzhai.gif" /> </a>
+					</li>
+					<li>
+						<a href="http://www.zhiliketang.com" target="_blank" title="智力课堂"><img src="http://att.ccppg.cn/huodong/huodongcanyu/2013-01-24/d8e0333605c286e9f75713cbe95339bf.jpg" />
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="part2">
+				<h4>友情链接</h4>
+				<hr />
+				<ul class="list-inline">
+					<li><a href='http://www.ccppg.com.cn/zizhan/btwl/xiaojizhe/' title='小记者频道' target=_blank>小记者频道</a></li>
+					<li><a href='http://www.qingshao.net/' title='新疆青少年出版社' target=_blank>新疆青少年出版社</a></li>
+					<li><a href='http://www.ccyl.org.cn' title='中国共青团' target=_blank>中国共青团</a>
+					</li>
+					<li><a href='http://www.zgxzjxh.com/' title='中国小作家协会' target=_blank>中国小作家协会</a></li>
+					<li><a href='http://zsjf.ccppg.com.cn' title='小作家走天下' target=_blank>小作家走天下</a></li>
+					<li><a href='http://www.zxjj.com.cn/' title='知心姐姐' target=_blank>知心姐姐</a>
+					</li>
+					<li><a href='http://zsbk.ccppg.com.cn/' title='中少期刊' target=_blank>中少期刊</a></li>
+					<li><a href='http://www.fjcp.com/' title='福建少年儿童出版社' target=_blank>福建少年儿童出版社</a></li>
+					<li><a href='http://www.xinhuanet.com/book/' title='新华网-读书频道' target=_blank>新华网-读书频道</a></li>
+					<li><a href='http://shaoer.cntv.cn' title='央视网青少频道' target=_blank>央视网青少频道</a></li>
+					<li><a href='http://www.haott.com/' title='好太太网' target=_blank>好太太网</a>
+					</li>
+					<li><a href='http://www.edu-sp.com/' title='清华同方学堂' target=_blank>清华同方学堂</a></li>
+					<li><a href='http://www.ccppg.com.cn/zizhan/cartoon/' title='中少动漫频道' target=_blank>中少动漫频道</a></li>
+					<li><a href='http://www.haoerge.cn/' title='儿歌网' target=_blank>儿歌网</a>
+					</li>
+					<li><a href='http://ayongshushu.ccppg.com.cn/' title='阿涌叔叔' target=_blank>阿涌叔叔</a></li>
+					<li><a href='http://www.nycr.org.cn/' title='全国少年儿童阅读年' target=_blank>全国少年儿童阅读年</a></li>
+					<li><a href='http://www.xwg.cc/' title='希望谷' target=_blank>希望谷</a>
+					</li>
+					<li><a href='http://www.ryb-baby.com/' title='红黄蓝早期教育' target=_blank>红黄蓝早期教育</a></li>
+					<li><a href='http://www.huadoo.com/' title='花朵网' target=_blank>花朵网</a>
+					</li>
+					<li><a href='http://www.mamacn.com/' title='妈妈网' target=_blank>妈妈网</a>
+					</li>
+					<li><a href='http://www.babytree.com/' title='宝宝树育儿网' target=_blank>宝宝树育儿网</a></li>
+					<li><a href='http://cn.babycenter.com/' title='宝宝中心' target=_blank>宝宝中心</a></li>
+					<li><a href='http://baby.ifeng.com/' title='凤凰网亲子频道' target=_blank>凤凰网亲子频道</a></li>
+					<li><a href='http://www.qiuq.net/' title='秋千网' target=_blank>秋千网</a>
+					</li>
+					<li><a href='http://www.qiluoxing.com/' title='挑战奇罗星' target=_blank>挑战奇罗星</a></li>
+					<li><a href='http://www.zszww.com' title='中少作文网' target=_blank>中少作文网</a>
+					</li>
+					<li><a href='http://www.bjsciencefestival.com/' title='北京科学嘉年华' target=_blank>北京科学嘉年华</a></li>
+					<li><a href='http://www.tt277.com/' title='中学生学习网' target=_blank>中学生学习网</a>
+					</li>
+					<li><a href='http://www.baijiajiangtan.org' title='百家讲坛网' target=_blank>百家讲坛网</a></li>
+					<li><a href='http://www.ibabyzone.cn/' title='宝宝地带' target=_blank>宝宝地带</a></li>
+					<li><a href='http://www.wan-ku.com/' title='玩库网' target=_blank>玩库网</a>
+					</li>
+					<li><a href='http://www.123langlang.com/' title='乐朗乐读' target=_blank>乐朗乐读</a></li>
+					<li><a href='http://www.2love.cn/' title='家长会' target=_blank>家长会</a>
+					</li>
+					<li><a href='http://www.mama.cn/' title='妈妈网' target=_blank>妈妈网</a>
+					</li>
+					<li><a href='http://baby.liao1.com/' title='辽一网亲子' target=_blank>辽一网亲子</a>
+					</li>
+					<li><a href='http://www.bbtpress.com/index.asp' title='广西师范大学出版社' target=_blank>广西师范大学出版社</a></li>
+					<li><a href='http://www.gugubaby.com/' title='亲子王国' target=_blank>亲子王国</a></li>
+					<li><a href='http://www.jzbook.net.cn/' title='九章读书网' target=_blank>九章读书网</a></li>
+					<li><a href='http://www.3ren.cn/login' title='三人行网络教育' target=_blank>三人行网络教育</a></li>
+					<li><a href='http://www.hnjy.com.cn/ ' title='为先网' target=_blank>为先网</a>
+					</li>
+					<li><a href='http://t.xhsmb.com/Special_41/Index.aspx' title='图书馆报' target=_blank>图书馆报</a></li>
+					<li><a href='http://www.chinayd.org/html/ztzz/2013qmydnh/' title='全民阅读年会' target=_blank>全民阅读年会</a></li>
+					<li><a href='http://www.kids21.cn' title='中国未成年人网' target=_blank>中国未成年人网</a>
+					</li>
+					<li><a href='http://www.zuoyebao.com ' title='作业宝' target=_blank>作业宝</a>
+					</li>
+					<li><a href='http://xinli.k618.cn/' title='未来网心理频道' target=_blank>未来网心理频道</a></li>
+					<li><a href='http://www.jswch.com/' title='江苏省少年儿童文化艺术促进会' target=_blank>江苏省少年儿童文化艺术促进会</a></li>
+					<li><a href='http://www.hellobook.com.cn/' title='青少年读书网' target=_blank>青少年读书网</a></li>
+					<li><a href='http://baby.sina.com.cn/' title='新浪育儿' target=_blank>新浪育儿</a></li>
+					<li><a href='http://www.shaoer.com/' title='中国少儿网' target=_blank>中国少儿网</a>
+					</li>
+					<li><a href='http://www.noc.net.cn/' title='noc创新网' target=_blank>noc创新网</a></li>
+					<li><a href='http://www.yaolan.com/' title='摇篮网' target=_blank>摇篮网</a>
+					</li>
+					<li><a href='http://zsbk.ccppg.com.cn/' title='中少报刊阅读推广平台' target=_parent>中少报刊阅读推广平台</a></li>
+					<li><a href='http://www.bookdao.com/' title='百道网' target=_blank>百道网</a>
+					</li>
+					<li><a href='http://www.edulive.cn/' title='易学网' target=_blank>易学网</a>
+					</li>
+					<li><a href='http://xiaoai.anzeel.cn/' title='小爱也温暖' target=_blank>小爱也温暖</a></li>
+					<li><a href='http://www.ccppg.com.cn/zizhan/btwl/reporter/' title='通讯员频道' target=_blank>通讯员频道</a></li>
+				</ul>
+			</div>
+			<div class="part3">
+			<a href="http://www.ccppg.cn" target="_blank">[中少总社]</a> <a href="http://www.ccppg.cn/zhongshaogaikuang/map/" target="_blank">[联系我们]</a>
+			<a href="http://www.ccppg.cn/zhongshaogaikuang/job/" target="_blank ">[人才招聘]</a>
+			<a href="http://cms.ccppg.com.cn/yqlj.html" target="_blank ">[友情链接]</a>
+		</div>
+		<div class="part4">
+			<div class="copyright text-muted small">
+				团中央中国少年儿童新闻出版总社 CHINA CHILDREN'S PRESS&PUBLICATION GROUP <br /> 声明:本网站内容未经授权不得转载或建立镜像 京ICP备13015003号&nbsp;&nbsp;京公网安备11010502022170
+				<a href="http://webscan.360.cn/index/checkwebsite/url/www.ccppg.com.cn "></a>
+			</div>
+		</div>
+		</footer>
+		<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/slider.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				var bannerSlider = new Slider($('#banner_tabs'), {
+					time: 5000,
+					delay: 400,
+					event: 'hover',
+					auto: true,
+					mode: 'fade',
+					controller: $('#bannerCtrl'),
+					activeControllerCls: 'active'
+				});
+				$('#banner_tabs .flex-prev').click(function() {
+					bannerSlider.prev()
+				});
+				$('#banner_tabs .flex-next').click(function() {
+					bannerSlider.next()
+				});
+			})
+		</script>
+		<script>
+			$(function() {
+				$('#close_im').bind('click', function() {
+					$('#im_main').hide();
+					$('#open_im').show();
+				});
+				$('#open_im').bind('click', function(e) {
+					$('#im_main').show();
+					$(this).hide();
+				});
+			});
+			jQuery(document).ready(function($) {
+				$('.theme-login').click(function() {
+					$('.theme-popover-mask').fadeIn(500);
+					$('.theme-popover').slideDown(250);
+				})
+				$('.theme-poptit-close').click(function() {
+					$('.theme-popover-mask').fadeOut(500);
+					$('.theme-popover').slideUp(250);
+				});
+			});
+
+			function service() {
+				$.ajax({
+					type: "post",
+					cache: false,
+					url: "${ctx}/online/findall.do",
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					async: false,
+					success: function(data) {
+						$('#serviceNumber1').attr(
+							'href',
+							'http://wpa.qq.com/msgrd?v=3&uin=' + data[0].serviceNumber + '&site=qq&menu=yes');
+						$('#serviceNumber2').attr(
+							'href',
+							'http://wpa.qq.com/msgrd?v=3&uin=' + data[1].serviceNumber + '&site=qq&menu=yes');
+						$('#serviceNumber3').attr(
+							'href',
+							'http://wpa.qq.com/msgrd?v=3&uin=' + data[2].serviceNumber + '&site=qq&menu=yes');
+						$("#serviceName1").html(data[0].serviceName);
+						$("#serviceName2").html(data[1].serviceName);
+						$("#serviceName3").html(data[2].serviceName);
+						$("#serviceNumber4").html(data[3].serviceNumber);
+						$("#serviceNumber5").html(data[4].serviceNumber);
+					},
+					error: function() {
+						alert("请求失败");
+					}
+				});
+			};
+		</script>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<img alt="" src="images/qq.png">
+			</div>
+		</div>
+	</body>
+</html>

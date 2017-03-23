@@ -1,0 +1,124 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+a {
+	color: blue;
+	text-decoration: none;
+}
+html{
+	min-height: 100%;
+}
+body {
+	background: url("../img/login_bgx.gif");
+	font-family: "microsoft yahei";
+}
+#logo{
+	margin:3% 0 2% 46%;
+}
+.main {
+	width: 460px;
+	margin:auto;
+	padding-bottom: 50px;
+	background: white;
+	border-radius: 20px;
+	overflow: hidden;
+	box-shadow:2px 2px 5px #000;
+}
+h1 {
+	font-size: 34px;
+	font-weight: 100;
+	text-align: center;
+	padding: 20px 0;
+	margin-bottom:20px;
+}
+
+.flp {
+	padding: 0 50px;
+}
+
+.flp div {
+	position: relative;
+}
+
+.flp .input{
+	width: 350px;
+	display: block;
+	font: inherit;
+	font-size: 16px;
+	line-height: 24px;
+	height: 46px;
+	border: 1px solid #999;
+}
+.flp .label {
+	display: block;
+	font: inherit;
+	font-size: 16px;
+	line-height: 24px;
+	height: 46px;
+	border: 1px solid #999;
+}
+
+.flp .input {
+	padding: 10px;
+	outline: none;
+	border-radius: 3px;
+}
+
+.flp .label {
+	position: absolute;
+	top: -30px;
+	border-color: transparent;
+	color: #666;
+	cursor: text;
+}
+
+.ch {
+	display: block;
+	float: left;
+	position: relative;
+	background: white;
+}
+
+.ch:first-child {
+	padding-left: 2px;
+}
+
+.ch:last-child {
+	padding-right: 2px;
+}
+
+.focussed {
+	pointer-events: none;
+}
+#link {
+	float: right;
+}
+.error{
+	color: red;
+	display:inline-block;
+}
+img{
+	margin:4px 0 4px 10px;
+}
+#login{
+	width:150px;
+	margin-left:20px;
+	margin-right:10px;
+	background:#337AB7;
+	color:#FFF;
+	float:left;
+	cursor:pointer;
+}
+#reg{
+	width:150px;
+	margin-left:20px;
+	margin-right:10px;
+	background:#8AC007;
+	color:#FFF;
+	float:left;
+	cursor:pointer;
+}
+
+p{margin: 0 !important}

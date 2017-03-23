@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cmn-Hans">
+<meta charset="UTF-8">
+<title>智慧猪场Demo-闪龙科技</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+
+<link rel="stylesheet" href="../css/bootstrap.min.css" />
+<link rel="stylesheet" href="../css/font-awesome.min.css" />
+<link rel="stylesheet" href="../css/AdminLTE.min.css" />
+<link rel="stylesheet" href="../css/skin-blue.min.css" />
+<link rel="stylesheet" href="../css/style.min.css" />
+</head>
+<input type="hidden" value="8" id="number"/>
+<input type="hidden" value="0" id="parent"/>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+ <header class="main-header">
+	<a href="index.html" class="logo">
+		<span class="logo-mini">闪龙</span>
+		<span class="logo-lg">Sanlogic 闪龙科技</span>
+	</a>
+	<nav class="navbar navbar-static-top" role="navigation">
+		<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+			<span class="sr-only">Toggle navigation</span>
+		</a>
+		<div class="navbar-custom-menu">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown" id="userControl">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">管理员<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li>
+							<a href="#">警报管理</a>
+						</li>
+						<li>
+							<a href="#">用户管理</a>
+						</li>
+						<li>
+							<a href="#">日志</a>
+						</li>
+						<li>
+							<a href="#">报表查询</a>
+						</li>
+						<li>
+							<a href="#">系统配置</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="#">注销</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</header>
+<aside class="main-sidebar">
+	<section class="sidebar">
+		<ul class="sidebar-menu">
+			<li id="li-1">
+				<a href="./index.html"><i class="fa fa-map"></i> <span>GIS</span></a>
+			</li>
+			<li class="treeview">
+				<a href="#"><i class="fa fa-camera"></i> <span>视频监控</span>
+					<span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+				</a>
+				<ul class="treeview-menu">
+					<li id="li-2">
+						<a href="./video.html">总览</a>
+					</li>
+					<li>
+						<a href="#">猪舍</a>
+					</li>
+					<li>
+						<a href="#">育成舍</a>
+					</li>
+					<li>
+						<a href="#">办公楼</a>
+					</li>
+					<li>
+						<a href="#">大门</a>
+					</li>
+				</ul>
+			</li>
+			<li class="treeview">
+				<a href="#"><i class="fa fa-link"></i> <span>环境监测</span>
+					<span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+				</a>
+				<ul class="treeview-menu">
+					<li id="li-3">
+						<a href="./gauge.html">数据监控</a>
+					</li>
+					<li>
+						<a href="#">猪舍</a>
+					</li>
+					<li>
+						<a href="#">育成舍</a>
+					</li>
+					<li>
+						<a href="#">办公楼</a>
+					</li>
+					<li>
+						<a href="#">大门</a>
+					</li>
+				</ul>
+			</li>
+			<li id="li-4">
+				<a href="#"><i class="fa fa-key"></i> <span>门禁管理</span></a>
+			</li>
+			<li id="li-5">
+				<a href="./data1.html"><i class="fa fa-key"></i> <span>数据展示1</span></a>
+			</li>
+			<li id="li-6">
+				<a href="./data2.html"><i class="fa fa-key"></i> <span>数据展示2</span></a>
+			</li>
+			<li id="li-7">
+				<a href="./data3.html"><i class="fa fa-key"></i> <span>数据展示3</span></a>
+			</li>
+			<li id="li-8">
+				<a href="./data4.html"><i class="fa fa-key"></i> <span>数据展示4</span></a>
+			</li>
+			<li id="li-9">
+				<a href="./data5.html"><i class="fa fa-key"></i> <span>数据展示5</span></a>
+			</li>
+			<li id="li-10">
+				<a href="./data6.html"><i class="fa fa-key"></i> <span>数据展示6</span></a>
+			</li>
+			<li id="li-11">
+				<a href="./data7.html"><i class="fa fa-key"></i> <span>数据展示7</span></a>
+			</li>
+			<li id="li-12">
+				<a href="./data8.html"><i class="fa fa-key"></i> <span>数据展示8</span></a>
+			</li>
+		</ul>
+	</section>
+</aside>
+  <div class="content-wrapper">
+    <section class="content">
+		<div id="main"></div>
+    </section>
+  </div>
+</div>
+<script src="../js/jquery-2.2.3.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/app.min.js"></script>
+
+
+<script src="../js/echarts.min.js"></script>
+
+
+<script>
+$(document).ready(function(){
+	$('#userControl').mouseover(function() {
+		$(this).addClass('open');
+	}).mouseout(function() {
+		$(this).removeClass('open');
+	});
+	var index = parseInt($("#number").val());
+	var parent = parseInt($("#parent").val());
+	if(parent == 0){
+		$("#li-"+index).addClass("active");
+	}else{
+		$("#li-"+index).addClass("active");
+		$("#li-"+index).parent().parent().addClass("active");
+	}
+})
+	
+</script>
+<script>
+$("#main").height(document.body.scrollHeight-80)
+ var myChart = echarts.init(document.getElementById('main'));
+	// 2x轴+假数据列
+// 细粒度数据，必须根据主分类排序
+var dummy = [
+    ['2016年1月','1月',8000+Math.round(Math.random()*2000),8000+Math.round(Math.random()*2000)],
+    ['2016年2月','2月',8000+Math.round(Math.random()*2000),8000+Math.round(Math.random()*2000)],
+    ['2016年3月','3月',8000+Math.round(Math.random()*2000),8000+Math.round(Math.random()*2000)],
+    ['2016年4月','4月',8000+Math.round(Math.random()*2000),8000+Math.round(Math.random()*2000)],
+    ['2016年5月','5月',8000+Math.round(Math.random()*2000),8000+Math.round(Math.random()*2000)],
+    ['2016年6月','6月',8000+Math.round(Math.random()*2000),8000+Math.round(Math.random()*2000)],
+    ['2016年7月','7月',8000+Math.round(Math.random()*2000),8000+Math.round(Math.random()*2000)],
+    ['2016年8月','8月',8000+Math.round(Math.random()*2000),8000+Math.round(Math.random()*2000)],
+    ['2016年9月','9月',8000+Math.round(Math.random()*2000),8000+Math.round(Math.random()*2000)],
+    ['2016年10月','10月',8000+Math.round(Math.random()*2000),8000+Math.round(Math.random()*2000)],
+    ['2016年11月','11月',8000+Math.round(Math.random()*2000),8000+Math.round(Math.random()*2000)],
+    ['2016年12月','12月',8000+Math.round(Math.random()*2000),8000+Math.round(Math.random()*2000)]
+];
+var metadata = {
+    flag: true,
+    quarter: [],
+    month: [],
+    data1: [],
+    data2: [],
+    data3: [],
+    x_major_offset: dummy[0][1].length,
+    init: function() {
+        if (metadata.flag) {
+            for (var i = 0; i < dummy.length; i++) {
+                if (i === 0) {
+                    metadata.quarter.push(dummy[i][0]);
+                } else {
+                    metadata.quarter.push(dummy[i-1][0] === dummy[i][0] ? '' : dummy[i][0]);
+                }
+                metadata.month.push(dummy[i][1]);
+                metadata.data1.push(dummy[i][2]);
+                metadata.data2.push(dummy[i][3]);
+                metadata.data3.push('');
+                // 计算子分类字符长度（按汉字计算，*12号字体）
+                metadata.x_major_offset = metadata.x_major_offset > dummy[i][1].length ? metadata.x_major_offset : dummy[i][1].length;
+            }
+            metadata.flag = false;
+        }
+        return metadata;
+    }
+};
+
+option = {
+	title: {
+        text: '海南省2016年各月猪存栏量统计',
+        x: 'center'
+    },
+    tooltip: {
+        axisPointer: {
+            type: 'shadow'
+        },
+        trigger: 'axis'
+    },
+    grid: {
+        bottom: metadata.init().x_major_offset * 12 + 30
+    },
+    legend: {
+        data:['公猪','母猪'],
+        left:1
+    },
+    xAxis: [
+        {
+            type: 'category',
+            axisLine: {show: false},
+            axisTick: {show: false},
+            axisLabel: {
+                rotate: 50
+            },
+            splitArea: {show: false},
+            data: metadata.init().month
+        },
+        {
+            type: 'category',
+            position: 'bottom',
+            offset: metadata.init().x_major_offset * 12,
+            axisLine: {show: false},
+            axisTick: {
+                length: metadata.init().x_major_offset * 12 + 20,
+                lineStyle: {color: '#CCC'},
+                interval: function (index, value) {
+                    return value!=='';
+                }
+            },
+            splitArea: {
+                show: true,
+                interval: function (index, value) {
+                    return value!=='';
+                }
+            },
+            data: metadata.init().quarter
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value',
+            name: '头数',
+            min: 0,
+            max: 10000,
+            interval: 1000,
+            axisLabel: {
+                formatter: '{value} 头'
+            }
+        }
+    ],
+    series: [
+        {
+            name:'公猪',
+            type:'bar',
+            z: 1,
+             data: metadata.init().data1
+        },
+        {
+            name:'母猪',
+            type:'bar',
+            z: 1,
+            data: metadata.init().data2
+        },
+        {
+            type:'line',
+            xAxisIndex: 1,
+            z: 0,
+            data: metadata.init().data3
+        }
+    ]
+};
+myChart.setOption(option);
+</script>
+</body>
+</html>

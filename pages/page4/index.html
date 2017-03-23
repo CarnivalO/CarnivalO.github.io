@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>读后感首页</title>
+		<link rel="stylesheet" href="css/style.css" />
+		<script type="text/javascript" src="js/modernizr.custom.js"></script>
+	</head>
+
+	<body>
+		<a href="${ctx}/pages/home/home_index.jsp" id="returnhome">返回首页 </a>
+		<div class="button-wrap" style="display: none">
+			<button id="opendialog" class="trigger">Open Dialog</button>
+		</div>
+		<div id="somedialog" class="dialog dialog--open" style="z-index: 999">
+			<div class="dialog__overlay"></div>
+			<div class="dialog__content">
+				<h2>
+				<strong>${UserName}同学</strong>, 欢迎你发表读后感！
+			</h2>
+				<div>
+					<button class="action" data-dialog-close="" style="cursor: pointer">好的</button>
+				</div>
+			</div>
+		</div>
+		<form action="${ctx}/studentrecord/readerResponse.do" method="post" enctype="multipart/form-data" id="msform">
+			<ul id="progressbar">
+				<li class="active">班级信息</li>
+				<li>选择封面</li>
+				<li>图书评价</li>
+				<li>填写读后感</li>
+				<li>上传图片</li>
+				<li>上传视频</li>
+			</ul>
+
+			<fieldset>
+				<h2 class="fs-title">选择班级</h2>
+				<h3 class="fs-subtitle">请选择您所在的班级</h3>
+				<div style="margin-bottom: 10px;">
+					<span>年级:</span> <select class="form-control" name="bookReview.grade">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+				</select> &nbsp;&nbsp; <span>班级:</span> <select class="form-control" name="bookReview.className">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+				</select>
+				</div>
+				<input type="button" name="next" class="next action-button" value="下一页" />
+			</fieldset>
+			<fieldset>
+				<h2 class="fs-title">请输入图书信息</h2>
+				<div style="margin-bottom: 10px;">
+					<h3 class="fs-subtitle">请输入书名</h3>
+					<input type="text" placeholder="请输入书名" name="bookReview.bookName">
+				</div>
+
+				<div id="wating" class="modal">
+					<div>
+						<img src="${ctx}/pages/review/loadinganim.gif" />
+					</div>
+					<div>
+						<span>请稍等...</span>
+					</div>
+				</div>
+				<h3 class="fs-subtitle">请上传图书封面,上传大小不超1M</h3>
+				<img id="bookcoverImg" dynsrc="" src="" style="display: none" /> <input type="file" id="bookcover" name="uploadfile" onchange="butf(this,'${ctx }')"> <input id="fenmian" type="hidden" name="bookReview.bookCoverId" value=""> <br />
+				<input type="button" name="previous" class="previous action-button" value="上一页" /> <input type="button" name="next" class="next action-button" value="下一页" />
+			</fieldset>
+			<fieldset>
+				<h2 class="fs-title">图书评价</h2>
+				<h3 class="fs-subtitle">1、你是通过什么方式阅读的?</h3>
+				<div style="margin-bottom: 10px;">
+					<label for="method1"> 电子书</label> <input type="radio" name="bookReview.bookType" id="method1" value="0" checked>&nbsp;&nbsp;
+					<label for="method2">纸质图书</label> <input type="radio" name="bookReview.bookType" id="method2" value="2">
+				</div>
+				<h3 class="fs-subtitle">2、是谁推荐你看这本书的？</h3>
+				<div style="margin-bottom: 10px;">
+					<table>
+						<tr>
+							<td><label for="who1">校长</label> <input type="radio" name="bookReview.bookSource" id="who1" value="0" checked></td>
+							<td><label for="who2">老师</label> <input type="radio" name="bookReview.bookSource" id="who2" value="1"></td>
+						</tr>
+						<tr>
+							<td><label for="who3">图书推荐</label> <input type="radio" name="bookReview.bookSource" id="who3" value="2"></td>
+							<td><label for="who4">亲人</label> <input type="radio" name="bookReview.bookSource" id="who4" value="3"></td>
+						</tr>
+						<tr>
+							<td><label for="who5">同学</label> <input type="radio" name="bookReview.bookSource" id="who5" value="4"></td>
+							<td><label for="who6">自发</label> <input type="radio" name="bookReview.bookSource" id="who6" value="5"></td>
+						</tr>
+					</table>
+				</div>
+				<div style="margin-bottom: 10px;">
+					<h3 class="fs-subtitle">3、你对本书的评价是?</h3>
+					<div id="xzw_starSys">
+						<div id="xzw_starBox">
+							<ul class="star" id="star">
+								<li><a href="javascript:void(0)" title="1" class="one-star">1</a></li>
+								<li><a href="javascript:void(0)" title="2" class="two-stars">2</a></li>
+								<li><a href="javascript:void(0)" title="3" class="three-stars">3</a></li>
+								<li><a href="javascript:void(0)" title="4" class="four-stars">4</a></li>
+								<li><a href="javascript:void(0)" title="5" class="five-stars">5</a></li>
+							</ul>
+							<input type="hidden" name="bookReview.star" id="starcounts" />
+							<div class="current-rating" id="showb"></div>
+						</div>
+						<!--评价文字-->
+						<div class="description"></div>
+					</div>
+				</div>
+				<input type="button" name="previous" class="previous action-button" value="上一页" /> <input type="button" name="next" class="next action-button" value="下一页" />
+			</fieldset>
+			<fieldset>
+				<h2 class="fs-title">读后感</h2>
+				<h3 class="fs-subtitle">你用了多长时间看这本书?</h3>
+				<div style="margin-bottom: 10px;">
+					<input type="hidden" name="bookReview.studentName" value="${UserName}"> <input type="text" placeholder="请输入天数" name="bookReview.readDays"> 天
+				</div>
+				<div style="margin-bottom: 10px;">
+					<h3 class="fs-subtitle">请发表你的读后感吧</h3>
+					<textarea name="bookReview.reMark" style="width: 400px; height: 100px; resize: none;"></textarea>
+				</div>
+				<input type="button" name="previous" class="previous action-button" value="上一页" /> <input type="button" name="next" class="next action-button" value="下一页" />
+			</fieldset>
+			<fieldset>
+				<h2 class="fs-title">上传精彩图片</h2>
+				<h3 class="fs-subtitle">你可以在下面上传这本书的精彩图片</h3>
+				<img id="tempimg1" dynsrc="" src="" style="display: none" /> <input type="file" id="pci1" name="uploadfile" onchange="butf(this,'${ctx }')"> <input id="pci1val" type="hidden" name="bookReview.pic1" value="">
+				<img id="tempimg2" dynsrc="" src="" style="display: none" /> <input type="file" id="pci2" name="uploadfile" onchange="butf(this,'${ctx }')"> <input id="pci2val" type="hidden" name="bookReview.pic2" value=""> <img id="tempimg3" dynsrc="" src="" style="display: none"
+				/> <input type="file" id="pci3" name="uploadfile" onchange="butf(this,'${ctx }')"> <input id="pci3val" type="hidden" name="bookReview.pic3" value=""> <img id="tempimg4" dynsrc="" src="" style="display: none" /> <input type="file" id="pci4" name="uploadfile"
+					onchange="butf(this,'${ctx }')"> <input id="pci4val" type="hidden" name="bookReview.pic4" value=""> <br /> <input type="button" name="previous" class="previous action-button" value="上一页" /> <input type="button" name="next" class="next action-button"
+					value="下一页" />
+			</fieldset>
+			<fieldset>
+				<h2 class="fs-title">上传精彩视频</h2>
+				<h3 class="fs-subtitle">最后你还可以上传你的小视频</h3>
+				<img id="tempimgvideo" dynsrc="" src="" style="display: none" /> <input type="file" id="video" name="uploadfile" onchange="butf(this,'${ctx }')" /> <input type="hidden" id="videoval" name="bookReview.myVideoId" value="" /> <br /> <input type="button"
+					name="previous" class="previous action-button" value="上一页" /> <input type="submit" name="submit" class="submit action-button" value="提交" />
+			</fieldset>
+		</form>
+
+		<script src="../js/jquery-2.1.4.min.js" type="text/javascript"></script>
+		<script src="../js/jquery.easing.min.js" type="text/javascript"></script>
+		<script type="text/javascript" src="js/ajaxfileupload.js"></script>
+		<script type="text/javascript" src="js/classie.js"></script>
+		<script type="text/javascript" src="js/dialogFx.js"></script>
+		<script type="text/javascript" src="js/jquery.modal.js"></script>
+		<script type="text/javascript" src="js/js.js"></script>
+		<script>
+			(function() {
+				var dlgtrigger = document.getElementById('opendialog'),
+					somedialog = document
+					.getElementById("somedialog"),
+					dlg = new DialogFx(
+						somedialog);
+				dlgtrigger.addEventListener('click', dlg.toggle.bind(dlg));
+			})();
+		</script>
+
+	</body>
+
+</html>

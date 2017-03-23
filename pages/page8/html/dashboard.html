@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>环境与气象</title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="../css/dashboard.min.css" />
+		<script type="text/javascript" src="../js/echarts.js"></script>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+
+	</head>
+
+	<body>
+		<div id="config" style="width: 19%;float: left;">
+			<form>
+				<h2>预警设置</h2>
+				<div>
+					<label for="sensorType">传感器类型：</label>
+					<select id="sensorType">
+						<option value="0">温度</option>
+						<option value="1">湿度</option>
+						<option value="2">CO</option>
+						<option value="3">SO2</option>
+						<option value="4">pm2.5</option>
+						<option value="5">pm10</option>
+					</select>
+				</div>
+				<div>
+					<label for="threshold">阈值：</label>
+					<input id="threshold" value="50"/>
+				</div>
+				<div>
+					<label>连续</label> <input id="conditionTimes" value="5"/> <label>次触发警报</label>
+				</div>
+				<div>
+					<label>通知方式：</label><label for="message">短信</label> <input type="checkbox" id="message" class="checkbox" /> <label for="email">邮件</label> <input id="email" type="checkbox" class="checkbox" />
+				</div>
+				<div>
+					<label>通知人员：</label>
+					<br />
+					<textarea class="textarea"></textarea>
+				</div>
+				<button id="btnConfig" type="button">确认</button>
+			</form>
+			<textarea id="console" style="height: 400px;"></textarea>
+		</div>
+		<div id="main" style="width:80%;height: 800px;float: right;"></div>
+		<script>
+			$('#sensorType').on('change',function(){
+				var index = $('#sensorType').val();
+				$('#threshold').val(_dashboardConfig[index].threshould);
+				$('#conditionTimes').val(_dashboardConfig[index].conditionTimes);
+			});
+			$('#btnConfig').on('click', function() {
+				var index = $('#sensorType').val();
+				_dashboardConfig[index].threshould=$('#threshold').val();
+				_dashboardConfig[index].conditionTimes=$('#conditionTimes').val();
+				_dashboardConfig[index].dataTemp=[];
+				alert("修改成功")
+			})
+
+			var _dashboardConfig = [{
+				"name": "湿度",
+				"max": 66.6,
+				"conditionTimes": 5,
+				"warningCount": 0,
+				"dataTemp": []
+			}, {
+				"name": "温度",
+				"max": 66.6,
+				"conditionTimes": 5,
+				"warningCount": 0,
+				"dataTemp": []
+			}, {
+				"name": "PM2.5",
+				"max": 666.6,
+				"conditionTimes": 5,
+				"warningCount": 0,
+				"dataTemp": []
+			}, {
+				"name": "信号强度",
+				"max": 400,
+				"conditionTimes": 5,
+				"warningCount": 0,
+				"dataTemp": []
+			},{
+				"name": "CO",
+				"max": 66.6,
+				"conditionTimes": 5,
+				"warningCount": 0,
+				"dataTemp": []
+			}, {
+				"name": "SO2",
+				"max": 66.6,
+				"conditionTimes": 5,
+				"warningCount": 0,
+				"dataTemp": []
+			}];
+			var myChart = echarts.init(document.getElementById('main'));
+			option = {
+				title: {
+					text: '实时数据',
+					textStyle: {
+						color: '#FFF',
+						fontSize: 28,
+					},
+					subtext: '点击指针查看历史数据',
+					left: 'center',
+					top:'2%',
+					subtextStyle: {
+						color: '#DDD',
+						fontSize: 18,
+					}
+				},
+				series: [{
+					type: 'gauge',
+					center: ["30%", "33%"],
+					min: 0,
+					max: Math.ceil(_dashboardConfig[0].max/2*3),
+					splitNumber: 10,
+					radius: '40%',
+					axisLine: { // 坐标轴线
+						lineStyle: { // 属性lineStyle控制线条样式
+							color: [
+								[0.3, 'lime'],
+								[0.7, 'yellow'],
+								[1, 'red']
+							],
+							width: 7,
+							shadowColor: '#fff', //默认透明
+							shadowBlur: 10
+						}
+					},
+					axisLabel: { // 坐标轴小标记
+						textStyle: { // 属性lineStyle控制线条样式
+							fontWeight: 'bolder',
+							color: '#fff',
+							shadowColor: '#fff', //默认透明
+							shadowBlur: 10
+						}
+					},
+					axisTick: { // 坐标轴小标记
+						length: 15, // 属性length控制线长
+						lineStyle: { // 属性lineStyle控制线条样式
+							color: 'auto',
+							shadowColor: '#fff', //默认透明
+							shadowBlur: 10
+						}
+					},
+					splitLine: { // 分隔线
+						length: 25, // 属性length控制线长
+						lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+							width: 3,
+							color: '#fff',
+							shadowColor: '#fff', //默认透明
+							shadowBlur: 10
+						}
+					},
+					pointer: { // 分隔线
+						height: 10,
+						shadowColor: '#fff', //默认透明
+						shadowBlur: 5
+					},
+					title: {
+						textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+							fontWeight: 'bolder',
+							fontSize: 20,
+							fontStyle: 'italic',
+							color: '#fff',
+							shadowColor: '#fff', //默认透明
+							shadowBlur: 10
+						}
+					},
+					detail: {
+						backgroundColor: 'rgba(30,144,255,0.8)',
+						borderColor: '#fff',
+						shadowColor: '#fff', //默认透明
+						shadowBlur: 5,
+						offsetCenter: [0, '50%'], // x, y，单位px
+						textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+							fontWeight: 'bolder',
+							color: '#fff'
+						}
+					},
+					data: [{
+						name: '湿度',
+						value:0,
+						max:Math.ceil(_dashboardConfig[0].max/2*3),
+						type:0
+					}]
+				}, {
+					type: 'gauge',
+					center: ["70%", "33%"],
+					min: 0,
+					max: Math.ceil(_dashboardConfig[1].max/2*3),
+					splitNumber: 10,
+					radius: '40%',
+					axisLine: { // 坐标轴线
+						lineStyle: { // 属性lineStyle控制线条样式
+							color: [
+								[0.3, 'lime'],
+								[0.7, 'yellow'],
+								[1, 'red']
+							],
+							width: 7,
+							shadowColor: '#fff', //默认透明
+							shadowBlur: 10
+						}
+					},
+					axisLabel: { // 坐标轴小标记
+						textStyle: { // 属性lineStyle控制线条样式
+							fontWeight: 'bolder',
+							color: '#fff',
+							shadowColor: '#fff', //默认透明
+							shadowBlur: 10
+						}
+					},
+					axisTick: { // 坐标轴小标记
+						length: 15, // 属性length控制线长
+						lineStyle: { // 属性lineStyle控制线条样式
+							color: 'auto',
+							shadowColor: '#fff', //默认透明
+							shadowBlur: 10
+						}
+					},
+					splitLine: { // 分隔线
+						length: 25, // 属性length控制线长
+						lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+							width: 3,
+							color: '#fff',
+							shadowColor: '#fff', //默认透明
+							shadowBlur: 10
+						}
+					},
+					pointer: { // 分隔线
+						shadowColor: '#fff', //默认透明
+						shadowBlur: 5
+					},
+					title: {
+						textStyle: {
+							fontWeight: 'bolder',
+							fontSize: 20,
+							fontStyle: 'italic',
+							color: '#fff',
+							shadowColor: '#fff', //默认透明
+							shadowBlur: 10
+						}
+					},
+					detail: {
+						backgroundColor: 'rgba(30,144,255,0.8)',
+						borderColor: '#fff',
+						shadowColor: '#fff', //默认透明
+						shadowBlur: 5,
+						offsetCenter: [0, '50%'], // x, y，单位px
+						textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+							fontWeight: 'bolder',
+							color: '#fff'
+						}
+					},
+					data: [{
+						name: '温度',
+						value:0,
+						max:Math.ceil(_dashboardConfig[1].max/2*3),
+						type:1
+					}]
+				}, {
+					type: 'gauge',
+					center: ["30%", "75%"],
+					min: 0,
+					max: Math.ceil(_dashboardConfig[2].max/2*3),
+					splitNumber: 10,
+					radius: '40%',
+					axisLine: { // 坐标轴线
+						lineStyle: { // 属性lineStyle控制线条样式
+							color: [
+								[0.3, 'lime'],
+								[0.7, 'yellow'],
+								[1, 'red']
+							],
+							width: 7,
+							shadowColor: '#fff', //默认透明
+							shadowBlur: 10
+						}
+					},
+					axisLabel: { // 坐标轴小标记
+						textStyle: { // 属性lineStyle控制线条样式
+							fontWeight: 'bolder',
+							color: '#fff',
+							shadowColor: '#fff', //默认透明
+							shadowBlur: 10
+						}
+					},
+					axisTick: { // 坐标轴小标记
+						length: 15, // 属性length控制线长
+						lineStyle: { // 属性lineStyle控制线条样式
+							color: 'auto',
+							shadowColor: '#fff', //默认透明
+							shadowBlur: 10
+						}
+					},
+					splitLine: { // 分隔线
+						length: 25, // 属性length控制线长
+						lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+							width: 3,
+							color: '#fff',
+							shadowColor: '#fff', //默认透明
+							shadowBlur: 10
+						}
+					},
+					pointer: { // 分隔线
+						shadowColor: '#fff', //默认透明
+						shadowBlur: 5
+					},
+					title: {
+						textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+							fontWeight: 'bolder',
+							fontSize: 20,
+							fontStyle: 'italic',
+							color: '#fff',
+							shadowColor: '#fff', //默认透明
+							shadowBlur: 10
+						}
+					},
+					detail: {
+						backgroundColor: 'rgba(30,144,255,0.8)',
+						borderColor: '#fff',
+						shadowColor: '#fff', //默认透明
+						shadowBlur: 5,
+						offsetCenter: [0, '50%'], // x, y，单位px
+						textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+							fontWeight: 'bolder',
+							color: '#fff'
+						}
+					},
+					data: [{
+						name: 'PM2.5',
+						value:0,
+						max:Math.ceil(_dashboardConfig[2].max/2*3),
+						type:2
+					}]
+				}, {
+					type: 'gauge',
+					center: ["70%", "75%"],
+					min: 0,
+					max: Math.ceil(_dashboardConfig[3].max/2*3),
+					splitNumber: 10,
+					radius: '40%',
+					axisLine: { // 坐标轴线
+						lineStyle: { // 属性lineStyle控制线条样式
+							color: [
+								[0.3, 'lime'],
+								[0.7, 'yellow'],
+								[1, 'red']
+							],
+							width: 7,
+							shadowColor: '#fff', //默认透明
+							shadowBlur: 10
+						}
+					},
+					axisLabel: { // 坐标轴小标记
+						textStyle: { // 属性lineStyle控制线条样式
+							fontWeight: 'bolder',
+							color: '#fff',
+							shadowColor: '#fff', //默认透明
+							shadowBlur: 10
+						}
+					},
+					axisTick: { // 坐标轴小标记
+						length: 15, // 属性length控制线长
+						lineStyle: { // 属性lineStyle控制线条样式
+							color: 'auto',
+							shadowColor: '#fff', //默认透明
+							shadowBlur: 10
+						}
+					},
+					splitLine: { // 分隔线
+						length: 25, // 属性length控制线长
+						lineStyle: { // 属性lineStyle（详见lineStyle）控制线条样式
+							width: 3,
+							color: '#fff',
+							shadowColor: '#fff', //默认透明
+							shadowBlur: 10
+						}
+					},
+					pointer: { // 分隔线
+						shadowColor: '#fff', //默认透明
+						shadowBlur: 5
+					},
+					title: {
+						textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+							fontWeight: 'bolder',
+							fontSize: 20,
+							fontStyle: 'italic',
+							color: '#fff',
+							shadowColor: '#fff', //默认透明
+							shadowBlur: 10
+						}
+					},
+					detail: {
+						backgroundColor: 'rgba(30,144,255,0.8)',
+						borderColor: '#fff',
+						shadowColor: '#fff', //默认透明
+						shadowBlur: 5,
+						offsetCenter: [0, '50%'], // x, y，单位px
+						textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+							fontWeight: 'bolder',
+							color: '#fff'
+						}
+					},
+					data: [{
+						name: '信号强度',
+						value:0,
+						max:Math.ceil(_dashboardConfig[3].max/2*3),
+						type:3
+					}]
+				}
+			]
+			};
+			myChart.setOption(option);
+			$.getJSON('../device/getonedata').done(function(data) {
+					option.series[0].data[0].value=data[0].dvalue;
+					option.series[1].data[0].value=data[1].dvalue;
+					option.series[2].data[0].value=data[2].dvalue;
+					option.series[3].data[0].value=data[3].dvalue;
+					myChart.setOption(option);
+					deferred();
+			})
+			var clientid=Math.random()*100000000000;
+			function deferred(){
+			    $.getJSON("../device/poll/last/"+clientid, function(result) {	
+					option.series[0].data[0].value=result.sd;
+					option.series[1].data[0].value=result.wd;
+					option.series[2].data[0].value=result.pm;
+					option.series[3].data[0].value=result.xh;
+					$("#console").prepend(new Date().toLocaleString()+"\n"+"湿度: "+result.sd+", 温度: "+result.wd+", PM2.5: "+result.pm+", 信号强度: "+ -result.xh+"\n");
+					myChart.setOption(option);
+					deferred();
+				});
+			}			
+			
+			myChart.on('click', function(params) {
+				window.open('./linechart.html?type=' + params.data.type+'&max='+params.data.max);
+			});
+		</script>
+	</body>
+
+</html>
