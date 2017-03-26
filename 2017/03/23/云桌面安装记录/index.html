@@ -10,7 +10,7 @@
     
     <title>
         
-            页面 | 
+            云桌面安装记录 | 
         
         CarnivalO
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://carnivalo.top">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="页面 | CarnivalO">
+    <meta property="og:title" content="云桌面安装记录 | CarnivalO">
     <meta property="og:description" content="web前端,linux运维,nba火箭队,硬件">
     
 
@@ -244,7 +244,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#iperf"><span class="post-toc-number">1.</span> <span class="post-toc-text">iperf</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -280,7 +280,7 @@
         
     
             <p class="article-headline-p">
-                页面
+                云桌面安装记录
             </p>
         </div>
 
@@ -339,7 +339,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=页面&url=http://carnivalo.top//2017/03/23/页面/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=云桌面安装记录&url=http://carnivalo.top//2017/03/23/云桌面安装记录/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -348,7 +348,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=页面&url=http://carnivalo.top//2017/03/23/页面/index.html&via=WangJianian" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=云桌面安装记录&url=http://carnivalo.top//2017/03/23/云桌面安装记录/index.html&via=WangJianian" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -357,7 +357,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://carnivalo.top//2017/03/23/页面/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://carnivalo.top//2017/03/23/云桌面安装记录/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -366,7 +366,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://carnivalo.top//2017/03/23/页面/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://carnivalo.top//2017/03/23/云桌面安装记录/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -390,7 +390,13 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p><a href="./pages/page1">中少首页</a><br><a href="./pages/page2">登录</a><br><a href="./pages/page3">登录</a><br><a href="./pages/page4">读后感</a><br><a href="./pages/page5">书籍</a><br><a href="./pages/page6">页面排版</a><br><a href="./pages/page7/html">海南demo</a><br><a href="./pages/page8/html">安全生产demo</a></p>
+        <p>tail -f 查看日志<br>ls -d 查看文件夹</p>
+<h1 id="iperf"><a href="#iperf" class="headerlink" title="iperf"></a>iperf</h1><p>其中一台<br>iperf -s -i 1 -w 448k<br>iperf -c 192.168.10.2 -i 1 -w 448k -t 600</p>
+<p>gluster volume info<br>gluster peer status</p>
+<p>cat/etc/sysconfig/network-scripts/ifcfg-ens5f0</p>
+<p>iostat -x -t 2 &gt; /home/io.log</p>
+<p>dd if=/dev/zero of=/brick/ssd/testimg bs=1M count=300000</p>
+<p>dd if=/dev/zero of=/brick/ssd/testimg bs=1M count=30000<br>30g小速度快，但是写入都是进的内存 所以不对</p>
 
     
 
@@ -411,7 +417,7 @@
 <script>
     queue.offer(function() {
             var disqus_config = function () {
-                this.page.url = 'http://carnivalo.top/2017/03/23/页面/index.html';  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.url = 'http://carnivalo.top/2017/03/23/云桌面安装记录/index.html';  // Replace PAGE_URL with your page's canonical URL variable
                 this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
             };
 
@@ -442,7 +448,7 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/03/23/云桌面安装记录/" id="post_nav-newer" class="prev-content">
+        <a href="/2017/03/26/跨界战争/" id="post_nav-newer" class="prev-content">
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
                 <i class="material-icons">arrow_back</i>
             </button>
@@ -456,7 +462,7 @@
 
     <!-- Next Nav -->
     
-        <a href="/2017/03/08/搭建sspanel的问题记录/" id="post_nav-older" class="next-content">
+        <a href="/2017/03/23/页面/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
