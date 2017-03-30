@@ -381,10 +381,6 @@
 				$('#banner_tabs .flex-next').click(function() {
 					bannerSlider.next()
 				});
-			})
-		</script>
-		<script>
-			$(function() {
 				$('#close_im').bind('click', function() {
 					$('#im_main').hide();
 					$('#open_im').show();
@@ -393,9 +389,7 @@
 					$('#im_main').show();
 					$(this).hide();
 				});
-			});
-			jQuery(document).ready(function($) {
-				$('.theme-login').click(function() {
+					$('.theme-login').click(function() {
 					$('.theme-popover-mask').fadeIn(500);
 					$('.theme-popover').slideDown(250);
 				})
@@ -403,7 +397,7 @@
 					$('.theme-popover-mask').fadeOut(500);
 					$('.theme-popover').slideUp(250);
 				});
-			});
+			})
 
 			function service() {
 				$.ajax({
