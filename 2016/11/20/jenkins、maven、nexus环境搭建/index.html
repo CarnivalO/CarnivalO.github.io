@@ -10,7 +10,7 @@
     
     <title>
         
-            页面 | 
+            jenkins、maven、nexus环境搭建 | 
         
         CarnivalO
     </title>
@@ -48,7 +48,7 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://carnivalo.top">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="页面 | CarnivalO">
+    <meta property="og:title" content="jenkins、maven、nexus环境搭建 | CarnivalO">
     <meta property="og:description" content="web前端,linux运维,nba火箭队,硬件">
     
 
@@ -244,7 +244,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nexus配置"><span class="post-toc-number">1.</span> <span class="post-toc-text">nexus配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#maven-配置"><span class="post-toc-number">2.</span> <span class="post-toc-text">maven 配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#jenkins配置"><span class="post-toc-number">3.</span> <span class="post-toc-text">jenkins配置</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -280,7 +280,7 @@
         
     
             <p class="article-headline-p">
-                页面
+                jenkins、maven、nexus环境搭建
             </p>
         </div>
 
@@ -299,7 +299,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>WangJianian</strong>
-        <span>3月 23, 2017</span>
+        <span>11月 20, 2016</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -339,7 +339,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=页面&url=http://carnivalo.top//2017/03/23/页面/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=jenkins、maven、nexus环境搭建&url=http://carnivalo.top//2016/11/20/jenkins、maven、nexus环境搭建/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -348,7 +348,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=页面&url=http://carnivalo.top//2017/03/23/页面/index.html&via=WangJianian" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=jenkins、maven、nexus环境搭建&url=http://carnivalo.top//2016/11/20/jenkins、maven、nexus环境搭建/index.html&via=WangJianian" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -357,7 +357,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://carnivalo.top//2017/03/23/页面/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://carnivalo.top//2016/11/20/jenkins、maven、nexus环境搭建/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -366,7 +366,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://carnivalo.top//2017/03/23/页面/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://carnivalo.top//2016/11/20/jenkins、maven、nexus环境搭建/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -390,7 +390,44 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p><a href="./pages/page1">中少首页</a><br><a href="./pages/page2">登录</a><br><a href="./pages/page3">登录</a><br><a href="./pages/page4">读后感</a><br><a href="./pages/page5">书籍</a><br><a href="./pages/page6">页面排版</a><br><a href="./pages/page7/html">海南demo</a><br><a href="./pages/page8/html">安全生产demo</a></p>
+        <p>##首要任务<br>解决add-apt-repository</p>
+<p>sudo apt-get install python-software-properties<br>sudo apt-get install software-properties-common</p>
+<p>安装jdk</p>
+<p>sudo add-apt-repository ppa:webupd8team/java<br>sudo apt-get update</p>
+<p>sudo apt-get install oracle-java8-installer</p>
+<h2 id="nexus配置"><a href="#nexus配置" class="headerlink" title="nexus配置"></a>nexus配置</h2><ol>
+<li>配好jdk环境</li>
+<li>解压后运行bin目录下的./nexus start 启动,默认地址 <a href="http://192.168.20.62:8081/nexus/" target="_blank" rel="external">http://192.168.20.62:8081/nexus/</a>  账户admin 密码admin123</li>
+<li>在repositories中选择一个源,修改configuration下的remote storage location中的地址为 <a href="http://maven.aliyun.com/nexus/content/groups/public/" target="_blank" rel="external">http://maven.aliyun.com/nexus/content/groups/public/</a></li>
+</ol>
+<h2 id="maven-配置"><a href="#maven-配置" class="headerlink" title="maven 配置"></a>maven 配置</h2><ol>
+<li>配好jdk环境</li>
+<li>执行 vi /etc/profile 文件，插入如下内容<br><code>export M2_HOME=/home/maven/</code><br><code>PATH=$PATH:$JAVA_HOME/bin:$M2_HOME/bin</code><br>执行 source /etc/profile 命令使改动生效</li>
+<li>修改maven/conf下的setting.xml<br><servers>里增加</servers></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;server&gt;</div><div class="line">      &lt;id&gt;releases&lt;/id&gt;</div><div class="line">      &lt;username&gt;admin&lt;/username&gt;</div><div class="line">      &lt;password&gt;admin123&lt;/password&gt;</div><div class="line">    &lt;/server&gt;</div><div class="line">    &lt;server&gt;</div><div class="line">      &lt;id&gt;snapshots&lt;/id&gt;</div><div class="line">      &lt;username&gt;admin&lt;/username&gt;</div><div class="line">      &lt;password&gt;admin123&lt;/password&gt;</div><div class="line">    &lt;/server&gt;</div><div class="line">    &lt;server&gt;</div><div class="line">      &lt;id&gt;nexus&lt;/id&gt;</div><div class="line">      &lt;username&gt;admin&lt;/username&gt;</div><div class="line">      &lt;password&gt;admin123&lt;/password&gt;</div><div class="line">    &lt;/server&gt;</div></pre></td></tr></table></figure>
+<p><profiles>里增加</profiles></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&lt;profile&gt;</div><div class="line">      &lt;id&gt;nexus&lt;/id&gt;</div><div class="line">&lt;repositories&gt;</div><div class="line">        &lt;repository&gt;</div><div class="line">          &lt;id&gt;nexus&lt;/id&gt;</div><div class="line">          &lt;url&gt;http://192.168.20.62:8081/nexus/content/repositories/central/&lt;/url&gt;</div><div class="line">          &lt;releases&gt;</div><div class="line">            &lt;enabled&gt;true&lt;/enabled&gt;</div><div class="line">          &lt;/releases&gt;</div><div class="line">          &lt;snapshots&gt;</div><div class="line">            &lt;enabled&gt;true&lt;/enabled&gt;</div><div class="line">          &lt;/snapshots&gt;</div><div class="line">        &lt;/repository&gt;</div><div class="line">      &lt;/repositories&gt;</div><div class="line">      &lt;pluginRepositories&gt;</div><div class="line">        &lt;pluginRepository&gt;</div><div class="line">          &lt;id&gt;nexus&lt;/id&gt;</div><div class="line">          &lt;url&gt;http://192.168.20.62:8081/nexus/content/repositories/central/&lt;/url&gt;</div><div class="line">          &lt;releases&gt;</div><div class="line">            &lt;enabled&gt;true&lt;/enabled&gt;</div><div class="line">          &lt;/releases&gt;</div><div class="line">          &lt;snapshots&gt;</div><div class="line">            &lt;enabled&gt;true&lt;/enabled&gt;</div><div class="line">          &lt;/snapshots&gt;</div><div class="line">        &lt;/pluginRepository&gt;</div><div class="line">      &lt;/pluginRepositories&gt;</div><div class="line">    &lt;/profile&gt;</div></pre></td></tr></table></figure>
+<p>在文档 尾部修改为以下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;activeProfiles&gt;</div><div class="line">    &lt;activeProfile&gt;nexus&lt;/activeProfile&gt;</div><div class="line">&lt;/activeProfiles&gt;</div></pre></td></tr></table></figure>
+<ol>
+<li>项目的pom.xml里增加</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">&lt;repositories&gt;</div><div class="line">        &lt;repository&gt;</div><div class="line">            &lt;id&gt;nexus&lt;/id&gt;</div><div class="line">            &lt;name&gt;nexus&lt;/name&gt;</div><div class="line">            &lt;url&gt;http://192.168.20.62:8081/nexus/content/repositories/central/&lt;/url&gt;</div><div class="line">            &lt;layout&gt;default&lt;/layout&gt;</div><div class="line">            &lt;releases&gt;</div><div class="line">                &lt;enabled&gt;true&lt;/enabled&gt;</div><div class="line">                &lt;updatePolicy&gt;never&lt;/updatePolicy&gt;</div><div class="line">            &lt;/releases&gt;</div><div class="line">            &lt;snapshots&gt;</div><div class="line">                &lt;enabled&gt;false&lt;/enabled&gt;</div><div class="line">            &lt;/snapshots&gt;</div><div class="line">        &lt;/repository&gt;</div><div class="line">    &lt;/repositories&gt;</div><div class="line">    &lt;pluginRepositories&gt;</div><div class="line">        &lt;pluginRepository&gt;</div><div class="line">            &lt;id&gt;nexus&lt;/id&gt;</div><div class="line">            &lt;name&gt;nexus&lt;/name&gt;</div><div class="line">            &lt;url&gt;http://192.168.20.62:8081/nexus/content/repositories/central/&lt;/url&gt;</div><div class="line">            &lt;releases&gt;</div><div class="line">                &lt;enabled&gt;true&lt;/enabled&gt;</div><div class="line"> 	    &lt;/releases&gt;</div><div class="line">            &lt;snapshots&gt;</div><div class="line">                &lt;enabled&gt;false&lt;/enabled&gt;</div><div class="line">            &lt;/snapshots&gt;</div><div class="line">        &lt;/repository&gt;</div><div class="line">    &lt;/repositories&gt;</div><div class="line">    &lt;pluginRepositories&gt;</div><div class="line">        &lt;pluginRepository&gt;</div><div class="line">            &lt;id&gt;nexus&lt;/id&gt;</div><div class="line">            &lt;name&gt;nexus&lt;/name&gt;</div><div class="line">            &lt;url&gt;http://192.168.20.62:8081/nexus/content/repositories/central/&lt;/url&gt;</div><div class="line">            &lt;releases&gt;</div><div class="line">                &lt;enabled&gt;true&lt;/enabled&gt;</div><div class="line">            &lt;/releases&gt;</div><div class="line">            &lt;snapshots&gt;</div><div class="line">                &lt;enabled&gt;true&lt;/enabled&gt;</div><div class="line">            &lt;/snapshots&gt;</div><div class="line">        &lt;/pluginRepository&gt;</div><div class="line">    &lt;/pluginRepositories&gt;</div><div class="line">   &lt;distributionManagement&gt;</div><div class="line">    &lt;snapshotRepository&gt;</div><div class="line">        &lt;id&gt;snapshots&lt;/id&gt;</div><div class="line">        &lt;name&gt;User Project SNAPSHOTS&lt;/name&gt;</div><div class="line">        &lt;url&gt;http://192.168.20.62:8081/nexus/content/repositories/snapshots/&lt;/url&gt;</div><div class="line">    &lt;/snapshotRepository&gt;</div><div class="line">      &lt;repository&gt;</div><div class="line">          &lt;id&gt;releases&lt;/id&gt;</div><div class="line">          &lt;name&gt;User Project Release&lt;/name&gt;</div><div class="line">          &lt;url&gt;http://192.168.20.62:8081/nexus/content/repositories/releases/&lt;/url&gt;</div><div class="line">      &lt;/repository&gt;</div><div class="line">  &lt;/distributionManagement&gt;</div></pre></td></tr></table></figure>
+<h2 id="jenkins配置"><a href="#jenkins配置" class="headerlink" title="jenkins配置"></a>jenkins配置</h2><ol>
+<li>配好jdk,tomcat</li>
+<li>修改tomcat/bin目录下的catalina.sh,在cygwin=false前增加一行:<br><code>JAVA_OPTS=&quot;-Xms256m -Xmx512m -Xss1024K -XX:PermSize=128m -XX:MaxPermSize=256m”</code></li>
+<li>把jenkins.war放进webapps</li>
+<li>启动tomcat,地址为<a href="http://192.168.20.63:8080/jenkins" target="_blank" rel="external">http://192.168.20.63:8080/jenkins</a></li>
+<li>安装deploy container plugin</li>
+<li><p>然后在tomcat的conf目录配置tomcat-users.xml文件，在<tomcat-users>节点里添加如下内容：</tomcat-users></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;role rolename=&quot;manager-gui&quot;/&gt;   </div><div class="line">&lt;role rolename=&quot;manager-script&quot;/&gt;  </div><div class="line">&lt;role rolename=&quot;manager-jmx&quot;/&gt;  </div><div class="line">&lt;role rolename=&quot;manager-status&quot;/&gt;   </div><div class="line">&lt;user username=“admin” password=“cloud1234” roles=&quot;manager-gui,manager-script,manager-jmx,manager-status&quot;/&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在项目的配置中使用为build,options增加clean deploy</p>
+</li>
+<li>在最下面的增加构建后操作中选择deploy war/ear to  a container</li>
+</ol>
+<p>参考资料 <a href="https://my.oschina.net/u/260244/blog/318755" target="_blank" rel="external">Jenkins安装与配置 - 小小小七 - 开源中国社区</a></p>
 
     
 
@@ -411,7 +448,7 @@
 <script>
     queue.offer(function() {
             var disqus_config = function () {
-                this.page.url = 'http://carnivalo.top/2017/03/23/页面/index.html';  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.url = 'http://carnivalo.top/2016/11/20/jenkins、maven、nexus环境搭建/index.html';  // Replace PAGE_URL with your page's canonical URL variable
                 this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
             };
 
@@ -442,7 +479,7 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/03/23/云桌面安装记录/" id="post_nav-newer" class="prev-content">
+        <a href="/2017/02/08/mac环境备份/" id="post_nav-newer" class="prev-content">
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
                 <i class="material-icons">arrow_back</i>
             </button>
@@ -455,14 +492,6 @@
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
-    
-        <a href="/2017/03/08/搭建sspanel的问题记录/" id="post_nav-older" class="next-content">
-            旧篇
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_forward</i>
-            </button>
-        </a>
     
 </nav>
 
