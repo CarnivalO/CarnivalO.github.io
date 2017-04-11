@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh">
     <head>
-    <!-- 
+    <!--
         © Material Theme
         https://github.com/viosey/hexo-theme-material
-        Version: 1.3.0 -->
+        Version: 1.3.4 -->
 
     <!-- Title -->
     
@@ -15,19 +15,31 @@
         CarnivalO
     </title>
 
-    <!-- Favicons -->
-    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
-    <link rel="icon" sizes="192x192" href="/img/favicon.png">
-    <link rel="apple-touch-icon" href="/img/favicon.png">
-
     <!-- Meta & Info -->
     <meta charset="utf-8">
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    
+    
+    
+    
+        <link rel="dns-prefetch" href="https://hm.baidu.com"/>
+    
+    
+    
+
     <meta http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="WangJianian">
     <meta name="description" content="web前端,linux运维,nba火箭队,硬件">
-    <meta name="keywords" content="null">
+    <meta name="keywords" content="null,学习笔记">
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -50,7 +62,7 @@
     <meta property="og:type" content="blog">
     <meta property="og:title" content="运用商业逻辑做出正确选择 | CarnivalO">
     <meta property="og:description" content="web前端,linux运维,nba火箭队,硬件">
-    
+    <meta property="og:article:tag" content="学习笔记"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -60,10 +72,11 @@
         
     <![endif]-->
 
-    <!-- Import CSS -->
-    <link rel="stylesheet" href="/css/material.min.css">
-    <link rel="stylesheet" href="/css/style.min.css">
-    <!-- Config CSS -->
+    <!-- Import CSS & jQuery -->
+    
+        <link rel="stylesheet" href="/css/material.min.css">
+        <link rel="stylesheet" href="/css/style.min.css">
+        <!-- Config CSS -->
 
 
 <!-- Other Styles -->
@@ -127,6 +140,7 @@
     color: #00838F;
     text-decoration: underline;
   }
+
 </style>
 
 
@@ -165,9 +179,9 @@
     </style>
 
 
-
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/queue.js"></script>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/queue.js"></script>
+    
 
     <!-- UC Browser Compatible -->
     <script>
@@ -191,6 +205,7 @@
     
 
     
+
 
     <!-- Bing Background -->
     
@@ -243,7 +258,7 @@
         <i class="material-icons">format_list_numbered</i>
     </button>
 
-    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
         <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1、如何用商业的逻辑，做出正确的选择？"><span class="post-toc-number">1.</span> <span class="post-toc-text">1、如何用商业的逻辑，做出正确的选择？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2、你的老板究竟比你强在哪里？"><span class="post-toc-number">2.</span> <span class="post-toc-text">2、你的老板究竟比你强在哪里？</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#培养自己的战略能力"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">培养自己的战略能力</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#如何拥有战略思考能力？"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">如何拥有战略思考能力？</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3、关键字“杠杆”"><span class="post-toc-number">3.</span> <span class="post-toc-text">3、关键字“杠杆”</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么一个人想赚很多钱，必须要用杠杆？"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">为什么一个人想赚很多钱，必须要用杠杆？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#如何提高杠杆？"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">如何提高杠杆？</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#25-35岁"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">25-35岁</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#35-45岁"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">35-45岁</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#45岁之后"><span class="post-toc-number">3.2.3.</span> <span class="post-toc-text">45岁之后</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#总结"><span class="post-toc-number">3.2.4.</span> <span class="post-toc-text">总结</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4、向上管理"><span class="post-toc-number">4.</span> <span class="post-toc-text">4、向上管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#权利"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">权利</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#如何管理老板"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">如何管理老板</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么要向上管理老板？"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">为什么要向上管理老板？</span></a></li></ol></li></ol>
 
         <!--
@@ -274,7 +289,8 @@
             <script>
     var randomNum = Math.floor(Math.random() * 19 + 1);
 
-    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
 </script>
 
         
@@ -323,7 +339,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        
+        <a class="post_tag-link" href="/tags/学习笔记/">学习笔记</a>
     </ul>
     
 
@@ -443,16 +459,17 @@
                     
 
 
+
+
     <!-- 使用 DISQUS -->
     <div id="disqus-comment">
         <div id="disqus_thread"></div>
 <script>
+    var disqus_config = function () {
+        this.page.url = 'http://carnivalo.top/2017/03/31/运用商业逻辑做出正确选择/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://carnivalo.top/2017/03/31/运用商业逻辑做出正确选择/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
     queue.offer(function() {
-            var disqus_config = function () {
-                this.page.url = 'http://carnivalo.top/2017/03/31/运用商业逻辑做出正确选择/index.html';  // Replace PAGE_URL with your page's canonical URL variable
-                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-            };
-
             (function() { // DON'T EDIT BELOW THIS LINE
                 var d = document;
                 var s = d.createElement('script');
@@ -473,6 +490,7 @@
 
 
 
+
                 
             </div>
 
@@ -480,19 +498,19 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
+        <a href="/2017/03/26/跨界战争/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
-    
-        <a href="/2017/03/26/跨界战争/" id="post_nav-older" class="next-content">
-            旧篇
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_forward</i>
-            </button>
-        </a>
     
 </nav>
 
@@ -582,12 +600,24 @@
             </ul>
         </li>
         
+            <li class="divider"></li>
+        
     
 
     <!-- Categories  -->
     
 
     <!-- Pages  -->
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
     
 
     <!-- Article Number  -->
@@ -671,6 +701,12 @@ It will not impact the appearance and can give developers a lot of support :)
 
     <!-- Weibo -->
     
+        <a href="http://weibo.com/xmwjn" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-weibo.svg);">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
 
     <!-- Instagram -->
     
@@ -679,6 +715,12 @@ It will not impact the appearance and can give developers a lot of support :)
     
 
     <!-- Github -->
+    
+        <a href="https://github.com/CarnivalO" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.svg);">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
     
 
     <!-- LinkedIn -->
@@ -726,9 +768,14 @@ It will not impact the appearance and can give developers a lot of support :)
 
 
                     <!-- Import File -->
-<script src="/js/lazyload.min.js"></script>
-<script src="/js/js.min.js"></script>
-<script src="/js/nprogress.js"></script>
+
+    <script src="/js/lazyload.min.js"></script>
+    <script src="/js/js.min.js"></script>
+
+
+
+    <script src="/js/nprogress.js"></script>
+
 
 <script type="text/javascript">
     NProgress.configure({
@@ -761,15 +808,12 @@ It will not impact the appearance and can give developers a lot of support :)
 
 
 
+
     <!-- 使用 DISQUS js 代码 -->
     <script id="dsq-count-scr" src="//carnivalo.disqus.com/count.js" async></script>
 
 
 
-<!-- Swiftye -->
-
-
-<!-- Local Search-->
 
 
 <!-- Window Load-->
@@ -782,6 +826,21 @@ It will not impact the appearance and can give developers a lot of support :)
 
 <!-- MathJax Load-->
 
+<script>
+    <!-- Offer LazyLoad -->
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    <!-- Start Queue -->
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
 
                 </main>
             </div>
