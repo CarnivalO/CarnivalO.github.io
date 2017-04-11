@@ -80,6 +80,7 @@ new Vue({
             var index = this.productList.indexOf(this.curProduct);
             this.productList.splice(index, 1);
             this.delFlag = false;
+            this.calcTotalPrice()
             axios.get() //通过后台删除
         }
     }
