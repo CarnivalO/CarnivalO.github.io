@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>img_3D</title>
+</head>
+<style type="text/css">
+    @keyframes an1{
+        0%{
+            transform: rotateY(0deg)  ;
+        }
+        50%{
+            transform: rotateY(180deg)  ;
+        }
+        100%{
+            transform: rotateY(360deg) ;
+        }
+    }
+    .container{
+        width: 900px;
+        height: 400px;
+        margin: 200px auto;
+        perspective: 2000px;
+        transform-style: preserve-3d;
+        animation: an1 10s linear 0s infinite;
+    }
+    .container img{
+        width: 200px;
+        height: auto;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        position: absolute;
+    }
+    .container img:nth-child(1){
+        transform: rotateY(0deg) translateZ(350px);
+    }
+    .container img:nth-child(2){
+        transform: rotateY(36deg) translateZ(350px);
+    }
+    .container img:nth-child(3){
+        transform: rotateY(72deg) translateZ(350px);
+    }
+    .container img:nth-child(4){
+        transform: rotateY(108deg) translateZ(350px);
+    }
+    .container img:nth-child(5){
+        transform: rotateY(144deg) translateZ(350px);
+    }
+    .container img:nth-child(6){
+        transform: rotateY(180deg) translateZ(350px);
+    }
+    .container img:nth-child(7){
+        transform: rotateY(216deg) translateZ(350px);
+    }
+    .container img:nth-child(8){
+        transform: rotateY(252deg) translateZ(350px);
+    }
+    .container img:nth-child(9){
+        transform: rotateY(288deg) translateZ(350px);
+    }
+    .container img:nth-child(10){
+        transform: rotateY(324deg) translateZ(350px);
+    }
+</style>
+<body>
+    <div class="container">
+        <img src="./images/1.jpg">
+        <img src="./images/2.jpg">
+        <img src="./images/3.jpg">
+        <img src="./images/4.jpg">
+        <img src="./images/5.jpg">
+        <img src="./images/6.jpg">
+        <img src="./images/7.jpg">
+        <img src="./images/8.jpg">
+        <img src="./images/9.jpg">
+        <img src="./images/10.jpg">
+    </div>
+</body>
+</html>
