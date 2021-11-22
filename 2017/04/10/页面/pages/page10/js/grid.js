@@ -1,4 +1,4 @@
-var images = "", count = 60 ,imganimates = ['saturate', 'grayscale', 'contrast', 'blur', 'sepia', 'opacity'], index1, animates = ['linear', 'swing', 'jswing', 'easeInQuad', 'easeOutQuad', 'easeInOutQuad', 'easeInCubic', 'easeOutCubic', 'easeInOutCubic', 'easeInQuart', 'easeOutQuart', 'easeInOutQuart', 'easeInQuint', 'easeOutQuint', 'easeInOutQuint', 'easeInSine', 'easeOutSine', 'easeInOutSine', 'easeInExpo', 'easeOutExpo', 'easeInOutExpo', 'easeInCirc', 'easeOutCirc', 'easeInOutCirc', 'easeInElastic', 'easeOutElastic', 'easeInOutElastic', 'easeInBack', 'easeOutBack', 'easeInOutBack', 'easeInBounce', 'easeOutBounce', 'easeInOutBounce'], theImage;
+var images = "", count = 10 ,imganimates = ['saturate', 'grayscale', 'contrast', 'blur', 'sepia', 'opacity'], index1, animates = ['linear', 'swing', 'jswing', 'easeInQuad', 'easeOutQuad', 'easeInOutQuad', 'easeInCubic', 'easeOutCubic', 'easeInOutCubic', 'easeInQuart', 'easeOutQuart', 'easeInOutQuart', 'easeInQuint', 'easeOutQuint', 'easeInOutQuint', 'easeInSine', 'easeOutSine', 'easeInOutSine', 'easeInExpo', 'easeOutExpo', 'easeInOutExpo', 'easeInCirc', 'easeOutCirc', 'easeInOutCirc', 'easeInElastic', 'easeOutElastic', 'easeInOutElastic', 'easeInBack', 'easeOutBack', 'easeInOutBack', 'easeInBounce', 'easeOutBounce', 'easeInOutBounce'], theImage;
 for (var i = 1; i <= count; i++) {
 	index1 = Math.floor((Math.random() * imganimates.length));
 	images += '<img class="' + imganimates[index1] + '" src="./images/' + i + '.jpg" />';
@@ -39,7 +39,7 @@ function storm() {
 				//applying the transformation
 				$(this).css("transform", "rotateY(" + ry + "deg) translateZ(" + tz + "px)");
 			},
-			duration: 10000,
+			duration: 1000,
 			//some easing fun. Comes from the jquery easing plugin.
 			easing: animates[index],
 		})
@@ -50,14 +50,16 @@ $("img").on("click", function () {
 	var screenImage = $(this);
 	theImage = new Image();
 	theImage.src = screenImage.attr("src");
-	$(".thumb").height(theImage.height);
-	$(".thumb").width(theImage.width);
-	$("#previewBG").css("background", 'url(' + theImage.src + ')');
-	$(".grid").fadeToggle(3000);
-	$(".thumb").fadeToggle(3000);
+	$(".thumb").height(800);
+	$(".thumb").width(1400);
+	$("#previewBG").css("background", 'url(' + theImage.src + ') ');
+	$("#previewBG").css("background-size", 'cover');
+
+	$(".grid").fadeToggle(1000);
+	$(".thumb").fadeToggle(1000);
 })
 
 $("#previewBG").on("click", function () {
-	$(".thumb").fadeToggle(3000);
-	$(".grid").fadeToggle(3000);
+	$(".thumb").fadeToggle(1000);
+	$(".grid").fadeToggle(1000);
 })
