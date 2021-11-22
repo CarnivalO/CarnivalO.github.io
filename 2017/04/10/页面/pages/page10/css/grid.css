@@ -30,7 +30,7 @@ body {
 	cursor: pointer;
 }
 .thumb {
-	margin: 10em auto;
+	margin: 1em auto;
 	perspective: 1000px;
 }
 
