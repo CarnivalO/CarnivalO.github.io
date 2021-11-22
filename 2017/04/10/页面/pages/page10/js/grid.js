@@ -50,8 +50,8 @@ $("img").on("click", function () {
 	var screenImage = $(this);
 	theImage = new Image();
 	theImage.src = screenImage.attr("src");
-	$(".thumb").height(800);
-	$(".thumb").width(1400);
+	$(".thumb").height(600);
+	$(".thumb").width(1000);
 	$("#previewBG").css("background", 'url(' + theImage.src + ') ');
 	$("#previewBG").css("background-size", 'cover');
 
