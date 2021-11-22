@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>海南省种猪监测系统</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="common/font-awesome.min.css">
+		<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/skin-green-light.min.css">
+		<style>
+			.newscontent {
+				width: 45%;
+				margin-bottom: 2%;
+				margin-right: 5%;
+			}
+			
+			.newscontent li {
+				list-style: none;
+				line-height: 30px;
+				font-size: 16px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+		</style>
+	</head>
+
+	<body class="hold-transition skin-green-light sidebar-mini">
+		<div class="wrapper">
+			<header class="main-header">
+				<a href="index.html" class="logo">
+					<span class="logo-mini"><b>PI</b>DS</span>
+					<span class="logo-lg"><b>海南省</b>种猪监测系统</span>
+				</a>
+				<nav class="navbar navbar-static-top" role="navigation">
+					<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+						<span class="sr-only">最小化</span>
+					</a>
+					<div class="navbar-custom-menu">
+						<ul class="nav navbar-nav">
+							<li class="dropdown notifications-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<span>管理员&nbsp;<i class="fa fa-caret-down"></i></span>
+								</a>
+								<ul class="dropdown-menu" style="width:180px;">
+									<li>
+										<ul class="menu">
+
+											<li>
+												<a href="#">
+													<i class="fa fa-edit"></i> 个人信息
+												</a>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<ul class="menu">
+											<li>
+												<a href="#">
+													<i class="fa fa-cog"></i> 修改密码
+												</a>
+											</li>
+
+											<li>
+												<a href="#">
+													<i class="fa fa-sign-out"></i> 退出
+												</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</header>
+			<aside class="main-sidebar">
+				<section class="sidebar">
+					<ul class="sidebar-menu">
+						<li class="active">
+							<a href="index.html"><i class="fa fa-link"></i> <span>首页</span></a>
+						</li>
+						<li>
+							<a href="pigreg.html"><i class="fa fa-registered"></i> <span>种猪登记</span></a>
+						</li>
+						<li class="treeview">
+							<a href="#">
+								<i class="fa fa-laptop"></i>
+								<span>综合查询</span>
+								<span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+							</a>
+							<ul class="treeview-menu">
+								<li>
+									<a href="hogpenquery.html"><i class="fa fa-map-o"></i>猪场信息查询</a>
+								</li>
+								<li>
+									<a href="pigquery.html"><i class="fa fa-venus"></i>个体信息查询</a>
+								</li>
+								<li>
+									<a href="growthquery.html"><i class="fa fa-line-chart"></i>生长性能查询</a>
+								</li>
+								<li>
+									<a href="sowquery.html"><i class="fa fa-signal"></i>母猪繁殖信息查询</a>
+								</li>
+								<li>
+									<a href="qualityquery.html"><i class="fa fa-list-alt"></i>肉质查询</a>
+								</li>
+								<li>
+									<a href=""><i class="fa fa-undo"></i>遗传评估信息排名查询</a>
+								</li>
+								<li>
+									<a href=""><i class="fa fa-list-ol"></i>遗传进展趋势查询</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="pigfeed.html"><i class="fa fa-book"></i> <span>种猪饲养</span></a>
+						</li>
+						<li>
+							<a href="gis.html"><i class="fa fa-map"></i> <span>种猪GIS地图查询</span></a>
+						</li>
+						<li>
+							<a href="pigintro.html"><i class="fa fa-tasks"></i> <span>品牌种猪介绍</span></a>
+						</li>
+						<li>
+							<a href="tongji.html"><i class="fa fa-line-chart"></i> <span>数据统计</span></a>
+						</li>
+						<li>
+							<a href="admin.html"><i class="fa fa-user"></i> <span>后台管理</span></a>
+						</li>
+					</ul>
+				</section>
+			</aside>
+			<div class="content-wrapper">
+				<section class="content-header">
+					<h1>首页</h1>
+				</section>
+				<section class="content">
+					<div class="row">
+						<div class="col-md-6 newscontent">
+							<div class="nav-tabs-custom">
+								<ul class="nav nav-tabs">
+									<li class="active">
+										<a href="#tab_1" data-toggle="tab">时事新闻</a>
+									</li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane active" id="tab_1">
+										<ul>
+											<li>
+												<a href="" target="_blank">省畜牧技术推广站赴万宁、儋州核查 ...</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">省畜牧技术推广站到琼中和陵水县 ...</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">广西壮族自治区水牛研究所在我省采集...</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">省畜牧技术推广站赴白沙县邦溪镇地质...</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">海南省畜牧技术推广站开展牛人工授精...</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">省畜牧技术推广站党支部学习习总书记...</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">省畜牧技术推广站党支部学习习总书记...</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">省畜牧技术推广站党支部学习习总书记...</a><span>2016-07-26<span></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 newscontent">
+							<div class="nav-tabs-custom">
+								<ul class="nav nav-tabs">
+									<li class="active">
+										<a href="#tab_2" data-toggle="tab">网站公告</a>
+									</li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane active" id="tab_2">
+										<ul>
+											<li>
+												<a href="" target="_blank">关于做好台风三级预警防范工作的通知...</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">农业部畜牧业司关于启用 畜禽规模...</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">省畜牧技术推广站关于开展 201...</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">关于做好2016年生猪等主要畜禽生...</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">省畜牧技术推广站关于举办市县级畜牧...</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">省畜牧技术推广站关于开展全省畜禽养...</a><span>2016-07-26<span></li>
+													<li>
+												<a href="" target="_blank">省畜牧技术推广站关于举办市县级畜牧...</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">省畜牧技术推广站关于开展全省畜禽养...</a><span>2016-07-26<span></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 newscontent">
+							<div class="nav-tabs-custom">
+								<ul class="nav nav-tabs">
+									<li class="active">
+										<a href="#tab_3" data-toggle="tab">行业动态</a>
+									</li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane active" id="tab_3">
+										<ul>
+										<li>
+												<a href="" target="_blank">省畜牧技术推广站赴万宁、儋州核查 ...</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">省畜牧技术推广站到琼中和陵水县 ...</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">广西壮族自治区水牛研究所在我省采集...</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">省畜牧技术推广站赴白沙县邦溪镇地质...</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">海南省畜牧技术推广站开展牛人工授精...</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">省畜牧技术推广站党支部学习习总书记...</a><span>2016-07-26<span></li>
+													<li>
+												<a href="" target="_blank">省畜牧技术推广站党支部学习习总书记...</a><span>2016-07-26<span></li>
+													<li>
+												<a href="" target="_blank">省畜牧技术推广站党支部学习习总书记...</a><span>2016-07-26<span></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 newscontent">
+							<div class="nav-tabs-custom">
+								<ul class="nav nav-tabs">
+									<li class="active">
+										<a href="#tab_4" data-toggle="tab">政策法规</a>
+									</li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane active" id="tab_4">
+										<ul>
+											<li>
+												<a href="" target="_blank">农业部关于促进现代畜禽种业发展的意见</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">新版《缓解生猪市场价格周期性波动调...</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">中华人民共和国农业技术推广法</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">畜禽标识和养殖档案管理办法</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">海南首次将畜牧业机械纳入农机购置补贴</a><span>2016-07-26<span></li>
+													<li>
+												<a href="" target="_blank">畜禽标识和养殖档案管理办法</a><span>2016-07-26<span></li>
+											<li>
+												<a href="" target="_blank">海南首次将畜牧业机械纳入农机购置补贴</a><span>2016-07-26<span></li>
+													<li>
+												<a href="" target="_blank">省畜牧技术推广站党支部学习习总书记...</a><span>2016-07-26<span></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<footer class="main-footer">
+				<div class="pull-right hidden-xs">
+				</div>
+				<strong>Copyright &copy; 2016 <a href="#">闪龙科技</a>.</strong> All rights reserved.
+			</footer>
+		</div>
+		<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="dist/js/app.min.js"></script>
+	</body>
+
+</html>

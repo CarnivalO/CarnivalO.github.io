@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>海南省种猪检测系统</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="common/font-awesome.min.css">
+		<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/skin-green-light.min.css">
+		<style type="text/css">
+			#l-map {
+				width: 100%;
+				margin-top: 10px;
+			}
+			
+			#r-result {
+				width: 100%;
+				font-size: 14px;
+				line-height: 20px;
+			}
+		</style>
+	</head>
+
+	<body class="hold-transition skin-green-light sidebar-mini">
+		<div class="wrapper">
+			<header class="main-header">
+				<a href="index.html" class="logo">
+					<span class="logo-mini"><b>PI</b>DS</span>
+					<span class="logo-lg"><b>海南省</b>种猪监测系统</span>
+				</a>
+				<nav class="navbar navbar-static-top" role="navigation">
+					<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+						<span class="sr-only">最小化</span>
+					</a>
+					<div class="navbar-custom-menu">
+						<ul class="nav navbar-nav">
+							<li class="dropdown notifications-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<span>管理员&nbsp;<i class="fa fa-caret-down"></i></span>
+								</a>
+								<ul class="dropdown-menu" style="width:180px;">
+									<li>
+										<ul class="menu">
+
+											<li>
+												<a href="#">
+													<i class="fa fa-users text-aqua"></i> 个人信息
+												</a>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<ul class="menu">
+											<li>
+												<a href="#">
+													<i class="fa fa-users text-aqua"></i> 修改密码
+												</a>
+											</li>
+
+											<li>
+												<a href="#">
+													<i class="fa fa-users text-aqua"></i> 退出
+												</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</header>
+			<aside class="main-sidebar">
+				<section class="sidebar">
+					<ul class="sidebar-menu">
+						<li>
+							<a href="index.html"><i class="fa fa-link"></i> <span>首页</span></a>
+						</li>
+						<li>
+							<a href="pigreg.html"><i class="fa fa-registered"></i> <span>种猪登记</span></a>
+						</li>
+						<li class="treeview">
+							<a href="#">
+								<i class="fa fa-laptop"></i>
+								<span>综合查询</span>
+								<span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+							</a>
+							<ul class="treeview-menu">
+								<li>
+									<a href="hogpenquery.html"><i class="fa fa-map-o"></i>猪场信息查询</a>
+								</li>
+								<li>
+									<a href="pigquery.html"><i class="fa fa-venus"></i>个体信息查询</a>
+								</li>
+								<li>
+									<a href="growthquery.html"><i class="fa fa-line-chart"></i>生长性能查询</a>
+								</li>
+								<li>
+									<a href="sowquery.html"><i class="fa fa-signal"></i>母猪繁殖信息查询</a>
+								</li>
+								<li>
+									<a href="qualityquery.html"><i class="fa fa-list-alt"></i>肉质查询</a>
+								</li>
+								<li>
+									<a href=""><i class="fa fa-undo"></i>遗传评估信息排名查询</a>
+								</li>
+								<li>
+									<a href=""><i class="fa fa-list-ol"></i>遗传进展趋势查询</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="pigfeed.html"><i class="fa fa-book"></i> <span>种猪饲养</span></a>
+						</li>
+						<li class="active">
+							<a href="gis.html"><i class="fa fa-map"></i> <span>种猪GIS地图查询</span></a>
+						</li>
+						<li>
+							<a href="pigintro.html"><i class="fa fa-tasks"></i> <span>品牌种猪介绍</span></a>
+						</li>
+						<li>
+							<a href="tongji.html"><i class="fa fa-line-chart"></i> <span>数据统计</span></a>
+						</li>
+						<li>
+							<a href="admin.html"><i class="fa fa-line-chart"></i> <span>后台管理</span></a>
+						</li>
+					</ul>
+				</section>
+			</aside>
+			<div class="content-wrapper">
+				<section class="content">
+					<div class="row">
+						<div id="r-result">
+							<div class="row">
+								<div class="col-xs-1">
+								</div>
+								<form action="#" method="post">
+								<div class="col-xs-2">
+									<input type="text" class="form-control" placeholder="请输入猪场名称" id="farmName" required>
+								</div>
+								<div class="col-xs-1">
+									<input type="submit" value="搜索" class="btn btn-primary"/>
+								</div>
+								</form>
+								<div class="col-xs-4">
+								</div>
+								<div class="col-xs-1">
+									<button onclick="bdGEO()" class="btn btn-primary">搜索全部猪场</button>
+								</div>
+								<div class="col-xs-1">
+									<button onclick="bdGEO()" class="btn btn-primary">种猪分布情况</button>
+								</div>
+								<div class="col-xs-1">
+									<button onclick="bdGEO()" class="btn btn-primary">种猪类别</button>
+								</div>
+
+							</div>
+
+						</div>
+						<div id="l-map"></div>
+					</div>
+				</section>
+			</div>
+			<footer class="main-footer">
+				<div class="pull-right hidden-xs">
+				</div>
+				<strong>Copyright &copy; 2016 <a href="#">闪龙科技</a>.</strong> All rights reserved.
+			</footer>
+		</div>
+		<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="dist/js/app.min.js"></script>
+		<script type="text/javascript" src="common/js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=YsBfeCDw8ViGLzOCNEPpx4IbKkBQCKgK"></script>
+		<script type="text/javascript">
+			// 百度地图API功能
+			var mapheight = $(window).height() - 190;
+			$("#l-map").css("height", mapheight);
+			var map = new BMap.Map("l-map");
+			map.centerAndZoom("嘉兴", 13);
+			map.enableScrollWheelZoom(true);
+			var index = 0;
+			var myGeo = new BMap.Geocoder();
+			var opts = {
+				width: 250, // 信息窗口宽度
+				height: 120, // 信息窗口高度
+				enableMessage: true //设置允许信息窗发送短息
+			};
+			var adds = [
+				"嘉兴市广益路6号",
+				"嘉兴市亚美路7号",
+				"嘉兴市亚欧路3号",
+				"嘉兴市中环南路20号",
+				"嘉兴市新气象路5号"
+			];
+			var infos = [
+				"猪场规模：100头<br/>种猪类别：大白猪",
+				"猪场简介2",
+				"猪场简介3",
+				"猪场简介4",
+				"猪场简介5"
+			];
+			var lables = [
+				"猪场1号",
+				"猪场2号",
+				"猪场3号",
+				"猪场4号",
+				"猪场5号"
+			];
+
+			function bdGEO() {
+				var add = adds[index];
+				var info = infos[index];
+				var lable1 = lables[index];
+				geocodeSearch(add, info, lable1);
+				index++;
+			}
+
+			function geocodeSearch(add, info, lable1) {
+				if(index < adds.length) {
+					setTimeout(window.bdGEO, 1);
+				}
+				myGeo.getPoint(add, function(point) {
+					if(point) {
+						var address = new BMap.Point(point.lng, point.lat);
+						var myLable = new BMap.Label(lable1, {
+							offset: new BMap.Size(20, -10)
+						});
+						myLable.setStyle({
+							border: "0", //边
+							cursor: "pointer"
+						});
+						addMarker(address, info, myLable);
+					}
+				}, "嘉兴市");
+			}
+			// 编写自定义函数,创建标注
+			function addMarker(point, info, lable2) {
+				var marker = new BMap.Marker(point);
+				map.addOverlay(marker);
+				marker.setLabel(lable2);
+				addClickHandler(info, marker, lable2);
+			}
+			//让所有点在视野范围内
+			//   map.setViewport(pointArray);
+
+			function addClickHandler(content, marker, lable2) {
+				marker.addEventListener("click", function(e) {
+					openInfo(content, e, lable2)
+				});
+			}
+
+			function openInfo(content, e, lable2) {
+				var p = e.target;
+				var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+				var infoWindow = new BMap.InfoWindow(content, opts); // 创建信息窗口对象 
+				infoWindow.setTitle(lable2.content);
+				map.openInfoWindow(infoWindow, point); //开启信息窗口
+			}
+		</script>
+	</body>
+
+</html>

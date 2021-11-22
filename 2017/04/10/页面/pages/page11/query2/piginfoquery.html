@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>海南省种猪检测系统</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../common/bootstrap-table.min.css" />
+
+	</head>
+
+	<body>
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header">
+					<h3 class="box-title">个体信息查询</h3>
+				</div>
+				<table id="table"></table>
+			</div>
+		</div>
+		<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<script src="../bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../common/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../common/bootstrap-table-zh-CN.min.js"></script>
+		<script>
+			$('#table').bootstrapTable({
+				//method: 'post',
+				//url: '/qStock/AjaxPage',
+				//dataType: "json",
+				striped: true, //使表格带有条纹
+				pagination: true, //在表格底部显示分页工具栏
+				pageSize: 22,
+				pageNumber: 1,
+				pageList: [10, 20, 50, 100, 200, 500],
+				idField: "ProductId", //标识哪个字段为id主键
+				showToggle: false, //名片格式
+				cardView: false, //设置为True时显示名片（card）布局
+				//showColumns: true, //显示隐藏列  
+				//showRefresh: true, //显示刷新按钮
+				//singleSelect: true, //复选框只能选择一条记录
+				//search: true, //是否显示右上角的搜索框
+				//clickToSelect: true, //点击行即可选中单选/复选框
+				//sidePagination: "server", //表格分页的位置
+				//queryParams: queryParams, //参数
+				//queryParamsType: "limit", //参数格式,发送标准的RESTFul类型的参数请求
+				//toolbar: "#toolbar", //设置工具栏的Id或者class
+				//columns: column, //列
+				silent: true, //刷新事件必须设置
+				formatLoadingMessage: function() {
+					return "请稍等，正在加载中...";
+				},
+				formatNoMatches: function() { //没有匹配的结果
+					return '无符合条件的记录';
+				},
+				onLoadError: function(data) {
+					$('#reportTable').bootstrapTable('removeAll');
+				},
+//				onClickRow: function(row) {
+//					window.location.href = "/qStock/qProInfo/" + row.ProductId;
+//				},
+				columns: [{
+					field: 'name',
+					title: '耳标号'
+				}, {
+					field: 'farmId',
+					title: '来源种猪场单位名称'
+				}, {
+					field: 'price',
+					title: '代次'
+				}, {
+					field: 'pigType',
+					title: '品种'
+				}, {
+					field: 'gender',
+					title: '性别'
+				}, {
+					field: 'birthDay',
+					title: '出生日期'
+				}, {
+					field: 'pId',
+					title: '猪父号'
+				}, {
+					field: 'mId',
+					title: '猪母号'
+				}, {
+					field: 'picUrl',
+					title: '种猪图片'
+				}, {
+					field: 'videoUrl',
+					title: '种猪视频'
+				}],
+				data: [{
+					id: 1,
+					name: 'Item 1',
+					price: '$1'
+				}, {
+					id: 2,
+					name: 'Item 2',
+					price: '$2'
+				}]
+			});
+		</script>
+
+	</body>
+
+</html>

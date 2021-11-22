@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html ng-app="webApp">
+
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>管理系统</title>
+		<link rel="shortcut icon" href="/yins_hb/static/src/img/favicon.ico" type="image/x-icon" />
+
+		<link href="./common/css/login.css" rel="stylesheet" />
+	</head>
+
+	<body class="hn2_login">
+
+		<div class="form_container">
+			<div>
+				<div class="logo" style="margin-bottom:10px;margin-left:15%;float:left">
+					<img src="img/yzda-logo.png" />
+				</div>
+				<a href="http://www.hnxm.org">访问海南畜牧技术推广网</a>
+			</div>
+			<div class="form_content_3">
+				<div class="login_background_3" align="center">
+					<div class="login_form">
+
+						<form class="oe_login_form" name="loginForm" role="form" method="post">
+
+							<div class="tab-content">
+								<div class="form-group field-login">
+									<label for="login" class="control-label">账号</label>
+									<input type="text" name="login" id="login" class="form-control" autofocus="autofocus" />
+								</div>
+								<div class="form-group field-password">
+									<label for="password" class="control-label">密码</label>
+									<input type="password" name="password" id="password" class="form-control" />
+								</div>
+
+								<input type="hidden" name="redirect" value="/web?" />
+								<div class="clearfix oe_login_buttons">
+									<button type="button" class="btn btn-primary_3" style="width:48%;color:#FFF;font-size:16px" onClick="document.loginForm.action='/web/login3/normal' + location.hash;document.loginForm.submit();">登　录</button>
+									<button type="button" class="btn btn-primary" onClick="javascript:window.location.href='register.html';" style="width: 48%;float: right;background-color: #11b695;border-color: #11b695;font-size:16px">注　册</button>
+								</div>
+							</div>
+						</form>
+
+					</div>
+				</div>
+
+			</div>
+			<div class="login_footer" style="margin-top: 20px; font-size: 13px; color: black;">
+				© 海南省畜牧技术推广站版权所有 琼IPC备15000989证号
+			</div>
+			<div>
+				建议使用IE9.0或更高版本的浏览器访问本系统，请安装雅黑字体</a>以达到最佳显示效果。
+			</div>
+		</div>
+
+	</body>
+
+</html>

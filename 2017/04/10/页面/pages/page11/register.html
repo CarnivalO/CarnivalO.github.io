@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html ng-app="webApp" style="height:100%">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>管理系统</title>
+    <link rel="shortcut icon" href="http://sys.hnxm.org/yins_hb/static/src/img/favicon.ico" type="image/x-icon">
+    <link href="./common/css/register.css" rel="stylesheet">
+</head>
+
+<body class="hn2_register">
+    <div class="form_container">
+        <div class="logo">
+            <img src="./img/top-tittle.png">
+        </div>
+        <hr>
+        <div class="form_content">
+            <form class="oe_register_form modal-content" name="registerForm" role="form" method="post" enctype="multipart/form-data">
+                <img src="./img/register_qiye.png" style="margin-top: -10px;margin-left: -10px;height: 34px;">
+                <div class="form-group field-login">
+                    <label for="farm_name" class="control-label"><span style="color: red;">*</span>企业全称</label>
+                    <input name="farm_name" id="farm_name" type="text" class="form-control" required="required" autofocus="autofocus">
+                </div>
+                <div>
+                    <div class="form-group field-login" style="width: 48%;float: left;">
+                        <label class="control-label"><span style="color: red;">*</span>企业所属市县</label>
+                        <select name="company_id" id="company_id" value="[{&#39;name&#39;: u&#39;\u6d77\u53e3\u5e02&#39;, &#39;id&#39;: 1}, {&#39;name&#39;: u&#39;\u4e09\u4e9a\u5e02&#39;, &#39;id&#39;: 2}, {&#39;name&#39;: u&#39;\u4e09\u6c99\u5e02&#39;, &#39;id&#39;: 3}, {&#39;name&#39;: u&#39;\u4e94\u6307\u5c71\u5e02&#39;, &#39;id&#39;: 4}, {&#39;name&#39;: u&#39;\u743c\u6d77\u5e02&#39;, &#39;id&#39;: 5}, {&#39;name&#39;: u&#39;\u510b\u5dde\u5e02&#39;, &#39;id&#39;: 6}, {&#39;name&#39;: u&#39;\u6587\u660c\u5e02&#39;, &#39;id&#39;: 7}, {&#39;name&#39;: u&#39;\u4e07\u5b81\u5e02&#39;, &#39;id&#39;: 10}, {&#39;name&#39;: u&#39;\u4e1c\u65b9\u5e02&#39;, &#39;id&#39;: 11}, {&#39;name&#39;: u&#39;\u5b9a\u5b89\u53bf&#39;, &#39;id&#39;: 12}, {&#39;name&#39;: u&#39;\u5c6f\u660c\u53bf&#39;, &#39;id&#39;: 13}, {&#39;name&#39;: u&#39;\u6f84\u8fc8\u53bf&#39;, &#39;id&#39;: 14}, {&#39;name&#39;: u&#39;\u4e34\u9ad8\u53bf&#39;, &#39;id&#39;: 15}, {&#39;name&#39;: u&#39;\u767d\u6c99\u9ece\u65cf\u81ea\u6cbb\u53bf&#39;, &#39;id&#39;: 16}, {&#39;name&#39;: u&#39;\u660c\u6c5f\u9ece\u65cf\u81ea\u6cbb\u53bf&#39;, &#39;id&#39;: 17}, {&#39;name&#39;: u&#39;\u4e50\u4e1c\u9ece\u65cf\u81ea\u6cbb\u53bf&#39;, &#39;id&#39;: 18}, {&#39;name&#39;: u&#39;\u9675\u6c34\u9ece\u65cf\u81ea\u6cbb\u53bf&#39;, &#39;id&#39;: 23}, {&#39;name&#39;: u&#39;\u4fdd\u4ead\u9ece\u65cf\u82d7\u65cf\u81ea\u6cbb\u53bf&#39;, &#39;id&#39;: 24}, {&#39;name&#39;: u&#39;\u743c\u4e2d\u9ece\u65cf\u82d7\u65cf\u81ea\u6cbb\u53bf&#39;, &#39;id&#39;: 25}]" class="form-control" required="required">
+                            <option value="1">海口市</option>
+                            <option value="2">三亚市</option>
+                            <option value="3">三沙市</option>
+                            <option value="4">五指山市</option>
+                            <option value="5">琼海市</option>
+                            <option value="6">儋州市</option>
+                            <option value="7">文昌市</option>
+                            <option value="10">万宁市</option>
+                            <option value="11">东方市</option>
+                            <option value="12">定安县</option>
+                            <option value="13">屯昌县</option>
+                            <option value="14">澄迈县</option>
+                            <option value="15">临高县</option>
+                            <option value="16">白沙黎族自治县</option>
+                            <option value="17">昌江黎族自治县</option>
+                            <option value="18">乐东黎族自治县</option>
+                            <option value="23">陵水黎族自治县</option>
+                            <option value="24">保亭黎族苗族自治县</option>
+                            <option value="25">琼中黎族苗族自治县</option>
+                        </select>
+                    </div>
+                    <div class="form-group field-login" style="width: 48%;float: right;">
+                        <label class="control-label"><span style="color: red;">*</span>企业养殖类型</label>
+                        <select name="farm_category" id="farm_category" value="[{&#39;name&#39;: u&#39;\u5546\u54c1\u732a&#39;, &#39;id&#39;: 1}, {&#39;name&#39;: u&#39;\u79cd\u732a&#39;, &#39;id&#39;: 2}, {&#39;name&#39;: u&#39;\u5546\u54c1\u725b&#39;, &#39;id&#39;: 3}, {&#39;name&#39;: u&#39;\u79cd\u725b&#39;, &#39;id&#39;: 4}, {&#39;name&#39;: u&#39;\u5546\u54c1\u7f8a&#39;, &#39;id&#39;: 5}, {&#39;name&#39;: u&#39;\u79cd\u7f8a&#39;, &#39;id&#39;: 6}, {&#39;name&#39;: u&#39;\u79cd\u9e21&#39;, &#39;id&#39;: 7}, {&#39;name&#39;: u&#39;\u8089\u9e21&#39;, &#39;id&#39;: 8}, {&#39;name&#39;: u&#39;\u86cb\u9e21&#39;, &#39;id&#39;: 9}, {&#39;name&#39;: u&#39;\u79cd\u9e2d&#39;, &#39;id&#39;: 10}, {&#39;name&#39;: u&#39;\u8089\u9e2d&#39;, &#39;id&#39;: 11}, {&#39;name&#39;: u&#39;\u86cb\u9e2d&#39;, &#39;id&#39;: 12}, {&#39;name&#39;: u&#39;\u79cd\u9e45&#39;, &#39;id&#39;: 13}, {&#39;name&#39;: u&#39;\u5546\u54c1\u9e45&#39;, &#39;id&#39;: 14}, {&#39;name&#39;: u&#39;\u4e0d\u9002\u7528&#39;, &#39;id&#39;: 15}]" class="form-control" required="required">
+                            <option value="1">商品猪</option>
+                            <option value="2">种猪</option>
+                            <option value="3">商品牛</option>
+                            <option value="4">种牛</option>
+                            <option value="5">商品羊</option>
+                            <option value="6">种羊</option>
+                            <option value="7">种鸡</option>
+                            <option value="8">肉鸡</option>
+                            <option value="9">蛋鸡</option>
+                            <option value="10">种鸭</option>
+                            <option value="11">肉鸭</option>
+                            <option value="12">蛋鸭</option>
+                            <option value="13">种鹅</option>
+                            <option value="14">商品鹅</option>
+                            <option value="15">不适用</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group field-login" style="width: 48%;float: left;">
+                        <label class="control-label"><span style="color: red;">*</span>企业类型</label>
+                        <select name="department_cat" id="department_cat" value="[{u&#39;id&#39;: u&#39;farm&#39;, u&#39;name&#39;: u&#39;\u79cd\u755c\u79bd\u573a&#39;}, {u&#39;id&#39;: u&#39;breed&#39;, u&#39;name&#39;: u&#39;\u517b\u6b96\u4f01\u4e1a&#39;}]" class="form-control" required="required">
+                            <option value="farm">种畜禽场</option>
+                            <option value="breed">养殖企业</option>
+                        </select>
+                    </div>
+                    <div class="form-group field-login" style="width: 48%;float: right;">
+                        <label for="number_3" class="control-label"><span style="color: red;">*</span>种畜禽生产经营许可证编号(种畜禽场填)</label>
+                        <input name="number_3" id="number_3" type="text" class="form-control" required="required">
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group field-login" style="width: 48%;float: left;">
+                        <label for="farm_number" class="control-label"><span style="color: red;">*</span>统一社会信用代码</label>
+                        <input name="farm_number" id="farm_number" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group field-login" style="width: 48%;float: right;">
+                        <label for="farm_phone" class="control-label"><span style="color: red;">*</span>企业联系电话</label>
+                        <input name="farm_phone" id="farm_phone" type="text" class="form-control" required="required">
+                    </div>
+                </div>
+                <div class="form-group field-login">
+                    <label for="farm_address" class="control-label"><span style="color: red;">*</span>企业联系地址</label>
+                    <input name="farm_address" id="farm_address" type="text" class="form-control" required="required">
+                </div>
+                <div>
+                    <div class="form-group field-login" style="width: 48%;float: left;">
+                        <label for="number_1" class="control-label">畜禽标识代码(如有，请填写)</label>
+                        <input name="number_1" id="number_1" type="text" class="form-control">
+                    </div>
+                    <div class="form-group field-login" style="width: 48%;float: right;">
+                        <label for="number_2" class="control-label">动物防疫合格证编号(如有，请填写)</label>
+                        <input name="number_2" id="number_2" type="text" class="form-control">
+                    </div>
+                </div>
+
+                <img src="./img/register_renyuan.png" style="margin-left: -10px;height: 34px;">
+                <div>
+                    <div class="form-group field-login" style="width: 48%;float: left;">
+                        <label for="farm_principal" class="control-label"><span style="color: red;">*</span>企业负责人</label>
+                        <input name="farm_principal" id="farm_principal" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group field-login" style="width: 48%;float: right;">
+                        <label for="principal_phone" class="control-label"><span style="color: red;">*</span>企业负责人联系手机</label>
+                        <input name="principal_phone" id="principal_phone" type="text" class="form-control" required="required">
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group field-login" style="width: 48%;float: left;">
+                        <label for="login" class="control-label"><span style="color: red;">*</span>系统操作人</label>
+                        <input name="login" id="login" type="text" class="form-control" required="required">
+                    </div>
+                    <div class="form-group field-login" style="width: 48%;float: right;">
+                        <label for="phone_num" class="control-label"><span style="color: red;">*</span>系统操作人联系手机</label>
+                        <input name="phone_num" id="phone_num" type="text" class="form-control" required="required">
+                    </div>
+                </div>
+                <div class="form-group field-login">
+                    <label for="mail_box" class="control-label">
+                        <span style="color: red;">*</span>联系邮箱(非常重要，登录账号和密码将发送到此邮箱，注册后请及时登录邮箱查收)
+                    </label>
+                    <input name="mail_box" id="mail_box" type="text" class="form-control" required="required">
+                </div>
+                <div class="form-group field-login" id="login_cat" style="display: none;">
+                    <label class="control-label"><span style="color: red;">*</span>登录类型</label>
+                    <select name="login_cat" id="login_cat" value="[{u&#39;id&#39;: u&#39;login_3&#39;, u&#39;name&#39;: u&#39;\u517b\u6b96\u6863\u6848&#39;}]" class="form-control" required="required">
+                        <option value="login_3">养殖档案</option>
+                    </select>
+                </div>
+                <input type="hidden" name="redirect" value="/web?">
+                <div class="clearfix oe_login_buttons">
+                    <button type="button" class="btn btn-primary" onclick="window.location=&#39;http://www.hnxm.org&#39;;" style="width: 48%;float: left;font-size: 16px;">取消注册</button>
+                    <button name="register" type="button" class="btn btn-primary" style="width: 48%;float: right;font-size: 16px;">提交注册</button>
+                </div>
+            </form>
+        </div>
+        <hr>
+        <div class="login_footer">
+            ©海南省畜牧技术推广站版权所有 琼IPC备15000989证号
+        </div>
+    </div>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/messages_zh.min.js"></script>
+    <script src="js/yins_register.js"></script>
+</body>
+
+</html>

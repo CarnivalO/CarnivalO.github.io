@@ -1,0 +1,479 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>海南省种猪检测系统</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="common/font-awesome.min.css">
+		<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/skin-green-light.min.css">
+		<style>
+			.content h3 {
+				font-size: 3rem;
+			}
+			
+			.content .col-lg-6 {
+				cursor: pointer;
+			}
+			
+			.box-body {
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body class="hold-transition skin-green-light sidebar-mini">
+		<div class="wrapper">
+			<header class="main-header">
+				<a href="index.html" class="logo">
+					<span class="logo-mini"><b>PI</b>DS</span>
+					<span class="logo-lg"><b>海南省</b>种猪监测系统</span>
+				</a>
+				<nav class="navbar navbar-static-top" role="navigation">
+					<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+						<span class="sr-only">最小化</span>
+					</a>
+					<div class="navbar-custom-menu">
+						<ul class="nav navbar-nav">
+							<li class="dropdown notifications-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<span>管理员&nbsp;<i class="fa fa-caret-down"></i></span>
+								</a>
+								<ul class="dropdown-menu" style="width:180px;">
+									<li>
+										<ul class="menu">
+
+											<li>
+												<a href="#">
+													<i class="fa fa-edit"></i> 个人信息
+												</a>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<ul class="menu">
+											<li>
+												<a href="#">
+													<i class="fa fa-cog"></i> 修改密码
+												</a>
+											</li>
+
+											<li>
+												<a href="#">
+													<i class="fa fa-sign-out"></i> 退出
+												</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</header>
+			<aside class="main-sidebar">
+				<section class="sidebar">
+					<ul class="sidebar-menu">
+						<li>
+							<a href="index.html"><i class="fa fa-link"></i> <span>首页</span></a>
+						</li>
+						<li>
+							<a href="pigreg.html"><i class="fa fa-registered"></i> <span>种猪登记</span></a>
+						</li>
+						<li class="active">
+							<a href="pigquery.html"><i class="fa fa-search"></i> <span>综合查询</span></a>
+						</li>
+						<li>
+							<a href="pigfeed.html"><i class="fa fa-book"></i> <span>种猪饲养</span></a>
+						</li>
+						<li>
+							<a href="gis.html"><i class="fa fa-map"></i> <span>种猪GIS地图查询</span></a>
+						</li>
+						<li>
+							<a href="pigintro.html"><i class="fa fa-tasks"></i> <span>品牌种猪介绍</span></a>
+						</li>
+						<li>
+							<a href="tongji.html"><i class="fa fa-line-chart"></i> <span>数据统计</span></a>
+						</li>
+						<li>
+							<a href="admin.html"><i class="fa fa-user"></i> <span>后台管理</span></a>
+						</li>
+					</ul>
+				</section>
+			</aside>
+			<div class="content-wrapper">
+				<section class="content-header">
+					<h1>综合查询</h1>
+				</section>
+				<section class="content">
+					<div class="row">
+						<div class="col-lg-6 col-xs-6" data-toggle="modal" data-target="#myQuery1" data-backdrop='static'>
+							<div class="small-box bg-gray">
+								<div class="inner">
+									<h3>猪场信息查询</h3>
+									<p>Hogpen Infomation Registration</p>
+								</div>
+								<div class="icon">
+									<i class="fa fa-map-o"></i>
+								</div>
+								<a href="#" class="small-box-footer">
+									添加 <i class="fa fa-arrow-circle-right"></i>
+								</a>
+							</div>
+						</div>
+
+						<div class="col-lg-6 col-xs-6" data-toggle="modal" data-target="#myQuery2" data-backdrop='static'>
+							<div class="small-box bg-gray">
+								<div class="inner">
+									<h3>个体信息查询</h3>
+									<p>Pig Infomation Query</p>
+								</div>
+								<div class="icon">
+									<i class="fa fa-venus"></i>
+								</div>
+								<a href="#" class="small-box-footer">
+									添加 <i class="fa fa-arrow-circle-right"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6 col-xs-6" data-toggle="modal" data-target="#myQuery3" data-backdrop='static'>
+							<div class="small-box bg-gray">
+								<div class="inner">
+									<h3>生长性能查询</h3>
+									<p>Growth Query</p>
+								</div>
+								<div class="icon">
+									<i class="fa fa-line-chart"></i>
+								</div>
+								<a href="#" class="small-box-footer">
+									添加 <i class="fa fa-arrow-circle-right"></i>
+								</a>
+							</div>
+						</div>
+						<div class="col-lg-6 col-xs-6" data-toggle="modal" data-target="#myQuery4" data-backdrop='static'>
+							<!-- small box -->
+							<div class="small-box bg-gray">
+								<div class="inner">
+									<h3>屠宰性能查询</h3>
+									<p>Slaughter Query</p>
+								</div>
+								<div class="icon">
+									<i class="fa fa-signal"></i>
+								</div>
+								<a href="#" class="small-box-footer">
+									添加 <i class="fa fa-arrow-circle-right"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6 col-xs-6" data-toggle="modal" data-target="#myQuery5" data-backdrop='static'>
+							<div class="small-box bg-gray">
+								<div class="inner">
+									<h3>肉质查询</h3>
+									<p>Quality Query</p>
+								</div>
+								<div class="icon">
+									<i class="fa fa-list-alt"></i>
+								</div>
+								<a href="#" class="small-box-footer">
+									添加 <i class="fa fa-arrow-circle-right"></i>
+								</a>
+							</div>
+						</div>
+						<div class="col-lg-6 col-xs-6" data-toggle="modal" data-target="#myQuery6" data-backdrop='static'>
+							<!-- small box -->
+							<div class="small-box bg-gray">
+								<div class="inner">
+									<h3>母猪繁殖信息查询</h3>
+									<p>Sow Reproductive Query</p>
+								</div>
+								<div class="icon">
+									<i class="fa fa-undo"></i>
+								</div>
+								<a href="#" class="small-box-footer">
+									添加 <i class="fa fa-arrow-circle-right"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6 col-xs-6" data-toggle="modal" data-target="#myQuery7" data-backdrop='static'>
+							<div class="small-box bg-gray">
+								<div class="inner">
+									<h3>遗传评估信息结果排名查询</h3>
+									<p>Genetic Information Query</p>
+								</div>
+								<div class="icon">
+									<i class="fa fa-list-ol"></i>
+								</div>
+								<a href="#" class="small-box-footer">
+									添加 <i class="fa fa-arrow-circle-right"></i>
+								</a>
+							</div>
+						</div>
+						<div class="col-lg-6 col-xs-6" data-toggle="modal" data-target="#myQuery8" data-backdrop='static'>
+							<div class="small-box bg-gray">
+								<div class="inner">
+									<h3>遗传进展趋势查询</h3>
+									<p>Genetic Gain Query</p>
+								</div>
+								<div class="icon">
+									<i class="fa fa-tasks"></i>
+								</div>
+								<a href="#" class="small-box-footer">
+									添加 <i class="fa fa-arrow-circle-right"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="myQuery1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title">猪场信息查询</h4>
+								</div>
+								<div class="modal-body">
+									<div class="box">
+										<div class="box-body">
+											<form action="query/hogpenquery.html" method="get" id="hogpen" target="_blank">
+												猪场名称：<input id="farmName" name="farmName" placeholder="请输入猪场名称 " required:true/>
+											</form>
+										</div>
+									</div>
+
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button class="btn btn-primary" onclick=hogpen(); data-dismiss="modal">查询</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="myQuery2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title">个体信息登记</h4>
+								</div>
+								<div class="modal-body">
+									<div class="box">
+										<div class="box-body">
+											<form action="query/piginfoquery.html" method="post" id="pig" target="_blank">
+												耳标号：<input id="id" name="id" placeholder="请输入耳标号" required/>
+											</form>
+										</div>
+									</div>
+
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button class="btn btn-primary" onclick=pig(); data-dismiss="modal">查询</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="myQuery3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title">生长性能查询</h4>
+								</div>
+								<div class="modal-body">
+									<div class="box">
+										<div class="box-body">
+											<form action="query/growthquery.html" method="post" id="growth" target="_blank">
+												耳标号：<input id="id" name="id" placeholder="请输入耳标号" required/>
+											</form>
+										</div>
+									</div>
+
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button class="btn btn-primary" onclick=growth(); data-dismiss="modal">查询</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="myQuery4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title"> 屠宰性能查询
+									</h4>
+								</div>
+								<div class="modal-body">
+									<div class="box">
+										<div class="box-body">
+											<form action="query/slaughterquery.html" method="post" id="slaughter" target="_blank">
+												耳标号：<input id="id" name="id" placeholder="请输入耳标号" required/>
+											</form>
+										</div>
+									</div>
+
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button class="btn btn-primary" onclick=slaughter(); data-dismiss="modal">查询</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="myQuery5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title">肉质查询</h4>
+								</div>
+								<div class="modal-body">
+									<div class="box">
+										<div class="box-body">
+											<form action="query/qualityquery.html" method="post" id="quality" target="_blank">
+												耳标号：<input id="id" name="id" placeholder="请输入耳标号 " required/>
+											</form>
+										</div>
+									</div>
+
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button class="btn btn-primary" onclick=quality(); data-dismiss="modal">查询</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="myQuery6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title"> 母猪繁殖信息查询</h4>
+								</div>
+								<div class="modal-body">
+									<div class="box">
+										<div class="box-body">
+											<form action="query/sowquery.html" method="post" id="sow" target="_blank">
+												耳标号：<input id="id" name="id" placeholder="请输入耳标号" required/>
+											</form>
+										</div>
+									</div>
+
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button class="btn btn-primary" onclick=sow(); data-dismiss="modal">查询</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="myQuery7" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title">遗传评估信息结果排名查询</h4>
+								</div>
+								<div class="modal-body ">
+									<div class="box ">
+										<div class="box-body ">
+											<form action=" " method="post" id="genetic">
+												耳标号：<input id="id" name="id" placeholder="请输入耳标号" required/>
+											</form>
+										</div>
+									</div>
+
+								</div>
+								<div class="modal-footer ">
+									<button class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button class="btn btn-primary">查询</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade " id="myQuery8" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog ">
+							<div class="modal-content ">
+								<div class="modal-header ">
+									<button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title"> 遗传进展趋势查询</h4>
+								</div>
+								<div class="modal-body">
+									<div class="box">
+										<div class="box-body">
+											<form action="" method="post" id="geneticgain">
+												耳标号：<input id="id" name="id" placeholder="请输入耳标号" required/>
+											</form>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button class="btn btn-primary">查询</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<footer class="main-footer">
+				<div class="pull-right hidden-xs">
+				</div>
+				<strong>Copyright &copy; 2016 <a href="#">闪龙科技</a>.</strong> All rights reserved.
+			</footer>
+		</div>
+		<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="dist/js/app.min.js"></script>
+		<script type="text/javascript" src="common/js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="common/js/messages_cn.js.js"></script>
+		<script>
+			function hogpen() {
+				document.getElementById("hogpen").submit();
+			}
+
+			function pig() {
+				document.getElementById("pig").submit();
+			}
+
+			function growth() {
+				document.getElementById("growth").submit();
+				
+			}
+
+			function slaughter() {
+				document.getElementById("slaughter").submit();
+				
+			}
+
+			function quality() {
+				document.getElementById("quality").submit();
+				
+			}
+
+			function sow() {
+				document.getElementById("sow").submit();
+				
+			}
+
+			function genetic() {
+
+			}
+
+			function geneticGain() {
+
+			}
+		</script>
+	</body>
+
+</html>

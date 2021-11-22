@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>海南省种猪检测系统</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="common/font-awesome.min.css">
+		<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/skin-green-light.min.css">
+		<style>
+			.users-list>li {
+				width: 250px;
+				cursor: pointer;
+			}
+			
+			.users-list>li img {
+				border-radius: 0;
+			}
+			
+			.modal-dialog {
+				width: 80%;
+			}
+			
+			.modal-dialog p {
+				text-indent: 28px;
+			}
+			.modal-dialog h4 {
+				font-weight: bold;
+			}
+			.modal-dialog img {
+				margin-left: 40%;
+				margin-bottom: 10px;
+			}
+		</style>
+	</head>
+
+	<body class="hold-transition skin-green-light sidebar-mini">
+		<div class="wrapper">
+			<header class="main-header">
+				<a href="index.html" class="logo">
+					<span class="logo-mini"><b>PI</b>DS</span>
+					<span class="logo-lg"><b>海南省</b>种猪监测系统</span>
+				</a>
+				<nav class="navbar navbar-static-top" role="navigation">
+					<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+						<span class="sr-only">最小化</span>
+					</a>
+					<div class="navbar-custom-menu">
+						<ul class="nav navbar-nav">
+							<li class="dropdown notifications-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<span>管理员&nbsp;<i class="fa fa-caret-down"></i></span>
+								</a>
+								<ul class="dropdown-menu" style="width:180px;">
+									<li>
+										<ul class="menu">
+
+											<li>
+												<a href="#">
+													<i class="fa fa-edit"></i> 个人信息
+												</a>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<ul class="menu">
+											<li>
+												<a href="#">
+													<i class="fa fa-cog"></i> 修改密码
+												</a>
+											</li>
+
+											<li>
+												<a href="#">
+													<i class="fa fa-sign-out"></i> 退出
+												</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</header>
+			<aside class="main-sidebar">
+				<section class="sidebar">
+					<ul class="sidebar-menu">
+						<li>
+							<a href="index.html"><i class="fa fa-link"></i> <span>首页</span></a>
+						</li>
+						<li>
+							<a href="pigreg.html"><i class="fa fa-registered"></i> <span>种猪登记</span></a>
+						</li>
+						<li class="treeview">
+							<a href="#">
+								<i class="fa fa-laptop"></i>
+								<span>综合查询</span>
+								<span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+							</a>
+							<ul class="treeview-menu">
+								<li>
+									<a href="hogpenquery.html"><i class="fa fa-map-o"></i>猪场信息查询</a>
+								</li>
+								<li>
+									<a href="pigquery.html"><i class="fa fa-venus"></i>个体信息查询</a>
+								</li>
+								<li>
+									<a href="growthquery.html"><i class="fa fa-line-chart"></i>生长性能查询</a>
+								</li>
+								<li>
+									<a href="sowquery.html"><i class="fa fa-signal"></i>母猪繁殖信息查询</a>
+								</li>
+								<li>
+									<a href="qualityquery.html"><i class="fa fa-list-alt"></i>肉质查询</a>
+								</li>
+								<li>
+									<a href=""><i class="fa fa-undo"></i>遗传评估信息排名查询</a>
+								</li>
+								<li>
+									<a href=""><i class="fa fa-list-ol"></i>遗传进展趋势查询</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="pigfeed.html"><i class="fa fa-book"></i> <span>种猪饲养</span></a>
+						</li>
+						<li>
+							<a href="gis.html"><i class="fa fa-map"></i> <span>种猪GIS地图查询</span></a>
+						</li>
+						<li class="active">
+							<a href="pigintro.html"><i class="fa fa-tasks"></i> <span>品牌种猪介绍</span></a>
+						</li>
+						<li>
+							<a href="tongji.html"><i class="fa fa-line-chart"></i> <span>数据统计</span></a>
+						</li>
+						<li>
+							<a href="admin.html"><i class="fa fa-user"></i> <span>后台管理</span></a>
+						</li>
+					</ul>
+				</section>
+			</aside>
+			<div class="content-wrapper">
+				<section class="content-header">
+					<h1>品牌种猪介绍</h1>
+				</section>
+				<section class="content">
+					<div class="col-md-12">
+						<div class="box-body no-padding">
+							<ul class="users-list clearfix">
+								<li data-toggle="modal" data-target="#pigIntro1">
+									<img src="img/pigintro/changbaizhu.jpg">
+									<a class="users-list-name" href="#">长白猪</a>
+								</li>
+								<li>
+									<img src="img/pigintro/dabaizhu.jpg">
+									<a class="users-list-name" href="#">大白猪</a>
+								</li>
+								<li>
+									<img src="img/pigintro/duluokezhu.jpg">
+									<a class="users-list-name" href="#">杜洛克猪</a>
+								</li>
+								<li>
+									<img src="img/pigintro/hanpuxiazhu.jpg">
+									<a class="users-list-name" href="#">汉普夏猪</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="modal fade" id="pigIntro1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+									<h4 class="modal-title" id="myModalLabel">
+              长白猪
+            </h4>
+								</div>
+								<div class="modal-body">
+									<div class="box">
+										<div class="box-body">
+											<img src="img/pigintro/changbaizhu.jpg">
+											<p>长白猪原产于丹麦，是世界著名的瘦肉型猪种。主要优点是产仔数多，生长发育快，省饲料，胴体瘦肉率高等，但抗逆性差，对饲料营养要求较高。</p>
+											<h4>分布范围</h4>
+											<p>长白猪原产于丹麦，中国1964年开始从瑞典第一批引进，在中国长白猪有美系、英系、法系、比利时系、新丹系等品系。生产中常用长白猪作为三元杂交(杜长大)猪的第一父本或第一母本。在现有的长白猪各系中，美系、新丹系的杂交后代生长速度快、饲料报酬高，比利时系后代体型较好，瘦肉率高。</p>
+											<p>由于长白猪在世界的分布广泛，各国家根据各自的需要开展选育，在总体保留长白猪特点的同时，又各具一定特色，我国通常就按照引种国别，分别将其冠名为××系长白猪，如丹系…、法系…、瑞系…、美系…、加（加拿大）系…、台系…、等。其实这种命名法也不尽科学，尽管来自同一国家，但是来自不同的育种公司（场），在体质外貌、生产性能方面各具特点和差别，不能用××系一概而论，因此在引进猪种时，不仅关注种猪来自什么国家，也要了解来自什么场家，如果无法了解，需要对种猪进行现场考察。</p>
+											<p>由于历史的原因，在上个世纪60年代，我国从北欧国家瑞典引进了长白猪，之后又陆续从荷兰、法国、美国等国引进长白猪，自那时起，养猪界就将来自不同国家的引进猪种冠以××（国名）系，上个世纪80年代开始，国家实施“菜篮子”和瘦肉型猪项目开始及至现今，每年几乎都有不同的场家从各国引进长白猪。</p>
+											<p>为了实施种猪的标准化管理，农业部组织了由专家、企业家等组成的长白猪种猪标准起草小组，在广泛征求意见基础上，提出了长白猪标准的报批稿，并建议将其作为长白猪种猪质量评定（销售）的标准。</p>
+											<h4>外貌特征</h4>
+											<p>长白猪体躯长，被毛白色，允许偶有少量暗黑斑点；头小颈轻，鼻嘴狭长，耳较大向前倾或下垂；背腰平直，后躯发达，腿臀丰满，整体呈前轻后重，外观清秀美观，体质结实，四肢坚实。</p>
+										</div>
+									</div>
+
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+            </button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<footer class="main-footer">
+				<div class="pull-right hidden-xs">
+				</div>
+				<strong>Copyright &copy; 2016 <a href="#">闪龙科技</a>.</strong> All rights reserved.
+			</footer>
+		</div>
+		<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="dist/js/app.min.js"></script>
+	</body>
+
+</html>

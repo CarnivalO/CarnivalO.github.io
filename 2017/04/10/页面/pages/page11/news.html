@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>新闻</title>
+		<style>
+			body {
+				width: 900px;
+				margin: auto;
+				font-family: "microsoft yahei";
+			}
+			
+			#newsTitle {
+				text-align: center;
+			}
+			
+			#newsInfo {
+				color: gray;
+				text-align: center;
+			}
+			
+			#newsInfo span {
+				margin-right: 25px;
+			}
+			
+			#newsContent p {
+				text-indent: 1cm;
+			}
+		</style>
+	</head>
+
+	<body>
+		分类：<span id="newsType"></span>
+		<h2 id="newsTitle"></h2>
+		<div id="newsInfo">
+			<span id="newsDate"></span>  作者：
+			<span id="author"></span> 发布者：
+			<span id="publisher"></span> 点击次数：
+			<span id="newsCount"></span>
+		</div>
+		<hr />
+		<div id="newsContent"></div>
+		<script type="text/javascript" src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<script>
+			$.ajax({
+				url: "http://192.168.255.139/json/news.json",
+				async: true,
+				success: function(data) {
+					$("#newsTitle").html(data[0].newsTitle);
+					$("#newsDate").html(data[0].publishDate);
+					$("#author").html(data[0].author);
+					$("#publisher").html(data[0].publisher);
+					$("#newsType").html(data[0].newsType);
+					$("#newsAuthor").html(data[0].author);
+					$("#newsCount").html(data[0].count);
+					$("#newsContent").html(data[0].newsContent);
+				},
+				error: function() {
+
+				}
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>海南省种猪监测系统</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="common/font-awesome.min.css">
+		<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/skin-green-light.min.css">
+		<link rel="stylesheet" href="common/bootstrap-table.min.css" />
+	</head>
+
+	<body class="hold-transition skin-green-light sidebar-mini">
+		<div class="wrapper">
+			<header class="main-header">
+				<a href="index.html" class="logo">
+					<span class="logo-mini"><b>PI</b>DS</span>
+					<span class="logo-lg"><b>海南省</b>种猪监测系统</span>
+				</a>
+				<nav class="navbar navbar-static-top" role="navigation">
+					<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+						<span class="sr-only">最小化</span>
+					</a>
+					<div class="navbar-custom-menu">
+						<ul class="nav navbar-nav">
+							<li class="dropdown notifications-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<span>管理员&nbsp;<i class="fa fa-caret-down"></i></span>
+								</a>
+								<ul class="dropdown-menu" style="width:180px;">
+									<li>
+										<ul class="menu">
+
+											<li>
+												<a href="#">
+													<i class="fa fa-edit"></i> 个人信息
+												</a>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<ul class="menu">
+											<li>
+												<a href="#">
+													<i class="fa fa-cog"></i> 修改密码
+												</a>
+											</li>
+
+											<li>
+												<a href="#">
+													<i class="fa fa-sign-out"></i> 退出
+												</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</header>
+			<aside class="main-sidebar">
+				<section class="sidebar">
+					<ul class="sidebar-menu">
+						<li>
+							<a href="index.html"><i class="fa fa-link"></i> <span>首页</span></a>
+						</li>
+						<li>
+							<a href="pigreg.html"><i class="fa fa-registered"></i> <span>种猪登记</span></a>
+						</li>
+						<li class="treeview active">
+							<a href="#">
+								<i class="fa fa-laptop"></i>
+								<span>综合查询</span>
+								<span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+							</a>
+							<ul class="treeview-menu">
+								<li>
+									<a href="hogpenquery.html"><i class="fa fa-map-o"></i>猪场信息查询</a>
+								</li>
+								<li class="active">
+									<a href="pigquery.html"><i class="fa fa-venus"></i>个体信息查询</a>
+								</li>
+								<li>
+									<a href="growthquery.html"><i class="fa fa-line-chart"></i>生长性能查询</a>
+								</li>
+								<li>
+									<a href="sowquery.html"><i class="fa fa-signal"></i>母猪繁殖信息查询</a>
+								</li>
+								<li>
+									<a href="qualityquery.html"><i class="fa fa-list-alt"></i>肉质查询</a>
+								</li>
+								<li>
+									<a href=""><i class="fa fa-undo"></i>遗传评估信息排名查询</a>
+								</li>
+								<li>
+									<a href=""><i class="fa fa-list-ol"></i>遗传进展趋势查询</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="pigfeed.html"><i class="fa fa-book"></i> <span>种猪饲养</span></a>
+						</li>
+						<li>
+							<a href="gis.html"><i class="fa fa-map"></i> <span>种猪GIS地图查询</span></a>
+						</li>
+						<li>
+							<a href="pigintro.html"><i class="fa fa-tasks"></i> <span>品牌种猪介绍</span></a>
+						</li>
+						<li>
+							<a href="tongji.html"><i class="fa fa-line-chart"></i> <span>数据统计</span></a>
+						</li>
+						<li>
+							<a href="admin.html"><i class="fa fa-user"></i> <span>后台管理</span></a>
+						</li>
+					</ul>
+				</section>
+			</aside>
+			<div class="content-wrapper">
+				<section class="content-header">
+					<h1>个体信息查询</h1>
+				</section>
+				<section class="content">
+					<form action="" method="post" id="pig" class="form-horizontal">
+						<div class="form-group">
+							<label class="col-xs-1 control-label">耳标号：</label>
+							<div class="col-sm-2">
+								<input id="earId" name="earId" placeholder="请输入耳标号 " class="form-control" required/>
+							</div>
+						<button class="btn btn-primary" onclick=hogpen();>查询</button>
+						</div>
+					</form>
+					<table id="table"></table>
+				</section>
+			</div>
+			<footer class="main-footer">
+				<div class="pull-right hidden-xs">
+				</div>
+				<strong>Copyright &copy; 2016 <a href="#">闪龙科技</a>.</strong> All rights reserved.
+			</footer>
+		</div>
+		<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="dist/js/app.min.js"></script>
+		<script type="text/javascript" src="common/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="common/bootstrap-table-zh-CN.min.js"></script>
+		<script>
+			$('#table').bootstrapTable({
+				//method: 'post',
+				//url: '/qStock/AjaxPage',
+				//dataType: "json",
+				striped: true, //使表格带有条纹
+				pagination: true, //在表格底部显示分页工具栏
+				pageSize: 22,
+				pageNumber: 1,
+				pageList: [10, 20, 50, 100, 200, 500],
+				idField: "ProductId", //标识哪个字段为id主键
+				showToggle: false, //名片格式
+				cardView: false, //设置为True时显示名片（card）布局
+				//showColumns: true, //显示隐藏列  
+				//showRefresh: true, //显示刷新按钮
+				//singleSelect: true, //复选框只能选择一条记录
+				//search: true, //是否显示右上角的搜索框
+				//clickToSelect: true, //点击行即可选中单选/复选框
+				//sidePagination: "server", //表格分页的位置
+				//queryParams: queryParams, //参数
+				//queryParamsType: "limit", //参数格式,发送标准的RESTFul类型的参数请求
+				//toolbar: "#toolbar", //设置工具栏的Id或者class
+				//columns: column, //列
+				silent: true, //刷新事件必须设置
+				formatLoadingMessage: function() {
+					return "请稍等，正在加载中...";
+				},
+				formatNoMatches: function() { //没有匹配的结果
+					return '无符合条件的记录';
+				},
+				onLoadError: function(data) {
+					$('#reportTable').bootstrapTable('removeAll');
+				},
+				//				onClickRow: function(row) {
+				//					window.location.href = "/qStock/qProInfo/" + row.ProductId;
+				//				},
+				columns: [{
+					field: 'earId',
+					title: '耳标号'
+				}, {
+					field: 'farmId',
+					title: '来源种猪场单位名称'
+				}, {
+					field: 'generation',
+					title: '代次'
+				}, {
+					field: 'pigType',
+					title: '品种'
+				}, {
+					field: 'gender',
+					title: '性别'
+				}, {
+					field: 'birthDay',
+					title: '出生日期'
+				}, {
+					field: 'pId',
+					title: '猪父号'
+				}, {
+					field: 'mId',
+					title: '猪母号'
+				}, {
+					field: 'picUrl',
+					title: '种猪图片'
+				}, {
+					field: 'videoUrl',
+					title: '种猪视频'
+				}],
+				data: [{
+					id: 1,
+					name: 'Item 1',
+					price: '$1'
+				}, {
+					id: 2,
+					name: 'Item 2',
+					price: '$2'
+				}]
+			});
+		</script>
+	</body>
+
+</html>

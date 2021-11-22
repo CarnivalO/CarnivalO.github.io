@@ -1,0 +1,609 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>海南省种猪检测系统</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="common/font-awesome.min.css">
+		<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+		<link rel="stylesheet" href="dist/css/skins/skin-green-light.min.css">
+		<style>
+			.content h3 {
+				font-size: 3rem;
+			}
+			
+			.content .col-lg-6 {
+				cursor: pointer;
+			}
+			
+			.file {
+				position: relative;
+				display: inline-block;
+				background: #D0EEFF;
+				border: 1px solid #99D3F5;
+				border-radius: 4px;
+				padding: 4px 12px;
+				overflow: hidden;
+				color: #1E88C7;
+				text-decoration: none;
+				text-indent: 0;
+				line-height: 20px;
+			}
+			
+			.file input {
+				position: absolute;
+				font-size: 100px;
+				right: 0;
+				top: 0;
+				opacity: 0;
+			}
+			
+			.file:hover {
+				background: #AADFFD;
+				border-color: #78C3F3;
+				color: #004974;
+				text-decoration: none;
+			}
+			
+			#myModal2 input {
+				width: 120px;
+			}
+			
+			#myModal2 tr td:first-child {
+				width: 100px;
+			}
+			
+			#myModal3 input {
+				width: 130px;
+			}
+			
+			#myModal3 tr td:first-child {
+				width: 100px;
+			}
+			
+			#myModal4 input {
+				width: 120px;
+			}
+			
+			#myModal4 tr td:first-child {
+				width: 100px;
+			}
+		</style>
+	</head>
+
+	<body class="hold-transition skin-green-light sidebar-mini">
+		<div class="wrapper">
+			<header class="main-header">
+				<a href="index.html" class="logo">
+					<span class="logo-mini"><b>PI</b>DS</span>
+					<span class="logo-lg"><b>海南省</b>种猪监测系统</span>
+				</a>
+				<nav class="navbar navbar-static-top" role="navigation">
+					<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+						<span class="sr-only">最小化</span>
+					</a>
+					<div class="navbar-custom-menu">
+						<ul class="nav navbar-nav">
+							<li class="dropdown notifications-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<span>管理员&nbsp;<i class="fa fa-caret-down"></i></span>
+								</a>
+								<ul class="dropdown-menu" style="width:180px;">
+									<li>
+										<ul class="menu">
+
+											<li>
+												<a href="#">
+													<i class="fa fa-edit"></i> 个人信息
+												</a>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<ul class="menu">
+											<li>
+												<a href="#">
+													<i class="fa fa-cog"></i> 修改密码
+												</a>
+											</li>
+
+											<li>
+												<a href="#">
+													<i class="fa fa-sign-out"></i> 退出
+												</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</header>
+			<aside class="main-sidebar">
+				<section class="sidebar">
+					<ul class="sidebar-menu">
+						<li>
+							<a href="index.html"><i class="fa fa-link"></i> <span>首页</span></a>
+						</li>
+						<li class="active">
+							<a href="pigreg.html"><i class="fa fa-registered"></i> <span>种猪登记</span></a>
+						</li>
+						<li class="treeview">
+							<a href="#">
+								<i class="fa fa-laptop"></i>
+								<span>综合查询</span>
+								<span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+							</a>
+							<ul class="treeview-menu">
+								<li>
+									<a href="hogpenquery.html"><i class="fa fa-map-o"></i>猪场信息查询</a>
+								</li>
+								<li>
+									<a href="pigquery.html"><i class="fa fa-venus"></i>个体信息查询</a>
+								</li>
+								<li>
+									<a href="growthquery.html"><i class="fa fa-line-chart"></i>生长性能查询</a>
+								</li>
+								<li>
+									<a href="sowquery.html"><i class="fa fa-signal"></i>母猪繁殖信息查询</a>
+								</li>
+								<li>
+									<a href="qualityquery.html"><i class="fa fa-list-alt"></i>肉质查询</a>
+								</li>
+								<li>
+									<a href=""><i class="fa fa-undo"></i>遗传评估信息排名查询</a>
+								</li>
+								<li>
+									<a href=""><i class="fa fa-list-ol"></i>遗传进展趋势查询</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="pigfeed.html"><i class="fa fa-book"></i> <span>种猪饲养</span></a>
+						</li>
+						<li>
+							<a href="gis.html"><i class="fa fa-map"></i> <span>种猪GIS地图查询</span></a>
+						</li>
+						<li>
+							<a href="pigintro.html"><i class="fa fa-tasks"></i> <span>品牌种猪介绍</span></a>
+						</li>
+						<li>
+							<a href="tongji.html"><i class="fa fa-line-chart"></i> <span>数据统计</span></a>
+						</li>
+						<li>
+							<a href="admin.html"><i class="fa fa-user"></i> <span>后台管理</span></a>
+						</li>
+					</ul>
+				</section>
+			</aside>
+			<div class="content-wrapper">
+				<section class="content-header">
+					<h1>种猪登记</h1>
+				</section>
+				<section class="content">
+					<div class="row">
+
+						<div class="col-lg-6 col-xs-6" data-toggle="modal" data-target="#myModal1">
+							<div class="small-box bg-gray">
+								<div class="inner">
+									<h3>个体信息登记</h3>
+									<p>Pig Infomation Registration</p>
+								</div>
+								<div class="icon">
+									<i class="fa fa-calendar-o"></i>
+								</div>
+								<a href="#" class="small-box-footer">
+									添加 <i class="fa fa-arrow-circle-right"></i>
+								</a>
+							</div>
+						</div>
+						<div class="col-lg-6 col-xs-6" data-toggle="modal" data-target="#myModal2">
+							<div class="small-box bg-gray">
+								<div class="inner">
+									<h3>生长登记</h3>
+									<p>Growth Registration</p>
+								</div>
+								<div class="icon">
+									<i class="fa fa-bar-chart"></i>
+								</div>
+								<a href="#" class="small-box-footer">
+									添加 <i class="fa fa-arrow-circle-right"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6 col-xs-6" data-toggle="modal" data-target="#myModal3">
+							<div class="small-box bg-gray">
+								<div class="inner">
+									<h3>母猪繁殖能力登记</h3>
+									<p>Sow Reproductive Registration</p>
+								</div>
+								<div class="icon">
+									<i class="fa fa-odnoklassniki"></i>
+								</div>
+								<a href="#" class="small-box-footer">
+									添加 <i class="fa fa-arrow-circle-right"></i>
+								</a>
+							</div>
+						</div>
+						<div class="col-lg-6 col-xs-6" data-toggle="modal" data-target="#myModal4">
+							<!-- small box -->
+							<div class="small-box bg-gray">
+								<div class="inner">
+									<h3>屠宰登记</h3>
+									<p>Slaughter Registration</p>
+								</div>
+								<div class="icon">
+									<i class="fa fa-calendar-times-o"></i>
+								</div>
+								<a href="#" class="small-box-footer">
+									添加 <i class="fa fa-arrow-circle-right"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+					<!-- 模态框（Modal） -->
+					<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop='static'>
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+									<h4 class="modal-title" id="myModalLabel">
+              个体信息登记
+            </h4>
+								</div>
+								<div class="modal-body">
+									<div class="box">
+										<div class="box-body">
+											<table class="table table-bordered">
+												<form action="" method="post">
+													<tbody>
+														<tr>
+															<td>耳标号：</td>
+															<td><input id="id" name="id" placeholder="请输入耳标号" /></td>
+															<td>性别：</td>
+															<td>
+																<lable for="boar">公</lable>
+																<input type="radio" name="gender" id="boar" checked/>&nbsp;&nbsp;
+																<lable for="sow">母</lable>
+																<input type="radio" name="gender" id="sow" />
+															</td>
+														</tr>
+														<tr>
+															<td>生日：</td>
+															<td><input type="date" name="birthDay" id="birthDay" value="" /></td>
+															<td>品种：</td>
+															<td>
+																<div style="position:relative;">
+																	<span style="margin-left:100px;width:18px;overflow:hidden;">      
+<select style="width:120px;margin-left:-100px" onchange="this.parentNode.nextSibling.value=this.value">      
+<option value="">请选择 </option>   
+<option value="1">1 </option>      
+<option value="2">2</option>      
+<option value="3">3</option>   
+</select></span><input name="box" style="width:100px;height:24px;position:absolute;left:0px;">
+																</div>
+															</td>
+														</tr>
+														<tr>
+															<td>猪父号：</td>
+															<td><input id="pId" /></td>
+															<td>猪母号：</td>
+															<td><input id="mId" /></td>
+														</tr>
+														<tr>
+															<td>种猪图片</td>
+															<td>
+																<a href="javascript:;" class="file">选择文件
+																	<input type="file" name="picUrl" id="picUrl">
+																</a>
+															</td>
+															<td>种猪视频</td>
+															<td>
+																<a href="javascript:;" class="file">选择文件
+																	<input type="file" name="videoUrl" id="videoUrl">
+																</a>
+															</td>
+														</tr>
+													</tbody>
+												</form>
+											</table>
+										</div>
+									</div>
+
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+            </button>
+									<button type="button" class="btn btn-primary">
+               提交
+            </button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop='static'>
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+									<h4 class="modal-title" id="myModalLabel">
+              生长登记
+            </h4>
+								</div>
+								<div class="modal-body">
+									<div class="box">
+										<div class="box-body">
+											<table class="table table-bordered">
+												<form action="" method="post">
+													<tbody>
+														<tr>
+															<td>耳标号：</td>
+															<td><input id="id" name="id" placeholder="请输入耳标号" /></td>
+															<td>出生重：</td>
+															<td>
+																<input id="birthWeight" name="birthWeight" placeholder="请输入出生体重" />&nbsp;kg
+															</td>
+														</tr>
+														<tr>
+															<td>断奶日龄：</td>
+															<td><input id="weaningAge" name="weaningAge" placeholder="请输入断奶日龄" />&nbsp;天</td>
+															<td>断奶重：</td>
+															<td>
+																<input id="weaningWeight" name="weaningWeight" placeholder="请输入断奶体重" />&nbsp;kg
+															</td>
+														</tr>
+														<tr>
+															<td>30-100kg日增重：</td>
+															<td><input id="dayIncreaseWeight" name="dayIncreaseWeight" placeholder="请输入日增重" />&nbsp;kg</td>
+															<td>饲料报酬：</td>
+															<td><input id="feedReturn" name="feedReturn" placeholder="请输入饲料报酬" />&nbsp;%
+														</tr>
+														<tr>
+															<td>达100kg日龄：</td>
+															<td>
+																<input id="up100Days" name="up100Days" placeholder="请输入天数" />&nbsp;天
+															</td>
+															<td>100kg活体膘厚：</td>
+															<td>
+																<input id="fatThickness" name="fatThickness" placeholder="请输入活体膘厚" />&nbsp;cm
+															</td>
+														</tr>
+													</tbody>
+												</form>
+											</table>
+										</div>
+									</div>
+
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+            </button>
+									<button type="button" class="btn btn-primary">
+               提交
+            </button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop='static'>
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+									<h4 class="modal-title" id="myModalLabel">
+              母猪繁殖登记
+            </h4>
+								</div>
+								<div class="modal-body">
+									<div class="box">
+										<div class="box-body">
+											<table class="table table-bordered">
+												<form action="" method="post">
+													<tbody>
+														<tr>
+															<td>耳标号：</td>
+															<td><input id="id" name="id" placeholder="请输入耳标号" /></td>
+															<td>与配公猪：</td>
+															<td>
+																<input id="pigId" name="pigId" placeholder="请输入耳标号" />
+															</td>
+														</tr>
+														<tr>
+															<td>初产日龄：</td>
+															<td><input name="firstDelivery" id="firstDelivery" />&nbsp;天</td>
+															<td>产仔日期：</td>
+															<td>
+																<input type="date" name="chirldBirthDate" id="chirldBirthDate" />
+															</td>
+														</tr>
+														<tr>
+															<td>出生均重：</td>
+															<td><input name="birthAvgWeight" id="birthAvgWeight" />&nbsp;kg</td>
+															<td>总产仔数：</td>
+															<td><input name="totalBirth" id="totalBirth" />&nbsp;头</td>
+														</tr>
+														<tr>
+															<td>活产仔数：</td>
+															<td>
+																<input name="aliveBirth" id="aliveBirth" />&nbsp;头
+															</td>
+															<td>弱仔数：</td>
+															<td>
+																<input name="weakBirth" id="weakBirth" />&nbsp;头
+															</td>
+														</tr>
+														<tr>
+															<td>死胎：</td>
+															<td>
+																<input name="deadBirth" id="deadBirth" />&nbsp;头
+															</td>
+															<td>木乃伊：</td>
+															<td>
+																<input name="mummy" id="mummy" />&nbsp;头
+															</td>
+														</tr>
+														<tr>
+															<td>断奶日期：</td>
+															<td>
+																<input type="date" name="weaningDate" id="weaningDate" />
+															</td>
+															<td>断奶窝重：</td>
+															<td>
+																<input name="weaningWeight" id="weaningWeight" />&nbsp;kg
+															</td>
+														</tr>
+														<tr>
+															<td>断奶日龄哺育率：</td>
+															<td>
+																<input name="weaningFeed" id="weaningFeed" />&nbsp;%
+															</td>
+														</tr>
+													</tbody>
+												</form>
+											</table>
+										</div>
+									</div>
+
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+            </button>
+									<button type="button" class="btn btn-primary">
+               提交
+            </button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop='static'>
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+									<h4 class="modal-title" id="myModalLabel">
+              个体信息登记
+            </h4>
+								</div>
+								<div class="modal-body">
+									<div class="box">
+										<div class="box-body">
+											<table class="table table-bordered">
+												<form action="" method="post">
+													<tbody>
+														<tr>
+															<td>耳标号：</td>
+															<td>
+																<input name="pigId" id="pigId" />
+															</td>
+															<td>宰前体重：</td>
+															<td>
+																<input name="pigWeight" id="pigWeight" />&nbsp;kg
+															</td>
+														</tr>
+														<tr>
+															<td>胴体重：</td>
+															<td>
+																<input name="tongWeight" id="tongWeight" />&nbsp;kg
+															</td>
+															<td>屠宰率：</td>
+															<td>
+																<input name="dressingPercentage" id="dressingPercentage" />&nbsp;%
+															</td>
+														</tr>
+														<tr>
+															<td>胴体膘厚：</td>
+															<td>
+																<input name="tongTiBiaoHou" id="tongTiBiaoHou" />&nbsp;cm
+															</td>
+															<td>胴体眼肌面积：</td>
+															<td>
+																<input name="tongTiYanJi" id="tongTiYanJi" />
+															</td>
+														</tr>
+														<tr>
+															<td>腿臀比例：</td>
+															<td>
+																<input name="legAssRate" id="legAssRate" />
+															</td>
+															<td>胴体瘦肉率：</td>
+															<td>
+																<input name="tongTiShouRou" id="tongTiShouRou" />&nbsp;%
+															</td>
+														</tr>
+														<tr>
+															<td>肌肉PH值：</td>
+															<td>
+																<input name="musclePH" id="musclePH" />
+															</td>
+															<td>肉色：</td>
+															<td>
+																<input name="muscleColor" id="muscleColor" />
+															</td>
+														</tr>
+														<tr>
+															<td>系水力：</td>
+															<td>
+																<input name="xiShuiLi" id="xiShuiLi" />
+															</td>
+															<td>滴水损失：</td>
+															<td>
+																<input name="diShuiSunShi" id="diShuiSunShi" />
+															</td>
+														</tr>
+														<tr>
+															<td>大理石纹：</td>
+															<td>
+																<input name="marbling" id="marbling" />
+															</td>
+															<td>肌肉脂肪含量：</td>
+															<td>
+																<input name="muscleContentFat" id="muscleContentFat" />&nbsp;%
+															</td>
+														</tr>
+													</tbody>
+												</form>
+											</table>
+										</div>
+									</div>
+
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+            </button>
+									<button type="button" class="btn btn-primary">
+               提交
+            </button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			<footer class="main-footer">
+				<div class="pull-right hidden-xs">
+				</div>
+				<strong>Copyright &copy; 2016 <a href="#">闪龙科技</a>.</strong> All rights reserved.
+			</footer>
+		</div>
+		<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="dist/js/app.min.js"></script>
+	</body>
+
+</html>
