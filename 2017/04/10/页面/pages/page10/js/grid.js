@@ -50,10 +50,10 @@ $("img").on("click", function () {
 	var screenImage = $(this);
 	theImage = new Image();
 	theImage.src = screenImage.attr("src");
-	$(".thumb").height(600);
+	$(".thumb").height(500);
 	$(".thumb").width(1000);
 	$("#previewBG").css("background", 'url(' + theImage.src + ') ');
-	$("#previewBG").css("background-size", 'cover');
+	$("#previewBG").css("background-size", 'contain');
 
 	$(".grid").fadeToggle(1000);
 	$(".thumb").fadeToggle(1000);
