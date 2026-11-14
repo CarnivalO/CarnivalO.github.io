@@ -1,0 +1,1807 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NBA // LIVE · 当日比赛球员数据汇总</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --canvas:#F1F4F8;
+  --s1:#FFFFFF;
+  --s2:#E7EDF4;
+  --s3:#DCE4ED;
+  --rule:#C9D3DE;
+  --rule-strong:#A6B4C3;
+  --ink:#0D1B2A;
+  --ink-2:#2B4257;
+  --muted:#556B80;
+  --faint:#8CA0B4;
+
+  --amber:#C9700A;   --amber-soft:#F7E7CC;
+  --mint:#0E8F63;    --mint-soft:#D6F0E4;
+  --blue:#1F6FE0;    --blue-soft:#DCE9FB;
+  --coral:#D23F3F;   --coral-soft:#F9DEDE;
+  --violet:#6B4EE6;  --violet-soft:#E4DEFC;
+  --teal:#0B8493;    --teal-soft:#D5EDF0;
+  --rose:#C2357B;    --rose-soft:#F8DCEA;
+
+  --shadow:0 1px 2px rgba(13,27,42,.05), 0 10px 28px rgba(13,27,42,.07);
+  --sans:"Inter Tight","Arial Narrow",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --gut:32px;
+}
+html[data-theme="dark"]{
+  --canvas:#0B0E13; --s1:#121A24; --s2:#1A2431; --s3:#222E3C;
+  --rule:#2B3745; --rule-strong:#40505F;
+  --ink:#E9F0F7; --ink-2:#BCCBDA; --muted:#8B9BAE; --faint:#63758B;
+  --amber:#F5A623; --amber-soft:rgba(245,166,35,.16);
+  --mint:#43D17A; --mint-soft:rgba(67,209,122,.16);
+  --blue:#55A8FF; --blue-soft:rgba(85,168,255,.16);
+  --coral:#FF6B5E; --coral-soft:rgba(255,107,94,.16);
+  --violet:#9B86FF; --violet-soft:rgba(155,134,255,.16);
+  --teal:#38C2D1; --teal-soft:rgba(56,194,209,.16);
+  --rose:#F2689F; --rose-soft:rgba(242,104,159,.16);
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 28px rgba(0,0,0,.38);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--canvas);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button,input,select{font-family:inherit;color:inherit}
+button{background:none;border:none;cursor:pointer}
+table{border-collapse:collapse}
+::selection{background:var(--amber-soft)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:2px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.lbl{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:1440px;margin:0 auto;padding:0 var(--gut)}
+
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:40;background:var(--canvas);border-bottom:1px solid var(--rule);transition:height .18s ease,background .18s ease,box-shadow .18s ease}
+header.condensed{background:color-mix(in srgb, var(--canvas) 88%, transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--rule),0 10px 24px rgba(13,27,42,.05)}
+html[data-theme="dark"] header.condensed{box-shadow:0 1px 0 var(--rule),0 10px 24px rgba(0,0,0,.32)}
+.hdr{display:flex;align-items:center;gap:28px;height:68px;transition:height .18s ease}
+header.condensed .hdr{height:54px}
+.wordmark{font-family:var(--mono);font-size:15px;font-weight:500;letter-spacing:.06em;white-space:nowrap;color:var(--ink);text-decoration:none}
+.wordmark i{color:var(--amber);font-style:normal}
+.nav-links{display:flex;gap:22px;flex:1}
+.nav-links a{color:var(--muted);text-decoration:none;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:22px 0 20px;border-bottom:2px solid transparent;transition:color .14s ease,border-color .14s ease}
+header.condensed .nav-links a{padding:17px 0 15px}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.on{color:var(--ink);border-bottom-color:var(--amber)}
+.hdr-mid{display:flex;align-items:center;gap:18px;margin-left:auto}
+.hdr-date{font-family:var(--mono);font-size:11px;color:var(--ink-2);letter-spacing:.05em;white-space:nowrap}
+.ts{font-family:var(--mono);font-size:10px;color:var(--faint);white-space:nowrap}
+.ts b{color:var(--muted);font-weight:500}
+.hdr-util{display:flex;align-items:center;gap:2px}
+.icon-btn{width:34px;height:34px;display:grid;place-items:center;border:1px solid transparent;border-radius:4px;color:var(--muted);transition:color .14s ease,background .14s ease,border-color .14s ease;position:relative}
+.icon-btn:hover{color:var(--ink);background:var(--s2);border-color:var(--rule)}
+.icon-btn .tip{position:absolute;top:calc(100% + 8px);right:0;background:var(--s1);border:1px solid var(--rule);border-radius:4px;padding:5px 9px;font-family:var(--mono);font-size:10px;color:var(--muted);white-space:nowrap;opacity:0;pointer-events:none;transform:translateY(-3px);transition:opacity .14s ease,transform .14s ease;box-shadow:var(--shadow);z-index:5}
+.icon-btn:hover .tip,.icon-btn:focus-visible .tip{opacity:1;transform:translateY(0)}
+.hamburger{display:none}
+.liveflag{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--amber);background:var(--amber-soft);border-radius:4px;padding:4px 9px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--amber);position:relative;flex:none}
+.dot::after{content:"";position:absolute;inset:-3px;border-radius:50%;border:2px solid var(--amber);opacity:0;animation:pulse 2s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.5);opacity:.4}70%{transform:scale(2);opacity:0}100%{opacity:0}}
+
+/* ---------- hero ---------- */
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;padding:38px 0 26px;flex-wrap:wrap}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--coral);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--coral)}
+h1{font-size:52px;font-weight:600;line-height:1;letter-spacing:-.015em;color:var(--ink)}
+.hero-sub{margin-top:14px;color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:.05em}
+.date-nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.dbtn{height:36px;min-width:36px;padding:0 12px;border:1px solid var(--rule);border-radius:4px;background:var(--s1);font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted);display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:color .14s ease,border-color .14s ease,background .14s ease}
+.dbtn:hover{color:var(--ink);border-color:var(--rule-strong);background:var(--s2)}
+.dbtn.primary{color:var(--ink);border-color:var(--rule-strong);font-weight:500}
+input[type=date]{height:36px;background:var(--s1);border:1px solid var(--rule);border-radius:4px;padding:0 11px;font-family:var(--mono);font-size:11px;color:var(--ink);color-scheme:light}
+html[data-theme="dark"] input[type=date]{color-scheme:dark}
+.chk{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--muted);cursor:pointer;height:36px;padding:0 12px;border:1px solid var(--rule);border-radius:4px;background:var(--s1);transition:color .14s ease,border-color .14s ease}
+.chk:hover{color:var(--ink);border-color:var(--rule-strong)}
+.chk input{appearance:none;width:12px;height:12px;border:1px solid var(--rule-strong);border-radius:2px;position:relative;cursor:pointer;flex:none;background:var(--s1)}
+.chk input:checked{background:var(--amber);border-color:var(--amber)}
+.chk input:checked::after{content:"";position:absolute;left:3px;top:0px;width:3px;height:7px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(42deg)}
+
+/* ---------- section heads ---------- */
+.strip-head{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--rule);padding-top:14px;margin-bottom:14px;gap:16px}
+.strip-head .lbl{display:flex;align-items:center;gap:8px}
+.strip-head .lbl::before{content:"";width:8px;height:8px;background:var(--teal);border-radius:1px}
+
+/* ---------- game strip ---------- */
+.strip{display:flex;gap:14px;overflow-x:auto;padding-bottom:14px;scrollbar-width:thin;scrollbar-color:var(--rule) transparent}
+.strip::-webkit-scrollbar{height:5px}
+.strip::-webkit-scrollbar-thumb{background:var(--rule);border-radius:3px}
+.gcard{flex:none;width:252px;min-height:136px;border:1px solid var(--rule);border-radius:4px;background:var(--s1);padding:0;display:flex;flex-direction:column;text-align:left;overflow:hidden;transition:border-color .14s ease,transform .14s ease,box-shadow .14s ease}
+.gcard:hover{border-color:var(--rule-strong);transform:translateY(-2px);box-shadow:var(--shadow)}
+.gcard.sel{border-color:var(--amber);box-shadow:0 0 0 1px var(--amber)}
+.gcard-top{display:flex;align-items:center;justify-content:space-between;padding:11px 12px 0}
+.gcard-body{padding:10px 12px;display:flex;flex-direction:column;gap:9px;flex:1}
+.gteam{display:flex;align-items:center;gap:9px}
+.crest{width:22px;height:22px;border-radius:3px;display:grid;place-items:center;font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.02em;color:#fff;flex:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.gcard-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.gcard-row .nm{font-family:inherit;font-size:12px;color:var(--ink);letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gcard-row .sc{font-family:var(--mono);font-size:22px;font-weight:500;line-height:1;font-variant-numeric:tabular-nums}
+.gcard-row.lose .sc{color:var(--faint)}
+.gcard-row.lose .nm{color:var(--muted)}
+.gcard-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid var(--rule);padding:9px 12px;background:var(--s2)}
+.gcard-foot .ts{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stat-tag{font-family:var(--mono);font-size:9px;letter-spacing:.08em;padding:3px 7px;border-radius:3px;color:var(--muted);background:var(--s2);white-space:nowrap}
+.stat-tag.live{color:var(--amber);background:var(--amber-soft)}
+.stat-tag.final{color:var(--coral);background:var(--coral-soft)}
+.stat-tag.sched{color:var(--blue);background:var(--blue-soft)}
+.stat-tag.post{color:var(--muted);background:var(--s3)}
+.gclock{font-family:var(--mono);font-size:10px;color:var(--amber);letter-spacing:.06em;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+
+/* ---------- lead grid ---------- */
+.lead-grid{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:16px;margin:10px 0 34px;align-items:stretch}
+.scoreboard{background:var(--s1);border:1px solid var(--rule);border-radius:4px;padding:22px 24px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.scoreboard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--amber)}
+.sb-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.sb-status{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--amber);text-transform:uppercase;display:flex;align-items:center;gap:7px}
+.sb-mid{display:grid;grid-template-columns:1fr 110px 168px 110px 1fr;align-items:center;gap:12px;margin:18px 0 6px}
+.sb-side{min-width:0}
+.sb-side.right{text-align:right}
+.sb-abbr{font-family:inherit;font-size:17px;font-weight:500;letter-spacing:0;white-space:nowrap}
+.sb-rec{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em;margin-top:5px}
+.sb-score{font-family:var(--sans);font-size:70px;font-weight:600;line-height:.95;letter-spacing:-.025em;font-variant-numeric:tabular-nums;text-align:right;transition:color .22s ease}
+.sb-score.left{text-align:left}
+.sb-score.flash{color:var(--amber)}
+.sb-clock{font-family:var(--mono);font-size:12px;letter-spacing:.09em;color:var(--amber);text-align:center;line-height:1.7}
+.sb-clock .sub{display:block;font-size:9px;letter-spacing:.05em;color:var(--faint)}
+.sb-leaders{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;border-top:1px solid var(--rule);padding-top:15px;margin-top:18px}
+.sb-lead .k{font-family:var(--mono);font-size:9px;letter-spacing:.09em;color:var(--faint);text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.sb-lead .k::before{content:"";width:6px;height:6px;border-radius:1px;background:var(--cat,var(--amber))}
+.sb-lead .v{font-family:var(--mono);font-size:15px;color:var(--ink);margin-top:6px;font-variant-numeric:tabular-nums}
+.sb-lead .n{font-size:11px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sb-actions{display:flex;gap:6px;flex:none}
+.mini-btn{font-family:var(--mono);font-size:9px;letter-spacing:.06em;color:var(--muted);border:1px solid var(--rule);border-radius:3px;padding:6px 9px;background:var(--s1);transition:color .14s ease,border-color .14s ease,background .14s ease}
+.mini-btn:hover{color:var(--ink);border-color:var(--rule-strong);background:var(--s2)}
+.mini-btn.on{color:var(--amber);border-color:var(--amber);background:var(--amber-soft)}
+
+/* ---------- pulse ---------- */
+.pulse{background:var(--s1);border:1px solid var(--rule);border-radius:4px;padding:20px 22px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.pulse h2{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);font-weight:500}
+.pulse .sub{font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--faint);margin-top:4px}
+.pulse-svg{flex:1;width:100%;margin-top:10px}
+.pline{fill:none;stroke:var(--coral);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.paxis{stroke:var(--rule);stroke-width:1}
+.pevt{opacity:0;transition:opacity .3s ease}
+.pevt text{font-family:var(--mono);font-size:8px;fill:var(--muted);letter-spacing:.03em}
+.pevt .pmark{fill:var(--s1);stroke:var(--coral);stroke-width:1.5}
+.pdot{fill:var(--coral)}
+
+/* ---------- board / rail ---------- */
+.board{display:block;padding-bottom:56px}
+.rail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px;align-items:start}
+.rail>div{display:contents}
+.rail h3{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.rail h3::before{content:"";width:10px;height:2px;background:var(--cat,var(--blue))}
+.rail-block{border:1px solid var(--rule);border-radius:4px;background:var(--s1);padding:15px 16px;min-width:0}
+.rail-block.first{border-color:var(--rule)}
+.main-col{min-width:0}
+.rail-toggle{display:none}
+.kv{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:12px;padding:6px 0;font-family:var(--mono);font-size:11px;border-bottom:1px dashed var(--rule)}
+.kv:last-child{border-bottom:none}
+.kv .k{color:var(--muted);letter-spacing:.05em}
+.kv .v{color:var(--ink);font-variant-numeric:tabular-nums;text-align:right;min-width:52px}
+.kv .v.amber{color:var(--amber)}
+.field{margin-bottom:11px}
+.field label{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
+.field select,.field input[type=text],.field input[type=number]{width:100%;height:36px;background:var(--s1);border:1px solid var(--rule);border-radius:4px;padding:0 10px;font-family:var(--mono);font-size:11px;color:var(--ink)}
+.field select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 15px) 16px,calc(100% - 10px) 16px;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:28px}
+.field-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.legend{display:flex;flex-direction:column;gap:9px}
+.legend div{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.04em}
+.swatch{width:16px;height:3px;border-radius:2px;flex:none}
+.note{font-family:var(--mono);font-size:9.5px;line-height:1.75;color:var(--faint);letter-spacing:.03em}
+
+/* ---------- toolbar ---------- */
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.seg{display:flex;border:1px solid var(--rule);border-radius:4px;overflow:hidden;background:var(--s1)}
+.seg button{height:36px;padding:0 13px;font-family:var(--mono);font-size:10px;letter-spacing:.07em;color:var(--muted);border-bottom:2px solid transparent;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;transition:color .14s ease,background .14s ease,border-color .14s ease}
+.seg button+button{border-left:1px solid var(--rule)}
+.seg button:hover{color:var(--ink);background:var(--s2)}
+.seg button.on{color:var(--ink);background:var(--s2);border-bottom-color:var(--cat,var(--amber))}
+.seg .cdot{width:6px;height:6px;border-radius:1px;background:var(--cat,var(--amber));flex:none}
+.sort-wrap{position:relative}
+.sort-btn{height:36px;padding:0 11px;border:1px solid var(--rule);border-radius:4px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--ink);display:inline-flex;align-items:center;gap:9px;background:var(--s1)}
+.sort-btn:hover{border-color:var(--rule-strong);background:var(--s2)}
+.sort-menu{position:absolute;top:calc(100% + 7px);right:0;min-width:184px;background:var(--s1);border:1px solid var(--rule);border-radius:4px;box-shadow:var(--shadow);z-index:30;display:none;overflow:hidden}
+.sort-menu.open{display:block}
+.sort-menu button{display:flex;width:100%;align-items:center;justify-content:space-between;gap:14px;padding:9px 13px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--muted);transition:color .14s ease,background .14s ease}
+.sort-menu button:hover{background:var(--s2);color:var(--ink)}
+.sort-menu button.on{color:var(--ink);background:var(--amber-soft)}
+.search-wrap{display:flex;align-items:center;gap:10px}
+.search-wrap input{width:236px;height:36px;background:var(--s1);border:1px solid var(--rule);border-radius:4px;padding:0 11px 0 32px;font-family:var(--mono);font-size:11px;color:var(--ink)}
+.search-\boxed{position:relative;display:flex;align-items:center}
+.search-box svg{position:absolute;left:10px;color:var(--faint);pointer-events:none}
+
+/* ---------- table ---------- */
+.table-shell{position:relative;border:1px solid var(--rule);border-radius:4px;background:var(--s1);overflow-x:auto;scrollbar-width:thin;scrollbar-color:var(--rule) transparent}
+.table-shell::-webkit-scrollbar{height:6px}
+.table-shell::-webkit-scrollbar-thumb{background:var(--rule);border-radius:3px}
+table{width:100%;min-width:0;table-layout:fixed}
+thead th{position:sticky;top:0;z-index:3;background:var(--s1);border-bottom:1px solid var(--rule-strong);padding:0;text-align:left;vertical-align:bottom}
+.th-btn{width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:12px 10px 10px;border-bottom:2px solid transparent;transition:background .14s ease,border-color .14s ease}
+.th-btn:hover{background:var(--s2)}
+th[data-key]:not([data-nosort]) .th-btn{cursor:pointer}
+th[aria-sort] .th-btn{border-bottom-color:var(--cat,var(--amber))}
+.th-en{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.09em;color:var(--muted);display:flex;align-items:center;gap:5px}
+th[aria-sort] .th-en{color:var(--cat,var(--amber))}
+.th-zh{font-family:var(--mono);font-size:9px;letter-spacing:.05em;color:var(--faint)}
+.th-ind{font-family:var(--mono);font-size:9px}
+th[data-num] .th-btn{align-items:flex-end}
+th[data-num] .th-en,th[data-num] .th-zh{justify-content:flex-end;text-align:right}
+tbody td{border-bottom:1px solid var(--rule);padding:0 10px;height:50px;font-family:var(--mono);font-size:13px;font-weight:500;font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap;vertical-align:middle}
+tbody tr{transition:background .14s ease;cursor:pointer}
+tbody tr:hover td{background:var(--s2)}
+tbody tr:last-child td{border-bottom:none}
+td.num{text-align:right}
+td.dim{color:var(--faint)}
+.pcell{position:sticky;left:0;z-index:2;background:var(--s1)}
+thead .pcell{z-index:4}
+tbody tr:hover .pcell{background:var(--s2)}
+.pname{font-family:var(--sans);font-size:15px;font-weight:600;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.psub{font-family:var(--mono);font-size:9px;color:var(--faint);letter-spacing:.05em;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stat-tag.sm{font-size:8px;padding:2px 6px}
+.pos-neg.up{color:var(--mint)}
+.pos-neg.down{color:var(--coral)}
+.teamcell{display:inline-flex;align-items:center;gap:8px}
+.mini-crest{width:18px;height:18px;border-radius:3px;display:grid;place-items:center;font-family:var(--mono);font-size:8px;font-weight:500;color:#fff;flex:none}
+.lead-row .pcell::before{content:"";position:absolute;left:-26px;top:0;bottom:0;width:3px;background:var(--amber)}
+.lead-tab{position:absolute;left:-26px;top:0;bottom:0;width:26px;background:var(--amber-soft);display:flex;align-items:center;justify-content:center}
+.lead-tab span{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--mono);font-size:8px;letter-spacing:.14em;color:var(--amber);text-transform:uppercase}
+.railcell{position:relative;padding-right:16px!important}
+.railbar{position:absolute;right:2px;top:50%;transform:translateY(-50%);height:3px;background:var(--cat,var(--amber));width:0;border-radius:2px;transition:width .32s cubic-bezier(.4,0,.2,1)}
+.tsbar{display:inline-flex;align-items:center;gap:9px;justify-content:flex-end}
+.tsbar i{display:block;width:38px;height:3px;background:var(--s3);position:relative;flex:none;border-radius:2px;overflow:hidden}
+.tsbar i b{position:absolute;left:0;top:0;bottom:0;background:var(--teal);border-radius:2px}
+td.cell-txt{overflow:hidden;text-overflow:ellipsis}
+td.cell-txt .teamcell{min-width:0;max-width:100%}
+td.cell-txt .teamcell>span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ---------- mobile card list ---------- */
+.card-list{display:none;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.pcard{border:1px solid var(--rule);border-radius:4px;background:var(--s1);padding:14px 15px;cursor:pointer;min-width:0;transition:border-color .14s ease,box-shadow .14s ease}
+.pcard:hover,.pcard:focus-visible{border-color:var(--rule-strong);box-shadow:var(--shadow)}
+.pcard-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding-bottom:11px;border-bottom:1px solid var(--rule)}
+.pcard-id{min-width:0;display:flex;align-items:center;gap:9px}
+.pcard-id .mini-crest{width:26px;height:26px;font-size:11px;border-radius:4px}
+.pcard-id-txt{min-width:0}
+.pcard-name{font-family:var(--sans);font-size:16px;font-weight:600;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pcard-sub{font-family:var(--mono);font-size:9px;color:var(--faint);margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pcard-main{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:12px 0 11px}
+.pcard-main .k{font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--faint)}
+.pcard-main .v{font-family:var(--mono);font-size:21px;font-weight:500;line-height:1.1;margin-top:5px;font-variant-numeric:tabular-nums}
+.pcard-main .v.hi{color:var(--amber)}
+.pcard-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px;border-top:1px solid var(--rule);padding-top:6px}
+.pcard-kv{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px dashed var(--rule);font-family:var(--mono);font-size:11px;min-width:0}
+.pcard-kv .k{font-size:10px;color:var(--muted);letter-spacing:.04em;white-space:nowrap}
+.pcard-kv .v{font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pcard-rail{height:3px;background:var(--s3);border-radius:2px;margin-top:12px;overflow:hidden}
+.pcard-rail i{display:block;height:100%;background:var(--cat,var(--amber))}
+.pcard-foot{display:flex;flex-wrap:wrap;gap:6px 10px;margin-top:11px;padding-top:10px;border-top:1px solid var(--rule);font-family:var(--mono);font-size:10px;color:var(--muted)}
+.pcard-foot b{color:var(--ink);font-weight:500}
+.card-empty{grid-column:1/-1}
+
+/* ---------- drawer ---------- */
+.backdrop{position:fixed;inset:0;background:#0D1B2A;opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s ease;z-index:50}
+.backdrop.open{opacity:.34;visibility:visible}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:432px;max-width:100vw;background:var(--s1);border-left:1px solid var(--rule);z-index:60;transform:translateX(100%);transition:transform .18s cubic-bezier(.22,1,.36,1);overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--rule) transparent;box-shadow:var(--shadow)}
+.drawer.open{transform:translateX(0)}
+.drawer::-webkit-scrollbar{width:5px}
+.drawer::-webkit-scrollbar-thumb{background:var(--rule)}
+.dr-head{position:sticky;top:0;background:var(--s1);border-bottom:1px solid var(--rule);padding:22px 26px 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;z-index:2}
+.dr-name{font-family:var(--sans);font-size:24px;font-weight:600;line-height:1.1}
+.dr-en{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.07em;margin-top:5px}
+.dr-team{display:flex;align-items:center;gap:10px;margin-top:11px;flex-wrap:wrap}
+.dr-body{padding:22px 26px 44px}
+.dr-sec{border-top:1px solid var(--rule);padding-top:18px;margin-top:22px}
+.dr-sec h4{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.dr-sec h4::before{content:"";width:10px;height:2px;background:var(--cat,var(--blue))}
+.dr-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 12px}
+.dr-stat .k{font-family:var(--mono);font-size:9px;letter-spacing:.09em;color:var(--faint);text-transform:uppercase}
+.dr-stat .v{font-family:var(--mono);font-size:23px;font-weight:500;line-height:1.1;margin-top:5px;font-variant-numeric:tabular-nums}
+.split-row{display:grid;grid-template-columns:62px 1fr 58px;align-items:center;gap:12px;margin-bottom:11px}
+.split-row .k{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.05em}
+.split-track{height:5px;background:var(--s3);position:relative;overflow:hidden;border-radius:3px}
+.split-fill{position:absolute;left:0;top:0;bottom:0;background:var(--cat,var(--amber));width:0;border-radius:3px;transition:width .32s cubic-bezier(.4,0,.2,1)}
+.split-row .v{font-family:var(--mono);font-size:11px;text-align:right;font-variant-numeric:tabular-nums}
+.cmp{width:100%}
+.cmp td{padding:9px 0;border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:12px;font-variant-numeric:tabular-nums}
+.cmp td:first-child{color:var(--muted);font-size:10px;letter-spacing:.07em}
+.cmp td:not(:first-child){text-align:right;width:88px}
+
+/* ---------- overlay / empty / stale ---------- */
+.overlay{position:absolute;inset:0;background:color-mix(in srgb, var(--canvas) 86%, transparent);backdrop-filter:blur(2px);display:none;place-items:center;z-index:20}
+.overlay.show{display:grid}
+.overlay .msg{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--amber);text-transform:uppercase;background:var(--s1);border:1px solid var(--rule);border-radius:4px;padding:12px 18px}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:56px 24px;text-align:center}
+.empty .t{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.empty .d{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.05em;line-height:1.8}
+.stale{display:none;align-items:center;gap:12px;border:1px solid var(--coral);background:var(--coral-soft);border-radius:4px;padding:11px 15px;margin-bottom:16px}
+.stale.show{display:flex}
+.stale .m{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--coral)}
+
+footer{border-top:1px solid var(--rule);background:var(--s1);margin-top:8px}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:58px;flex-wrap:wrap;padding:12px 0}
+.foot .f{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--faint);display:flex;align-items:center;gap:7px}
+.foot .f b{color:var(--muted);font-weight:500}
+.ok{color:var(--mint)}
+.bad{color:var(--coral)}
+
+/* ---------- modal ---------- */
+.modal{position:fixed;inset:0;z-index:70;display:none;place-items:center;padding:24px}
+.modal.open{display:grid}
+.modal-panel{position:relative;width:min(580px,100%);max-height:82vh;overflow-y:auto;background:var(--s1);border:1px solid var(--rule);border-radius:4px;box-shadow:var(--shadow);padding:30px}
+.modal-panel h3{font-family:var(--sans);font-size:26px;font-weight:600;margin-bottom:8px}
+.modal-panel h5{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--amber);text-transform:uppercase;margin:24px 0 9px}
+.modal-panel p{color:var(--muted);font-size:13px;line-height:1.7}
+.modal-close{position:absolute;top:18px;right:18px}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chip{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--ink-2);border:1px solid var(--rule);border-radius:3px;padding:6px 9px;background:var(--s1)}
+.chip i{width:9px;height:9px;border-radius:2px;background:var(--cat);display:block}
+
+/* ---------- responsive ---------- */
+@media (max-width:1399px){
+  .th-en{font-size:9px;letter-spacing:.05em}
+  .th-zh{font-size:8px}
+}
+@media (max-width:1199px){
+  :root{--gut:24px}
+  h1{font-size:42px}
+  .hdr{gap:12px}
+  .nav-links{gap:11px;min-width:0}
+  .nav-links a{font-size:10px;letter-spacing:.05em}
+  .hdr-mid{gap:8px}
+  .hdr-mid>.ts{display:none}
+  .icon-btn{width:30px;height:30px}
+  .icon-btn .tip{display:none}
+  .lead-grid{grid-template-columns:1fr}
+  .board{display:block}
+  .rail{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sb-leaders{grid-template-columns:repeat(3,1fr)}
+  .sb-mid{grid-template-columns:1fr 96px 140px 96px 1fr}
+}
+@media (max-width:767px){
+  :root{--gut:16px}
+  h1{font-size:30px}
+  .hdr{gap:8px;height:56px}
+  header.condensed .hdr{height:52px}
+  .wordmark{font-size:13px}
+  .hdr-mid{gap:6px}
+  .icon-btn{width:30px;height:30px}
+  .nav-links{position:absolute;top:100%;left:0;right:0;background:var(--s1);border-bottom:1px solid var(--rule);flex-direction:column;gap:0;padding:8px 16px;display:none}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:11px 0}
+  .hamburger{display:grid}
+  .hdr-date,.ts{display:none}
+  .hero{padding:24px 0 18px;gap:18px}
+  .hero-sub{font-size:10px;line-height:1.7}
+  .date-nav{width:100%;display:grid;grid-template-columns:44px minmax(0,1fr) 44px 44px;gap:8px}
+  .dbtn,.chk,input[type=date]{width:100%;min-width:0;flex:none;justify-content:center}
+  .date-nav .dbtn{font-size:10px;letter-spacing:0;padding:0 6px}
+  #datePrev{grid-area:1/1}
+  #dateToday{grid-area:1/2}
+  #dateNext{grid-area:1/3}
+  #btnCal{grid-area:1/4}
+  .date-nav input[type=date]{grid-area:2/1/3/3}
+  .date-nav .chk{grid-area:2/3/3/5}
+  .strip-head{flex-wrap:wrap;gap:8px}
+  .gcard{width:224px}
+  .scoreboard{padding:16px}
+  .sb-score{font-size:46px}
+  .sb-mid{grid-template-columns:1fr 1fr;gap:10px 12px}
+  .sb-score,.sb-score.left{text-align:left}
+  .sb-side.right{text-align:left}
+  .sb-clock{text-align:left;grid-column:1/-1}
+  .sb-actions{grid-column:1/-1;flex-wrap:wrap}
+  .sb-leaders{grid-template-columns:repeat(2,1fr);gap:10px}
+  .pulse{padding:16px}
+  .pulse-svg svg{width:100%;height:auto}
+  .rail{display:none;gap:12px}
+  .rail.open{display:grid;grid-template-columns:1fr;gap:12px;margin-top:2px}
+  .rail-block{padding:13px 14px}
+  .rail-toggle{display:flex;width:100%;height:38px;align-items:center;justify-content:space-between;padding:0 12px;margin-bottom:16px;border:1px solid var(--rule);border-radius:4px;background:var(--s1);font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .rail-toggle:hover{color:var(--ink);border-color:var(--rule-strong)}
+  .rail-toggle .arw{display:inline-flex;transition:transform .18s ease}
+  .rail-toggle[aria-expanded="true"] .arw{transform:rotate(180deg)}
+  .toolbar{gap:10px}
+  .toolbar>div:last-child{width:100%}
+  .sort-wrap{flex:none}
+  .search-wrap,.search-wrap input{width:100%}
+  .search-wrap{flex:1;min-width:0}
+  .seg{width:100%;overflow-x:auto}
+  .seg button{padding:0 10px}
+  .card-list{grid-template-columns:1fr}
+  .lead-row .pcell::before,.lead-tab{display:none}
+  .modal{padding:14px}
+  .modal-panel{padding:22px 18px;max-height:88svh}
+  .dr-head{padding:18px}
+  .dr-body{padding:18px 18px 40px}
+  .drawer{width:100%;top:auto;height:86svh;min-height:86svh;border-left:none;border-top:1px solid var(--rule);transform:translateY(100%)}
+  .drawer.open{transform:translateY(0)}
+  .foot{gap:8px;padding:14px 0}
+}
+@media (max-width:400px){
+  .pcard-main .v{font-size:18px}
+  .sb-score{font-size:40px}
+  .liveflag{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+html[data-motion="off"] *,html[data-motion="off"] *::before,html[data-motion="off"] *::after{animation:none!important;transition-duration:.001ms!important}
+html[data-motion="off"] .dot::after{opacity:.45;border-width:1px;transform:scale(1.2)}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="wrap hdr">
+    <a class="wordmark" href="#" onclick="return false">NBA <i>//</i> LIVE</a>
+    <nav class="nav-links" id="navLinks" aria-label="主导航">
+      <a href="#" class="on" onclick="return false">Scores</a>
+      <a href="#" onclick="return false">Players</a>
+      <a href="#" onclick="return false">Leaders</a>
+      <a href="#" onclick="return false">Teams</a>
+    </nav>
+    <div class="hdr-mid">
+      <span class="liveflag" id="liveFlag" hidden><span class="dot"></span>LIVE 实时</span>
+      <span class="hdr-date mono" id="hdrDate">—</span>
+      <span class="ts">数据更新于（北京） <b id="hdrTs">--:--:--</b></span>
+      <div class="hdr-util">
+        <button class="icon-btn hamburger" id="btnMenu" aria-label="打开导航菜单">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <button class="icon-btn" id="btnTheme" aria-label="切换深浅色">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+          <span class="tip">切换深浅色</span>
+        </button>
+        <button class="icon-btn" id="btnRefresh" aria-label="立即刷新数据">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></svg>
+          <span class="tip">立即刷新</span>
+        </button>
+        <button class="icon-btn" id="btnRules" aria-label="查看统计规则">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+          <span class="tip">统计规则</span>
+        </button>
+        <button class="icon-btn" id="btnSettings" aria-label="打开设置">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6L17 7M7 17l-1.4 1.4"/></svg>
+          <span class="tip">设置</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Game Day / 今日赛况</p>
+      <h1>当日比赛 · 球员数据汇总</h1>
+      <p class="hero-sub mono" id="heroSub">正在获取当日比赛数据…</p>
+    </div>
+    <div class="date-nav" role="group" aria-label="日期导航（北京时间）">
+      <button class="dbtn" id="datePrev" aria-label="前一天">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <button class="dbtn primary" id="dateToday">TODAY / 今天</button>
+      <button class="dbtn" id="dateNext" aria-label="后一天">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+      <input type="date" id="dateInput" aria-label="选择日期（北京时间）">
+      <button class="dbtn" id="btnCal" aria-label="打开日期选择">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+      </button>
+      <label class="chk"><input type="checkbox" id="liveOnly">仅看进行中</label>
+    </div>
+  </section>
+
+  <section aria-label="当日比赛列表">
+    <div class="strip-head">
+      <span class="lbl">Game Strip / 当日比赛（北京时间）</span>
+      <span class="ts" id="stripCount">加载中…</span>
+    </div>
+    <div class="strip" id="gameStrip"></div>
+  </section>
+
+  <section class="lead-grid">
+    <div class="scoreboard" id="leadBoard" aria-live="polite"></div>
+    <div class="pulse">
+      <h2>Tonight's Pulse</h2>
+      <p class="sub">本场分差走势 · 关键得分回合</p>
+      <div id="pulseHolder" style="flex:1;display:flex"></div>
+    </div>
+  </section>
+
+  <section class="board">
+    <button class="rail-toggle" id="railToggle" aria-expanded="false" aria-controls="railPanel">
+      <span>展开筛选与概览</span>
+      <span class="arw"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span>
+    </button>
+    <aside class="rail" id="railPanel" aria-label="筛选与概览">
+      <div>
+        <div class="rail-block first">
+          <h3 style="--cat:var(--teal)">当日概览</h3>
+          <div id="summary"></div>
+        </div>
+        <div class="rail-block">
+          <h3 style="--cat:var(--violet)">图例 · 数据色谱</h3>
+          <div class="legend">
+            <div><span class="swatch" style="background:var(--amber)"></span>得分 / 投射 PTS · 3PM · FG% · TS%</div>
+            <div><span class="swatch" style="background:var(--mint)"></span>篮板 REB · 正向正负值</div>
+            <div><span class="swatch" style="background:var(--blue)"></span>助攻 AST · 未开始状态</div>
+            <div><span class="swatch" style="background:var(--violet)"></span>防守 STL · BLK · TO</div>
+            <div><span class="swatch" style="background:var(--teal)"></span>时间 MIN · 命中率轨道</div>
+            <div><span class="swatch" style="background:var(--coral)"></span>已结束 / 负向正负值</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="rail-block first">
+          <h3 style="--cat:var(--blue)">球员筛选</h3>
+          <div class="field-2">
+            <div class="field">
+              <label for="fTeam">球队</label>
+              <select id="fTeam"><option value="all">全部</option></select>
+            </div>
+            <div class="field">
+              <label for="fPos">位置</label>
+              <select id="fPos">
+                <option value="all">全部</option>
+                <option value="G">后卫 G</option>
+                <option value="F">前锋 F</option>
+                <option value="C">中锋 C</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-2">
+            <div class="field">
+              <label for="fStatus">比赛状态</label>
+              <select id="fStatus">
+                <option value="all">全部</option>
+                <option value="live">仅实时</option>
+                <option value="final">仅已结束</option>
+                <option value="scheduled">仅未开始</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="fMin">最低分钟</label>
+              <input type="number" id="fMin" min="0" max="48" step="1" value="0">
+            </div>
+          </div>
+          <label class="chk" style="width:100%;justify-content:flex-start"><input type="checkbox" id="fRot">仅显示首发球员</label>
+        </div>
+        <div class="rail-block">
+          <h3 style="--cat:var(--coral)">排序说明</h3>
+          <p class="note" id="sortNote">当前按得分从高到低排列。</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-col">
+      <div class="stale" id="staleBar">
+        <span class="m" id="staleMsg">数据连接中断 · 显示最近更新内容</span>
+        <button class="mini-btn" id="btnReconnect">重新连接</button>
+      </div>
+
+      <div class="toolbar">
+        <div class="seg" id="metricSeg" role="group" aria-label="排序指标"></div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <div class="sort-wrap">
+            <button class="sort-btn" id="sortBtn" aria-haspopup="true" aria-expanded="false">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 4v16M7 20l-3-3M7 4l3 3M17 20V4M17 4l3 3M17 20l-3-3"/></svg>
+              <span id="sortBtnLabel">排序：得分</span>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="sort-menu" id="sortMenu"></div>
+          </div>
+          <div class="search-wrap">
+            <div class="search-box">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.2-4.2"/></svg>
+              <input type="text" id="fSearch" placeholder="搜索球员或球队（中英文均可）" aria-label="搜索球员或球队">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-shell" id="tableShell">
+        <div class="overlay show" id="loadOverlay"><span class="msg">正在加载当日比赛…</span></div>
+        <table id="playerTable">
+          <colgroup id="colGroup"></colgroup>
+          <thead><tr id="headRow"></tr></thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+        <div id="tableEmpty"></div>
+      </div>
+      <div class="card-list" id="cardList" aria-live="polite"></div>
+      <p class="note" style="margin-top:11px">点击任意球员行 / 卡片查看详细数据 · 平板自动精简列、手机自动切换卡片视图 · 键盘 ← → 切换日期 · 全站时间以北京时间显示</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span class="f">数据源：<b id="srcName">—</b></span>
+    <span class="f">下次更新：<b id="nextRefresh">—</b></span>
+    <span class="f">连接状态：<b id="connState" class="ok">连接正常</b></span>
+    <span class="f">查询自动换算美国东部日期 · 显示统一为北京时间</span>
+  </div>
+</footer>
+
+<div class="backdrop" id="backdrop"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="球员详细数据">
+  <div class="dr-head">
+    <div>
+      <div class="dr-name" id="drName">—</div>
+      <div class="dr-en" id="drEn"></div>
+      <div class="dr-team" id="drTeam"></div>
+    </div>
+    <button class="icon-btn" id="drClose" aria-label="关闭详情">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="dr-body" id="drBody"></div>
+</aside>
+
+<div class="modal" id="modalRules" role="dialog" aria-modal="true" aria-label="统计规则">
+  <div class="modal-panel">
+    <button class="icon-btn modal-close" id="rulesClose" aria-label="关闭">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <p class="eyebrow">Stat Rules</p>
+    <h3>统计规则</h3>
+    <h5>时区与日期</h5>
+    <p>页面默认按北京时间（UTC+8）选择和显示日期。查询时自动把北京这一天换算成对应的美国东部比赛日（北京白天对应美东前一天晚间），并按北京时间重新归组。所有开赛时间同时标注北京时间和美东时间。</p>
+    <h5>数据来源</h5>
+    <p>比分、球员技术统计、关键时刻均直接取自公开赛况源接口返回，不做补全、不做估算。接口未提供的字段显示为 `—`。</p>
+    <h5>得分 / PTS</h5>
+    <p>两分命中计 2 分，三分命中计 3 分，罚球命中计 1 分。</p>
+    <h5>命中率 / FG%、TS%</h5>
+    <p>命中率 = 命中数 ÷ 出手数；TS% 真实命中率 = 得分 ÷ (2 × (出手 + 0.44 × 罚球出手))。未出手显示 `—`。</p>
+    <h5>球员中文名</h5>
+    <p>页面内置中英对照译名表（脚本顶部 PLAYER_ZH_LIST），未收录的球员自动回退英文名，可自行增补。</p>
+    <h5>刷新节奏</h5>
+    <p>有比赛进行中每 15 秒刷新，全部结束或未开始时每 60 秒刷新。刷新期间保留现有数据。</p>
+  </div>
+</div>
+
+<div class="modal" id="modalSettings" role="dialog" aria-modal="true" aria-label="设置">
+  <div class="modal-panel">
+    <button class="icon-btn modal-close" id="setClose" aria-label="关闭">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <p class="eyebrow">Settings</p>
+    <h3>设置</h3>
+    <h5>界面主题</h5>
+    <div class="seg" id="setThemeSeg" style="width:fit-content">
+      <button data-theme="light" class="on">浅色（默认）</button>
+      <button data-theme="dark">深色</button>
+    </div>
+    <h5>数据色谱</h5>
+    <div class="chip-row">
+      <span class="chip" style="--cat:var(--amber)"><i></i>得分 / 投射</span>
+      <span class="chip" style="--cat:var(--mint)"><i></i>篮板</span>
+      <span class="chip" style="--cat:var(--blue)"><i></i>助攻</span>
+      <span class="chip" style="--cat:var(--violet)"><i></i>防守</span>
+      <span class="chip" style="--cat:var(--teal)"><i></i>时间 / 命中率</span>
+      <span class="chip" style="--cat:var(--coral)"><i></i>正负 / 已结束</span>
+      <span class="chip" style="--cat:var(--rose)"><i></i>强调</span>
+    </div>
+    <h5>自动刷新频率</h5>
+    <div class="seg" id="setIntervalSeg" style="width:fit-content">
+      <button data-iv="15" class="on">15 秒</button>
+      <button data-iv="30">30 秒</button>
+      <button data-iv="60">60 秒</button>
+    </div>
+    <h5>时区</h5>
+    <p>显示时区固定为北京时间（Asia/Shanghai），查询日期自动换算美国东部时间（America/New_York，含夏令时）。</p>
+    <h5>动效</h5>
+    <label class="chk" style="width:fit-content"><input type="checkbox" id="setMotion" checked>启用界面动效</label>
+    <h5>数据接口</h5>
+    <p>修改脚本顶部 <span class="mono" style="color:var(--amber)">DATA_SOURCE</span> 中的地址即可接入自有数据服务。</p>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ========== 1) 数据源配置 ========== */
+var DATA_SOURCE = {
+  name: "公开赛况源 / SCOREBOARD + BOXSCORE",
+  scoreboard: "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard",
+  summary: "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary",
+  refreshIntervalMs: 15000,
+  idleIntervalMs: 60000,
+  timeoutMs: 9000
+};
+
+/* ========== 2) 时区：显示北京时间，查询换算美国东部 ========== */
+var TZ_VIEW = "Asia/Shanghai";
+var TZ_QUERY = "America/New_York";
+
+/* ========== 3) 球员中英对照译名表 ========== */
+var PLAYER_ZH_LIST = [
+["LeBron James","勒布朗·詹姆斯"],["Anthony Davis","安东尼·戴维斯"],["Austin Reaves","奥斯汀·里夫斯"],
+["Rui Hachimura","八村塁"],["D'Angelo Russell","德安吉洛·拉塞尔"],["Gabe Vincent","加布·文森特"],
+["Jarred Vanderbilt","贾里德·范德比尔特"],["Dalton Knecht","多尔顿·克内克特"],["Bronny James","布朗尼·詹姆斯"],
+["Stephen Curry","斯蒂芬·库里"],["Klay Thompson","克莱·汤普森"],["Draymond Green","德雷蒙德·格林"],
+["Andrew Wiggins","安德鲁·威金斯"],["Jonathan Kuminga","乔纳森·库明加"],["Moses Moody","摩西·穆迪"],
+["Brandin Podziemski","布兰丁·波杰姆斯基"],["Buddy Hield","巴迪·希尔德"],["Chris Paul","克里斯·保罗"],
+["Kevin Durant","凯文·杜兰特"],["Devin Booker","德文·布克"],["Bradley Beal","布拉德利·比尔"],
+["Jusuf Nurkic","尤素福·努尔基奇"],["Grayson Allen","格雷森·阿伦"],["Royce O'Neale","罗伊斯·奥尼尔"],
+["Kawhi Leonard","科怀·伦纳德"],["James Harden","詹姆斯·哈登"],["Ivica Zubac","伊维察·祖巴茨"],
+["Norman Powell","诺曼·鲍威尔"],["Terance Mann","特伦斯·曼"],["Russell Westbrook","拉塞尔·威斯布鲁克"],
+["Nikola Jokic","尼古拉·约基奇"],["Jamal Murray","贾马尔·默里"],["Michael Porter Jr.","小迈克尔·波特"],
+["Aaron Gordon","阿伦·戈登"],["Kentavious Caldwell-Pope","肯塔维厄斯·考德威尔-波普"],["Christian Braun","克里斯蒂安·布劳恩"],
+["Luka Doncic","卢卡·东契奇"],["Kyrie Irving","凯里·欧文"],["Dereck Lively II","德雷克·莱夫利二世"],
+["Daniel Gafford","丹尼尔·加福德"],["P.J. Washington","P.J.·华盛顿"],["Derrick Jones Jr.","小德里克·琼斯"],
+["Dwight Powell","德怀特·鲍威尔"],["Naji Marshall","纳吉·马歇尔"],
+["Shai Gilgeous-Alexander","谢伊·吉尔杰斯-亚历山大"],["Jalen Williams","杰伦·威廉姆斯"],["Chet Holmgren","切特·霍姆格伦"],
+["Josh Giddey","约什·吉迪"],["Alex Caruso","亚历克斯·卡鲁索"],["Isaiah Hartenstein","以赛亚·哈尔滕施泰因"],
+["Luguentz Dort","卢根茨·多尔特"],["Cason Wallace","卡森·华莱士"],["Aaron Wiggins","阿隆·威金斯"],
+["Isaiah Joe","以赛亚·乔"],["Kenrich Williams","肯里奇·威廉姆斯"],
+["Anthony Edwards","安东尼·爱德华兹"],["Karl-Anthony Towns","卡尔-安东尼·唐斯"],["Rudy Gobert","鲁迪·戈贝尔"],
+["Mike Conley","迈克·康利"],["Julius Randle","朱利叶斯·兰德尔"],["Jaden McDaniels","杰登·麦克丹尼尔斯"],
+["Naz Reid","纳兹·里德"],["Donte DiVincenzo","唐特·迪文琴佐"],
+["Ja Morant","贾·莫兰特"],["Desmond Bane","德斯蒙德·贝恩"],["Jaren Jackson Jr.","小贾伦·杰克逊"],
+["Marcus Smart","马库斯·斯马特"],["Santi Aldama","桑蒂·阿尔达马"],["Luke Kennard","卢克·肯纳德"],
+["Zion Williamson","锡安·威廉森"],["Brandon Ingram","布兰登·英格拉姆"],["CJ McCollum","CJ·麦科勒姆"],
+["Dejounte Murray","德章泰·默里"],["Dyson Daniels","戴森·丹尼尔斯"],["Jose Alvarado","何塞·阿尔瓦拉多"],
+["Jordan Hawkins","乔丹·霍金斯"],["Trey Murphy III","特雷·墨菲三世"],["Herb Jones","赫伯特·琼斯"],
+["Victor Wembanyama","维克托·文班亚马"],["Devin Vassell","德文·瓦塞尔"],["Keldon Johnson","凯尔登·约翰逊"],
+["Jeremy Sochan","杰里米·索汉"],["Harrison Barnes","哈里森·巴恩斯"],["Tre Jones","特雷·琼斯"],
+["Zach Collins","扎克·柯林斯"],["Stephon Castle","斯蒂芬·卡斯尔"],
+["De'Aaron Fox","德阿龙·福克斯"],["Domantas Sabonis","多曼塔斯·萨博尼斯"],["Malik Monk","马利克·蒙克"],
+["Keegan Murray","基根·默里"],["Kevin Huerter","凯文·赫尔特"],["DeMar DeRozan","德马尔·德罗赞"],
+["Deandre Ayton","德安德烈·艾顿"],["Anfernee Simons","安芬尼·西蒙斯"],["Shaedon Sharpe","谢登·夏普"],
+["Jerami Grant","杰拉米·格兰特"],["Scoot Henderson","斯库特·亨德森"],["Deni Avdija","德尼·阿夫迪亚"],
+["Donovan Clingan","多诺万·克林根"],["Robert Williams III","罗伯特·威廉姆斯三世"],
+["Lauri Markkanen","劳里·马尔卡宁"],["Jordan Clarkson","乔丹·克拉克森"],["Collin Sexton","科林·塞克斯顿"],
+["Walker Kessler","沃克·凯斯勒"],["John Collins","约翰·柯林斯"],["Keyonte George","基昂特·乔治"],
+["Brice Sensabaugh","布赖斯·森萨鲍"],
+["Fred VanVleet","弗雷德·范弗利特"],["Jalen Green","杰伦·格林"],["Alperen Sengun","阿尔佩伦·申京"],
+["Amen Thompson","阿门·汤普森"],["Jabari Smith Jr.","小贾巴里·史密斯"],["Dillon Brooks","狄龙·布鲁克斯"],
+["Tari Eason","塔里·伊森"],["Steven Adams","史蒂文·亚当斯"],["Reed Sheppard","里德·谢泼德"],
+["Cam Whitmore","卡姆·惠特莫尔"],
+["Jayson Tatum","杰森·塔图姆"],["Jaylen Brown","杰伦·布朗"],["Derrick White","德里克·怀特"],
+["Jrue Holiday","朱·霍勒迪"],["Kristaps Porzingis","克里斯塔普斯·波尔津吉斯"],["Al Horford","艾尔·霍福德"],
+["Payton Pritchard","佩顿·普理查德"],["Sam Hauser","萨姆·豪泽"],["Luke Kornet","卢克·科内特"],
+["Josh Hart","约什·哈特"],["Mikal Bridges","米卡尔·布里奇斯"],["OG Anunoby","OG·阿奴诺比"],
+["Jalen Brunson","杰伦·布伦森"],["Tyrese Maxey","泰雷斯·马克西"],["Joel Embiid","乔尔·恩比德"],
+["Kelly Oubre Jr.","小凯利·乌布雷"],["Caleb Martin","凯莱布·马丁"],["Paul Reed","保罗·里德"],
+["Tyrese Haliburton","泰雷斯·哈利伯顿"],["Pascal Siakam","帕斯卡尔·西亚卡姆"],["Myles Turner","迈尔斯·特纳"],
+["Bennedict Mathurin","本内迪克特·马图林"],["Andrew Nembhard","安德鲁·内姆哈德"],["Aaron Nesmith","阿隆·内史密斯"],
+["Obi Toppin","奥比·托平"],["TJ McConnell","TJ·麦康奈尔"],["Ben Sheppard","本·谢泼德"],
+["Giannis Antetokounmpo","扬尼斯·阿德托昆博"],["Damian Lillard","达米安·利拉德"],["Brook Lopez","布鲁克·洛佩斯"],
+["Bobby Portis","波比·波蒂斯"],["Khris Middleton","克里斯·米德尔顿"],["Gary Trent Jr.","小加里·特伦特"],
+["Taurean Prince","陶里安·普林斯"],["Andre Jackson Jr.","小安德烈·杰克逊"],
+["Donovan Mitchell","多诺万·米切尔"],["Darius Garland","达里厄斯·加兰"],["Evan Mobley","埃文·莫布里"],
+["Jarrett Allen","贾勒特·阿伦"],["Max Strus","马克斯·斯特鲁斯"],["Caris LeVert","卡里斯·勒韦尔"],
+["Isaac Okoro","以赛亚·奥科罗"],["De'Andre Hunter","德安德烈·亨特"],
+["Trae Young","特雷·杨"],["Jalen Johnson","杰伦·约翰逊"],["Clint Capela","克林特·卡佩拉"],
+["Zaccharie Risacher","扎卡里·里萨谢"],["Bogdan Bogdanovic","博格丹·博格达诺维奇"],
+["Onyeka Okongwu","奥涅卡·奥孔古"],
+["Paolo Banchero","保罗·班切罗"],["Franz Wagner","弗朗茨·瓦格纳"],["Jalen Suggs","杰伦·萨格斯"],
+["Jonathan Isaac","乔纳森·艾萨克"],["Wendell Carter Jr.","小温德尔·卡特"],["Anthony Black","安东尼·布莱克"],
+["Cole Anthony","科尔·安东尼"],
+["LaMelo Ball","拉梅洛·鲍尔"],["Miles Bridges","迈尔斯·布里奇斯"],["Brandon Miller","布兰登·米勒"],
+["Mark Williams","马克·威廉姆斯"],["Tre Mann","特雷·曼"],["Cody Martin","科迪·马丁"],
+["Cade Cunningham","凯德·坎宁安"],["Jaden Ivey","杰登·艾维"],["Jalen Duren","杰伦·杜伦"],
+["Ausar Thompson","奥萨尔·汤普森"],["Malik Beasley","马利克·比斯利"],["Tobias Harris","托拜厄斯·哈里斯"],
+["Tim Hardaway Jr.","小蒂姆·哈达威"],["Ron Holland II","罗恩·霍兰德二世"],
+["Zach LaVine","扎克·拉文"],["Nikola Vucevic","尼古拉·武切维奇"],["Coby White","科比·怀特"],
+["Matas Buzelis","马塔斯·布泽利斯"],["Lonzo Ball","朗佐·鲍尔"],["Patrick Williams","帕特里克·威廉姆斯"],
+["Tyler Herro","泰勒·希罗"],["Bam Adebayo","巴姆·阿德巴约"],["Terry Rozier","特里·罗齐尔"],
+["Duncan Robinson","邓肯·罗宾逊"],["Jaime Jaquez Jr.","小海梅·哈克斯"],["Kel'el Ware","凯尔·韦尔"],
+["Kevin Love","凯文·乐福"],["Kyle Lowry","凯尔·洛瑞"],["Nikola Jovic","尼古拉·约维奇"],
+["Scottie Barnes","斯科蒂·巴恩斯"],["RJ Barrett","RJ·巴雷特"],["Immanuel Quickley","伊曼纽尔·奎克利"],
+["Gradey Dick","格雷迪·迪克"],["Jakob Poeltl","雅各布·珀尔特尔"],["Kelly Olynyk","凯利·奥利尼克"],
+["Ochai Agbaji","奥查伊·阿巴吉"],["Chris Boucher","克里斯·布歇"],
+["Kyle Kuzma","凯尔·库兹马"],["Jordan Poole","乔丹·普尔"],["Malcolm Brogdon","马尔科姆·布罗格登"],
+["Alex Sarr","亚历克斯·萨尔"],["Bilal Coulibaly","比拉尔·库利巴利"],["Jonas Valanciunas","约纳斯·瓦兰丘纳斯"],
+["Tyus Jones","泰厄斯·琼斯"],
+["Cam Thomas","卡姆·托马斯"],["Nic Claxton","尼古拉斯·克拉克斯顿"],["Dorian Finney-Smith","多里安·芬尼-史密斯"],
+["Ben Simmons","本·西蒙斯"],["Cameron Johnson","卡梅伦·约翰逊"],["Dennis Schroder","丹尼斯·施罗德"],
+["De'Anthony Melton","德安东尼·梅尔顿"],["Bojan Bogdanovic","博扬·博格达诺维奇"],["Eric Gordon","埃里克·戈登"],
+["Jalen Smith","杰伦·史密斯"],["Marvin Bagley III","马尔文·巴格利三世"],["Quentin Grimes","昆汀·格莱姆斯"],
+["Spencer Dinwiddie","斯宾塞·丁威迪"],["Jaden Hardy","杰登·哈迪"],["Max Christie","马克斯·克里斯蒂"]
+];
+var PLAYER_ZH = {};
+PLAYER_ZH_LIST.forEach(function(x){ if(x&&x[0]) PLAYER_ZH[x[0]]=x[1]; });
+function pName(en){ return PLAYER_ZH[en]||en; }
+
+/* ========== 4) 基础工具 ========== */
+var METRICS = {
+  pts:{en:"PTS",zh:"得分",max:45}, reb:{en:"REB",zh:"篮板",max:18},
+  ast:{en:"AST",zh:"助攻",max:15}, stl:{en:"STL",zh:"抢断",max:5},
+  blk:{en:"BLK",zh:"盖帽",max:5}, tpm:{en:"3PM",zh:"三分命中",max:9},
+  fgp:{en:"FG%",zh:"命中率",max:70}, to:{en:"TO",zh:"失误",max:8},
+  min:{en:"MIN",zh:"分钟",max:42}, pm:{en:"+/-",zh:"正负值",max:25}
+};
+var SORTABLE = ["pts","reb","ast","stl","blk","tpm","fgp","min","to","pm"];
+var STATUS_TEXT = {live:"LIVE 实时", final:"FINAL 已结束", scheduled:"SCHEDULED 未开始", postponed:"POSTPONED 延期"};
+var STATUS_ZH = {live:"进行中", final:"已结束", scheduled:"未开始", postponed:"延期"};
+
+/* 数据色谱 */
+var CAT = {
+  scoring:"var(--amber)", rebound:"var(--mint)", playmaking:"var(--blue)",
+  defense:"var(--violet)", time:"var(--teal)", plusminus:"var(--coral)", plain:"var(--rose)"
+};
+function catOf(k){
+  if(["pts","tpm","fg","fgp","tp","ft","ts"].indexOf(k)>=0) return CAT.scoring;
+  if(k==="reb") return CAT.rebound;
+  if(k==="ast") return CAT.playmaking;
+  if(["stl","blk","to"].indexOf(k)>=0) return CAT.defense;
+  if(k==="min") return CAT.time;
+  if(k==="pm") return CAT.plusminus;
+  return CAT.plain;
+}
+
+/* 键以 ESPN 接口返回的 abbreviation 为准 */
+var TEAM_ZH = {
+  ATL:"亚特兰大老鹰",BOS:"波士顿凯尔特人",BKN:"布鲁克林篮网",CHA:"夏洛特黄蜂",CHI:"芝加哥公牛",
+  CLE:"克利夫兰骑士",DAL:"达拉斯独行侠",DEN:"丹佛掘金",DET:"底特律活塞",GS:"金州勇士",
+  HOU:"休斯顿火箭",IND:"印第安纳步行者",LAC:"洛杉矶快船",LAL:"洛杉矶湖人",MEM:"孟菲斯灰熊",
+  MIA:"迈阿密热火",MIL:"密尔沃基雄鹿",MIN:"明尼苏达森林狼",NO:"新奥尔良鹈鹕",NY:"纽约尼克斯",
+  OKC:"俄克拉荷马雷霆",ORL:"奥兰多魔术",PHI:"费城76人",PHX:"菲尼克斯太阳",POR:"波特兰开拓者",
+  SAC:"萨克拉门托国王",SA:"圣安东尼奥马刺",TOR:"多伦多猛龙",UTAH:"犹他爵士",WSH:"华盛顿奇才"
+};
+/* NBA 官方 / 历史缩写与 ESPN 不同，统一别名到上面的键 */
+var TEAM_ALIAS = {
+  GSW:"GS", NOP:"NO", NOH:"NO", NYK:"NY", SAS:"SA", UTA:"UTAH", WAS:"WSH",
+  PHO:"PHX", BRK:"BKN", NJN:"BKN", CHO:"CHA", CHH:"CHA", SEA:"OKC"
+};
+/* 缩写再次变化时按 ESPN 英文队名兜底，避免回退成英文 */
+var TEAM_EN_KEY = [
+  ["Golden State","GS"],["LA Clippers","LAC"],["Los Angeles Lakers","LAL"],
+  ["New Orleans","NO"],["New York","NY"],["Oklahoma City","OKC"],["San Antonio","SA"],
+  ["Sacramento","SAC"],["Washington","WSH"],["Portland","POR"],["Philadelphia","PHI"],
+  ["Phoenix","PHX"],["Minnesota","MIN"],["Milwaukee","MIL"],["Memphis","MEM"],
+  ["Indiana","IND"],["Houston","HOU"],["Detroit","DET"],["Denver","DEN"],
+  ["Dallas","DAL"],["Cleveland","CLE"],["Chicago","CHI"],["Charlotte","CHA"],
+  ["Brooklyn","BKN"],["Boston","BOS"],["Atlanta","ATL"],["Toronto","TOR"],
+  ["Utah","UTAH"],["Orlando","ORL"],["Miami","MIA"]
+];
+function zhFor(abbr, enName){
+  var key = TEAM_ALIAS[abbr] || abbr;
+  if(TEAM_ZH[key]) return TEAM_ZH[key];
+  var en = String(enName||"").toLowerCase();
+  for(var i=0;i<TEAM_EN_KEY.length;i++){
+    if(en.indexOf(TEAM_EN_KEY[i][0].toLowerCase())>=0) return TEAM_ZH[TEAM_EN_KEY[i][1]];
+  }
+  return "";
+}
+var TEAMS = {};
+
+function pad(n){return n<10?"0"+n:""+n;}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c];});}
+function reduceMotion(){
+  return document.documentElement.dataset.motion==="off" ||
+    (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+}
+function fmtTZ(d,tz,opts){
+  try{
+    var o={hour12:false,timeZone:tz};
+    for(var k in (opts||{})) o[k]=opts[k];
+    return new Intl.DateTimeFormat("zh-CN",o).format(d);
+  }catch(e){ return d.toLocaleString(); }
+}
+function dateKeyTZ(d,tz){ return fmtTZ(d,tz,{year:"numeric",month:"2-digit",day:"2-digit"}).replace(/\D/g,""); }
+function hhmmTZ(d,tz){ return fmtTZ(d,tz,{hour:"2-digit",minute:"2-digit"}); }
+function hhmmssTZ(d,tz){ return fmtTZ(d,tz,{hour:"2-digit",minute:"2-digit",second:"2-digit"}); }
+
+function keyToDate(key){ return new Date(Date.UTC(+key.slice(0,4), +key.slice(4,6)-1, +key.slice(6,8))); }
+function keyAdd(key,n){ var d=keyToDate(key); d.setUTCDate(d.getUTCDate()+n); return d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate()); }
+function keyToInput(key){ return key.slice(0,4)+"-"+key.slice(4,6)+"-"+key.slice(6,8); }
+function inputToKey(v){ return String(v).replace(/\D/g,""); }
+function keyCN(key){ var d=keyToDate(key); return d.getUTCFullYear()+"年"+(d.getUTCMonth()+1)+"月"+d.getUTCDate()+"日"; }
+function keyMD(key){ var d=keyToDate(key); return (d.getUTCMonth()+1)+"/"+d.getUTCDate(); }
+function keyWeek(key){ return ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"][keyToDate(key).getUTCDay()]; }
+function todayKey(){ return dateKeyTZ(new Date(), TZ_VIEW); }
+
+function jget(url){
+  var ctl = ("AbortController" in window) ? new AbortController() : null;
+  var timer = ctl ? setTimeout(function(){ctl.abort();}, DATA_SOURCE.timeoutMs) : null;
+  return fetch(url,{signal:ctl?ctl.signal:undefined,cache:"no-store"}).then(function(r){
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    return r.json();
+  }).finally(function(){ if(timer) clearTimeout(timer); });
+}
+function splitShots(v){
+  var m=String(v==null?"0":v).split("-");
+  return [parseInt(m[0],10)||0, parseInt(m[1],10)||0];
+}
+function toMin(v){
+  if(v==null) return 0;
+  var s=String(v);
+  if(s.indexOf(":")>=0) return parseInt(s.split(":")[0],10)||0;
+  return parseInt(s,10)||0;
+}
+function periodLabel(n){ return n<=4 ? "Q"+n : (n-4===1?"OT":(n-4)+"OT"); }
+
+function regTeam(t, record){
+  if(!t||!t.abbreviation) return;
+  var abbr=t.abbreviation;
+  var zh=zhFor(abbr, t.displayName||t.name||"");
+  if(!TEAMS[abbr]) TEAMS[abbr]={abbr:abbr,zh:zh||abbr,p:"#333333",s:"#666666",rec:"—"};
+  TEAMS[abbr].zh = zh || TEAMS[abbr].zh || abbr;
+  if(t.color) TEAMS[abbr].p = "#"+t.color;
+  if(t.alternateColor) TEAMS[abbr].s = "#"+t.alternateColor;
+  if(record) TEAMS[abbr].rec = record;
+}
+function team(abbr){
+  if(TEAMS[abbr]) return TEAMS[abbr];
+  return {abbr:abbr,zh:zhFor(abbr)||abbr,p:"#333333",s:"#666666",rec:"—"};
+}
+
+/* ========== 5) 解析赛程 / 技术统计 ========== */
+function mapEvent(ev){
+  var comp = ev.competitions && ev.competitions[0];
+  if(!comp) return null;
+  var st = ev.status||{}, ty = st.type||{};
+  var stateName = ty.state||"pre";
+  var status = stateName==="in" ? "live" : stateName==="post" ? "final" : "scheduled";
+  if(ty.name==="postponed"||ty.name==="suspended") status="postponed";
+
+  var home=null, away=null;
+  (comp.competitors||[]).forEach(function(c){
+    var rec = (c.records&&c.records[0]&&c.records[0].summary)||"";
+    regTeam(c.team, rec);
+    if(c.homeAway==="home") home=c; else if(c.homeAway==="away") away=c;
+  });
+  if(!home||!away) return null;
+
+  var hs = parseInt(home.score,10)||0;
+  var as = parseInt(away.score,10)||0;
+  var startISO = ev.date ? new Date(ev.date) : new Date();
+  if(isNaN(startISO.getTime())) startISO = new Date();
+
+  var startBJ = hhmmTZ(startISO, TZ_VIEW);
+  var startUS = hhmmTZ(startISO, TZ_QUERY);
+  var dateBJ = dateKeyTZ(startISO, TZ_VIEW);
+  var dateUS = dateKeyTZ(startISO, TZ_QUERY);
+  var q = periodLabel(st.period||0);
+
+  return {
+    id:String(ev.id), home:home.team.abbreviation, away:away.team.abbreviation,
+    status:status, hs:hs, as:as,
+    quarter: status==="scheduled" ? startBJ : q,
+    clock: status==="live" ? (st.displayClock||"") : (status==="scheduled" ? startBJ : "00:00"),
+    startBJ:startBJ, startUS:startUS, dateBJ:dateBJ, dateUS:dateUS,
+    startISO:startISO,
+    note: (st.type&&st.type.detail) ? st.type.detail : ""
+  };
+}
+
+function parseBox(json, game){
+  var out=[], keyEvents=[];
+  var groups = (json&&json.boxscore&&json.boxscore.players)||[];
+  groups.forEach(function(g){
+    var abbr = g.team&&g.team.abbreviation;
+    if(!abbr) return;
+    regTeam(g.team);
+    var stat = (g.statistics||[])[0];
+    if(!stat) return;
+    var keys = stat.keys||[], labels = stat.labels||[];
+    var ix={};
+    function find(k){
+      var i=keys.indexOf(k); if(i>=0) return i;
+      i=labels.indexOf(k.toUpperCase()); if(i>=0) return i;
+      if(k==="pm"){ i=labels.indexOf("+/-"); if(i>=0) return i; }
+      return -1;
+    }
+    ["min","fg","3pt","ft","reb","ast","stl","blk","to","pts","pm"].forEach(function(k){ ix[k]=find(k); });
+    (stat.athletes||[]).forEach(function(a){
+      var s=a.stats||[];
+      if(a.didNotPlay || !s.length) return;
+      var get=function(k){ return ix[k]>=0&&ix[k]<s.length ? s[ix[k]] : null; };
+      var f=splitShots(get("fg")), t=splitShots(get("3pt")), ft=splitShots(get("ft"));
+      var enName=(a.athlete&&a.athlete.displayName)||"—";
+      var pos=(a.athlete&&a.athlete.position&&a.athlete.position.abbreviation)||"";
+      out.push({
+        id:"p_"+game.id+"_"+((a.athlete&&a.athlete.id)||out.length),
+        game:game.id, team:abbr,
+        opp: abbr===game.home ? game.away : game.home,
+        nameEn:enName, name:pName(enName),
+        pos:pos.charAt(0)||"G", starter:!!a.starter, status:game.status,
+        min:toMin(get("min")),
+        pts:parseInt(get("pts"),10)||0, reb:parseInt(get("reb"),10)||0,
+        ast:parseInt(get("ast"),10)||0, stl:parseInt(get("stl"),10)||0,
+        blk:parseInt(get("blk"),10)||0, to:parseInt(get("to"),10)||0,
+        fgm:f[0], fga:f[1], tpm:t[0], tpa:t[1], ftm:ft[0], fta:ft[1],
+        pm:parseInt(get("pm"),10)||0
+      });
+    });
+  });
+
+  var evs = json&&json.keyEvents;
+  if(evs&&evs.length){
+    evs.forEach(function(e){
+      if(!e||!e.scoringPlay) return;
+      var homeScore=parseInt(e.homeScore,10), awayScore=parseInt(e.awayScore,10);
+      if(isNaN(homeScore)||isNaN(awayScore)) return;
+      keyEvents.push({
+        t:(periodLabel(e.period&&e.period.number)||"")+" "+((e.clock&&e.clock.displayValue)||""),
+        label:(e.text||"").slice(0,18),
+        lead: homeScore-awayScore
+      });
+    });
+    if(keyEvents.length>9) keyEvents=keyEvents.slice(-9);
+  }
+  return {players:out, keyEvents:keyEvents};
+}
+
+/* ========== 6) 拉取当日数据（北京日期 -> 美东比赛日） ========== */
+var boxCache={}, pulseCache={};
+
+function fetchSlate(keyBJ, opts){
+  opts=opts||{};
+  var keysToQuery = [keyAdd(keyBJ,-1), keyBJ];
+  var jobs = keysToQuery.map(function(k){ return jget(DATA_SOURCE.scoreboard+"?dates="+k); });
+  return Promise.all(jobs).then(function(res){
+    var events=[], seen={};
+    res.forEach(function(sb){
+      (sb.events||[]).forEach(function(ev){
+        var id=String(ev.id);
+        if(!seen[id]){ seen[id]=1; events.push(ev); }
+      });
+    });
+    var games=events.map(mapEvent).filter(Boolean)
+      .filter(function(g){ return g.dateBJ===keyBJ; })
+      .sort(function(a,b){ return a.startISO-b.startISO; });
+
+    var need=games.filter(function(g){
+      return !boxCache[g.id] || g.status==="live" || opts.forceBox;
+    });
+    var boxJobs=need.map(function(g){
+      return jget(DATA_SOURCE.summary+"?event="+g.id).then(function(j){
+        var parsed=parseBox(j,g);
+        boxCache[g.id]=parsed.players;
+        pulseCache[g.id]=parsed.keyEvents;
+      }).catch(function(){});
+    });
+    return Promise.all(boxJobs).then(function(){
+      var players=[];
+      games.forEach(function(g){ players=players.concat(boxCache[g.id]||[]); });
+      return {key:keyBJ, dateUSRange:[keysToQuery[0],keyBJ], games:games, players:players, updatedAt:new Date()};
+    });
+  });
+}
+
+/* ========== 7) state ========== */
+var state={
+  key: todayKey(),
+  slate:{key:todayKey(), dateUSRange:[], games:[], players:[], updatedAt:new Date()},
+  sortKey:"pts", sortDir:"desc", metric:"pts",
+  filters:{team:"all",pos:"all",status:"all",minMin:0,rot:false,q:""},
+  liveOnly:false, selected:null, refreshMs:DATA_SOURCE.refreshIntervalMs
+};
+var refreshTimer=null, inflight=false, lastFocusedRow=null;
+
+/* ========== 8) 渲染 ========== */
+function crest(abbr,size){
+  var t=team(abbr), s=size||22;
+  return '<span class="crest" style="width:'+s+'px;height:'+s+'px;background:linear-gradient(135deg,'+t.p+' 0 52%,'+t.s+' 52% 100%);font-size:'+(s<18?7:9)+'px">'+esc((t.zh||t.abbr).charAt(0))+'</span>';
+}
+function miniCrest(abbr){
+  var t=team(abbr);
+  return '<span class="mini-crest" style="background:linear-gradient(135deg,'+t.p+' 0 52%,'+t.s+' 52% 100%)">'+esc(t.zh.charAt(0))+'</span>';
+}
+function statusTag(st,small){
+  var cls = st==="live"?"live":st==="final"?"final":st==="scheduled"?"sched":"post";
+  return '<span class="stat-tag '+cls+(small?" sm":"")+'">'+STATUS_ZH[st]+'</span>';
+}
+function renderHeader(){
+  document.getElementById("hdrDate").textContent=keyMD(state.key)+" · "+keyWeek(state.key);
+  document.getElementById("hdrTs").textContent=hhmmssTZ(new Date(), TZ_VIEW);
+  var live=state.slate.games.some(function(g){return g.status==="live";});
+  document.getElementById("liveFlag").hidden=!live;
+  document.getElementById("heroSub").textContent=
+    keyCN(state.key)+" "+keyWeek(state.key)+"（北京时间） · 美东对应 "+keyMD(state.slate.dateUSRange[0]||keyAdd(state.key,-1))+"–"+keyMD(state.key)+
+    " · "+state.slate.games.length+" 场比赛 · "+(live?"实时更新中":"定时刷新");
+}
+function renderStrip(){
+  var el=document.getElementById("gameStrip");
+  var games=state.slate.games;
+  if(state.liveOnly) games=games.filter(function(g){return g.status==="live";});
+  document.getElementById("stripCount").textContent=games.length+" 场比赛";
+  if(!games.length){
+    el.innerHTML='<div class="empty" style="width:100%">'+courtSVG()+
+      '<div class="t">'+(state.liveOnly?"暂无进行中的比赛":"没有符合条件的比赛")+'</div>'+
+      '<div class="d">'+(state.liveOnly?"切换筛选可查看全部当日比赛":"这一天没有安排比赛，换一天试试")+'</div></div>';
+    return;
+  }
+  el.innerHTML=games.map(function(g){
+    var tA=team(g.away),tH=team(g.home);
+    var awin=g.status==="final"&&g.as>g.hs, hwin=g.status==="final"&&g.hs>g.as;
+    return '<button class="gcard'+(state.selected===g.id?" sel":"")+'" data-game="'+g.id+'">'+
+      '<div class="gcard-top">'+statusTag(g.status)+'<span class="ts">'+(g.status==="scheduled"?g.startBJ:(g.status==="live"?g.quarter+" "+g.clock:g.quarter))+'</span></div>'+
+      '<div class="gcard-body">'+
+        '<div class="gcard-row'+(awin?"":" lose")+'"><span class="gteam">'+crest(g.away)+'<span class="nm">'+esc(shortTeam(tA.zh))+'</span></span><span class="sc">'+(g.status==="scheduled"?"—":g.as)+'</span></div>'+
+        '<div class="gcard-row'+(hwin?"":" lose")+'"><span class="gteam">'+crest(g.home)+'<span class="nm">'+esc(shortTeam(tH.zh))+'</span></span><span class="sc">'+(g.status==="scheduled"?"—":g.hs)+'</span></div>'+
+      '</div>'+
+      '<div class="gcard-foot"><span class="ts">'+esc(shortTeam(tA.zh))+' 对阵 '+esc(shortTeam(tH.zh))+'</span>'+
+      (g.status==="live"?'<span class="gclock"><span class="dot"></span>'+esc(g.clock)+'</span>':'<span class="ts">美东 '+g.startUS+'</span>')+'</div>'+
+      '</button>';
+  }).join("");
+  Array.prototype.forEach.call(el.querySelectorAll("[data-game]"),function(b){
+    b.addEventListener("click",function(){
+      var id=b.getAttribute("data-game");
+      state.selected = state.selected===id?null:id;
+      renderStrip(); renderScoreboard(true); renderPulse(true);
+    });
+  });
+}
+function leadGame(){
+  if(state.selected){
+    var f=state.slate.games.filter(function(g){return g.id===state.selected;});
+    if(f.length) return f[0];
+  }
+  var live=state.slate.games.filter(function(g){return g.status==="live";});
+  if(live.length) return live[0];
+  var fin=state.slate.games.filter(function(g){return g.status==="final";});
+  return fin[0]||state.slate.games[0]||null;
+}
+function gameLeaders(g){
+  var ps=state.slate.players.filter(function(p){return p.game===g.id;});
+  function top(k){return ps.slice().sort(function(a,b){return b[k]-a[k];})[0]||null;}
+  return {pts:top("pts"),reb:top("reb"),ast:top("ast"),blk:top("blk")};
+}
+function renderScoreboard(animate){
+  var el=document.getElementById("leadBoard");
+  var g=leadGame();
+  if(!g){
+    el.innerHTML='<div class="empty">'+scoreboardSVG()+'<div class="t">没有符合条件的比赛</div><div class="d">换一天看看，或调整筛选条件</div></div>';
+    return;
+  }
+  var L=gameLeaders(g), tA=team(g.away), tH=team(g.home);
+  function lead(k,key){
+    var p=L[k];
+    return '<div class="sb-lead" style="--cat:'+catOf(k)+'"><div class="k">'+key+'</div><div class="v">'+(p?p[k]:"—")+'</div><div class="n">'+(p?esc(p.name):"—")+'</div></div>';
+  }
+  var clockHTML = g.status==="live"
+    ? esc(g.quarter+" "+g.clock)+'<span class="sub">北京时间 '+hhmmTZ(new Date(),TZ_VIEW)+'</span>'
+    : g.status==="final"
+      ? '已结束<span class="sub">美东开赛 '+g.startUS+'</span>'
+      : esc(g.startBJ)+'<span class="sub">北京时间 · 美东 '+g.startUS+'</span>';
+
+  el.innerHTML=
+    '<div class="sb-top"><div><div class="sb-status">'+(g.status==="live"?'<span class="dot"></span>':"")+STATUS_ZH[g.status]+'</div>'+
+      '<div class="ts" style="margin-top:8px">'+esc(tA.zh)+' 对阵 '+esc(tH.zh)+' · 美东 '+keyMD(g.dateUS)+' '+g.startUS+'</div></div>'+
+      '<div class="sb-actions"><button class="mini-btn'+(state.selected===g.id?" on":"")+'" id="btnBox">查看技术统计</button><button class="mini-btn on" id="btnBackPlayers">返回球员数据</button></div></div>'+
+    '<div class="sb-mid">'+
+      '<div class="sb-side"><div class="sb-abbr">'+esc(shortTeam(tA.zh))+'</div><div class="sb-rec">'+esc(tA.rec)+'</div></div>'+
+      '<div class="sb-score left" id="sbAway">'+(g.status==="scheduled"?"—":g.as)+'</div>'+
+      '<div class="sb-clock">'+clockHTML+'</div>'+
+      '<div class="sb-score" id="sbHome">'+(g.status==="scheduled"?"—":g.hs)+'</div>'+
+      '<div class="sb-side right"><div class="sb-abbr">'+esc(shortTeam(tH.zh))+'</div><div class="sb-rec">'+esc(tH.rec)+'</div></div>'+
+    '</div>'+
+    '<div class="sb-leaders">'+lead("pts","PTS 得分")+lead("reb","REB 篮板")+lead("ast","AST 助攻")+lead("blk","BLK 盖帽")+
+      '<div class="sb-lead" style="--cat:'+CAT.time+'"><div class="k">FG% 命中率</div><div class="v">'+(L.pts&&L.pts.fga?pct(L.pts.fgm,L.pts.fga)+"%":"—")+'</div><div class="n">'+(L.pts?esc(L.pts.name):"—")+'</div></div></div>';
+
+  document.getElementById("btnBox").addEventListener("click",function(){
+    state.selected = state.selected===g.id?null:g.id;
+    renderStrip(); renderScoreboard(true); renderPulse(true);
+    document.getElementById("tableShell").scrollIntoView({behavior:"smooth",block:"start"});
+  });
+  document.getElementById("btnBackPlayers").addEventListener("click",function(){
+    state.selected=null; renderStrip(); renderScoreboard(true); renderPulse(true);
+    document.getElementById("tableShell").scrollIntoView({behavior:"smooth",block:"start"});
+  });
+  if(animate && !reduceMotion() && el.animate){
+    el.animate([{transform:"translateX(22px)",opacity:.4},{transform:"translateX(0)",opacity:1}],{duration:220,easing:"ease-out"});
+  }
+}
+function pct(made,att){return att>0?Math.round(made/att*1000)/10:0;}
+function courtSVG(){
+  return '<svg width="160" height="90" viewBox="0 0 160 90" aria-hidden="true">'+
+    '<rect x="1" y="1" width="158" height="88" fill="none" stroke="var(--rule)"/>'+
+    '<line x1="80" y1="1" x2="80" y2="89" stroke="var(--rule)"/>'+
+    '<circle cx="80" cy="45" r="14" fill="none" stroke="var(--amber)" stroke-width="1.5"/>'+
+    '<rect x="1" y="24" width="26" height="42" fill="none" stroke="var(--rule)"/>'+
+    '<rect x="133" y="24" width="26" height="42" fill="none" stroke="var(--rule)"/></svg>';
+}
+function scoreboardSVG(){
+  return '<svg width="150" height="86" viewBox="0 0 150 86" aria-hidden="true">'+
+    '<rect x="1" y="1" width="148" height="84" fill="none" stroke="var(--rule)"/>'+
+    '<line x1="1" y1="30" x2="149" y2="30" stroke="var(--rule)"/>'+
+    '<rect x="18" y="44" width="38" height="14" fill="none" stroke="var(--rule)"/>'+
+    '<rect x="94" y="44" width="38" height="14" fill="none" stroke="var(--rule)"/>'+
+    '<circle cx="75" cy="20" r="4" fill="var(--amber)"><animate attributeName="opacity" values="1;.25;1" dur="2s" repeatCount="indefinite"/></circle></svg>';
+}
+function railSVG(){
+  return '<svg width="120" height="80" viewBox="0 0 120 80" aria-hidden="true">'+
+    '<line x1="20" y1="4" x2="20" y2="76" stroke="var(--amber)" stroke-width="2" opacity=".55"/>'+
+    '<line x1="20" y1="24" x2="72" y2="24" stroke="var(--rule)" stroke-width="2"/>'+
+    '<line x1="20" y1="40" x2="48" y2="40" stroke="var(--rule)" stroke-width="2"/>'+
+    '<line x1="20" y1="56" x2="88" y2="56" stroke="var(--rule)" stroke-width="2"/>'+
+    '<rect x="16" y="18" width="8" height="2" fill="var(--amber)"/></svg>';
+}
+function renderPulse(animate){
+  var holder=document.getElementById("pulseHolder");
+  var g=leadGame();
+  if(!g){ holder.innerHTML='<div class="empty" style="padding:24px"><div class="t">没有符合条件的比赛</div></div>'; return; }
+  var evts=(pulseCache[g.id]||[]).slice(-9);
+  if(!evts.length){
+    holder.innerHTML='<div class="empty" style="padding:20px">'+courtSVG()+
+      '<div class="t">'+(g.status==="scheduled"?"比赛尚未开始":"暂无回合数据")+'</div>'+
+      '<div class="d">'+(g.status==="scheduled"?"北京时间 "+g.startBJ+" 开赛 · 美东 "+g.startUS:"数据源暂未提供本场关键时刻")+'</div></div>';
+    return;
+  }
+  var W=520,H=200,padL=30,padR=30,axY=H/2,scale=4.6;
+  var step=(W-padL-padR)/Math.max(1,(evts.length-1));
+  var pts=evts.map(function(e,i){return [padL+i*step, clamp(axY-e.lead*scale, 34, H-42)];});
+  var d="M"+pts[0][0].toFixed(1)+","+pts[0][1].toFixed(1);
+  for(var i=0;i<pts.length-1;i++){
+    var p0=pts[i>0?i-1:0],p1=pts[i],p2=pts[i+1],p3=pts[i+2<pts.length?i+2:pts.length-1];
+    var c1x=p1[0]+(p2[0]-p0[0])/6, c1y=p1[1]+(p2[1]-p0[1])/6;
+    var c2x=p2[0]-(p3[0]-p1[0])/6, c2y=p2[1]-(p3[1]-p1[1])/6;
+    d+=" C"+c1x.toFixed(1)+","+c1y.toFixed(1)+" "+c2x.toFixed(1)+","+c2y.toFixed(1)+" "+p2[0].toFixed(1)+","+p2[1].toFixed(1);
+  }
+  var marks=evts.map(function(e,i){
+    var x=pts[i][0], y=pts[i][1], above=y<axY;
+    var ty=above?y-13:y+19;
+    return '<g class="pevt" data-i="'+i+'" style="transition-delay:'+(i*100)+'ms">'+
+      '<circle class="pmark" cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="3.5"/>'+
+      '<text x="'+x.toFixed(1)+'" y="'+ty.toFixed(1)+'" text-anchor="middle" fill="'+(i===evts.length-1?"var(--coral)":"var(--muted)")+'">'+esc(e.label)+'</text>'+
+      '<text x="'+x.toFixed(1)+'" y="'+(above?ty-11:ty+11).toFixed(1)+'" text-anchor="middle" fill="var(--faint)">'+esc(e.t)+'</text></g>';
+  }).join("");
+  holder.innerHTML='<svg class="pulse-svg" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid meet" aria-label="本场分差走势与关键得分回合">'+
+    '<line class="paxis" x1="10" y1="'+axY+'" x2="'+(W-10)+'" y2="'+axY+'"/>'+
+    '<path class="pline" id="pulsePath" d="'+d+'"/>'+marks+'<circle class="pdot" id="pulseDot" r="3" cx="-10" cy="-10"/></svg>';
+
+  var path=document.getElementById("pulsePath"), dot=document.getElementById("pulseDot");
+  var evEls=holder.querySelectorAll(".pevt");
+  if(reduceMotion()||!animate){
+    Array.prototype.forEach.call(evEls,function(e){e.style.opacity=1;});
+    var L0=path.getTotalLength(), p0=path.getPointAtLength(L0);
+    dot.setAttribute("cx",p0.x); dot.setAttribute("cy",p0.y);
+    return;
+  }
+  var len=path.getTotalLength();
+  path.style.strokeDasharray=len; path.style.strokeDashoffset=len;
+  requestAnimationFrame(function(){
+    path.style.transition="stroke-dashoffset 900ms cubic-bezier(.22,1,.36,1)";
+    path.style.strokeDashoffset=0;
+    Array.prototype.forEach.call(evEls,function(e){e.style.opacity=1;});
+  });
+  var t0=null, DUR=1200;
+  function stepAnim(ts){
+    if(!t0) t0=ts;
+    var k=clamp((ts-t0)/DUR,0,1);
+    var pt=path.getPointAtLength(len*k);
+    dot.setAttribute("cx",pt.x); dot.setAttribute("cy",pt.y);
+    if(k<1) requestAnimationFrame(stepAnim);
+    else { dot.setAttribute("cx",-10); dot.setAttribute("cy",-10); }
+  }
+  setTimeout(function(){requestAnimationFrame(stepAnim);},900);
+}
+
+/* ========== 9) 表格（固定列宽 + 对齐） ========== */
+var COLUMNS=[
+  {key:"name",en:"PLAYER",zh:"球员",w:236,sortable:false,num:false},
+  {key:"min",en:"MIN",zh:"分钟",w:74,sortable:true,num:true},
+  {key:"pts",en:"PTS",zh:"得分",w:78,sortable:true,num:true},
+  {key:"reb",en:"REB",zh:"篮板",w:76,sortable:true,num:true},
+  {key:"ast",en:"AST",zh:"助攻",w:76,sortable:true,num:true},
+  {key:"stl",en:"STL",zh:"抢断",w:70,sortable:true,num:true},
+  {key:"blk",en:"BLK",zh:"盖帽",w:70,sortable:true,num:true},
+  {key:"to",en:"TO",zh:"失误",w:70,sortable:true,num:true},
+  {key:"fg",en:"FG",zh:"投篮",w:92,sortable:false,num:true},
+  {key:"tp",en:"3PT",zh:"三分",w:88,sortable:false,num:true},
+  {key:"ft",en:"FT",zh:"罚球",w:88,sortable:false,num:true},
+  {key:"pm",en:"+/-",zh:"正负",w:76,sortable:true,num:true},
+  {key:"ts",en:"TS%",zh:"真实命中",w:132,sortable:false,num:true},
+  {key:"rail",en:"PTS RAIL",zh:"得分轨道",w:122,sortable:false,num:true},
+  {key:"team",en:"TEAM",zh:"球队",w:164,sortable:false,num:false},
+  {key:"matchup",en:"MATCHUP",zh:"对阵",w:210,sortable:false,num:false},
+  {key:"status",en:"STATUS",zh:"状态",w:96,sortable:false,num:true}
+];
+
+/* --- 响应式视图：手机用卡片、平板精简列、桌面全列 --- */
+var MQ_MOBILE = window.matchMedia ? window.matchMedia("(max-width:767px)") : {matches:false};
+var MQ_COMPACT = window.matchMedia ? window.matchMedia("(max-width:1199px)") : {matches:false};
+var COMPACT_KEYS = ["name","min","pts","reb","ast","stl","pm","team","matchup","status"];
+function isMobile(){ return MQ_MOBILE.matches; }
+function visibleColumns(){
+  if(MQ_COMPACT.matches && !isMobile()) return COLUMNS.filter(function(c){return COMPACT_KEYS.indexOf(c.key)>=0;});
+  return COLUMNS;
+}
+function shortTeam(zh){
+  return String(zh||"").replace(/^(亚特兰大|波士顿|布鲁克林|夏洛特|芝加哥|克利夫兰|达拉斯|丹佛|底特律|金州|休斯顿|印第安纳|洛杉矶|孟菲斯|迈阿密|密尔沃基|明尼苏达|新奥尔良|纽约|俄克拉荷马|奥兰多|费城|菲尼克斯|波特兰|萨克拉门托|圣安东尼奥|多伦多|犹他|华盛顿)/,"") || zh;
+}
+function matchupText(p,g,full){
+  var zh=team(p.opp).zh;
+  return (g?(p.team===g.home?"主场迎战 ":"客场挑战 "):"对阵 ")+(full?zh:shortTeam(zh));
+}
+
+function renderHead(){
+  var cols=visibleColumns();
+  var total=cols.reduce(function(a,c){return a+c.w;},0)||1;
+  document.getElementById("colGroup").innerHTML=cols.map(function(c){
+    return '<col style="width:'+(c.w/total*100).toFixed(3)+'%">';
+  }).join("");
+  var tr=document.getElementById("headRow");
+  tr.innerHTML=cols.map(function(c){
+    var isSort=state.sortKey===c.key;
+    var aria=isSort?' aria-sort="'+(state.sortDir==="desc"?"descending":"ascending")+'"':"";
+    var ind=isSort?(state.sortDir==="desc"?"↓":"↑"):"";
+    return '<th data-key="'+c.key+'"'+aria+(c.sortable?"":' data-nosort="1"')+(c.num?" data-num":"")+
+      ' style="--cat:'+catOf(c.key)+'">'+
+      '<button class="th-btn" tabindex="-1">'+
+      '<span class="th-en">'+c.en+(ind?'<span class="th-ind">'+ind+'</span>':"")+'</span><span class="th-zh">'+c.zh+'</span></button></th>';
+  }).join("");
+  Array.prototype.forEach.call(tr.querySelectorAll("th[data-key]"),function(th){
+    if(th.getAttribute("data-nosort")) return;
+    th.querySelector(".th-btn").addEventListener("click",function(){
+      var k=th.getAttribute("data-key");
+      if(state.sortKey===k) state.sortDir=state.sortDir==="desc"?"asc":"desc";
+      else { state.sortKey=k; state.sortDir="desc"; }
+      if(METRICS[k]) state.metric=k;
+      syncSortUI(); syncMetricSeg(); renderTable();
+    });
+  });
+}
+function metricValue(p,k){
+  if(k==="fgp") return p.fga?p.fgm/p.fga*100:0;
+  return p[k]||0;
+}
+function filteredPlayers(){
+  var f=state.filters;
+  return state.slate.players.filter(function(p){
+    if(state.liveOnly && p.status!=="live") return false;
+    if(f.team!=="all" && p.team!==f.team && p.opp!==f.team) return false;
+    if(f.pos!=="all" && p.pos!==f.pos) return false;
+    if(f.status!=="all" && p.status!==f.status) return false;
+    if(f.minMin>0 && p.min<f.minMin) return false;
+    if(f.rot && !p.starter) return false;
+    if(f.q){
+      var q=f.q.toLowerCase(), t=team(p.team);
+      if(p.name.indexOf(f.q)<0 && p.nameEn.toLowerCase().indexOf(q)<0 &&
+         t.abbr.toLowerCase().indexOf(q)<0 && t.zh.indexOf(f.q)<0) return false;
+    }
+    return true;
+  }).sort(function(a,b){
+    var va=metricValue(a,state.sortKey), vb=metricValue(b,state.sortKey);
+    if(va===vb) return b.pts-a.pts;
+    return state.sortDir==="desc"?vb-va:va-vb;
+  });
+}
+function tsPct(p){
+  var den=2*(p.fga+0.44*p.fta);
+  return den>0 ? Math.round(p.pts/den*1000)/10 : 0;
+}
+function cellHTML(key,p,x){
+  var played=x.played, t=x.t, g=x.g, v=function(n){return played?n:"—";};
+  switch(key){
+    case "name":
+      return '<td class="pcell">'+(x.i===0?'<span class="lead-tab"><span>Live Leader</span></span>':"")+
+        '<div class="pname" title="'+esc(p.nameEn)+'">'+esc(p.name)+'</div>'+
+        '<div class="psub">'+esc(p.pos)+(p.starter?" · 首发":" · 替补")+' · '+esc(p.nameEn)+'</div></td>';
+    case "min": return '<td class="num'+(played?"":" dim")+'">'+v(p.min)+'</td>';
+    case "pts": return '<td class="num" style="color:'+(played&&p.pts>=25?"var(--amber)":"inherit")+'">'+v(p.pts)+'</td>';
+    case "reb": return '<td class="num'+(played?"":" dim")+'">'+v(p.reb)+'</td>';
+    case "ast": return '<td class="num'+(played?"":" dim")+'">'+v(p.ast)+'</td>';
+    case "stl": return '<td class="num'+(played?"":" dim")+'">'+v(p.stl)+'</td>';
+    case "blk": return '<td class="num'+(played?"":" dim")+'">'+v(p.blk)+'</td>';
+    case "to": return '<td class="num'+(played?"":" dim")+'">'+v(p.to)+'</td>';
+    case "fg": return '<td class="num dim">'+(played?p.fgm+"-"+p.fga:"—")+'</td>';
+    case "tp": return '<td class="num dim">'+(played?p.tpm+"-"+p.tpa:"—")+'</td>';
+    case "ft": return '<td class="num dim">'+(played?p.ftm+"-"+p.fta:"—")+'</td>';
+    case "pm": return '<td class="num pos-neg '+x.pmCls+'">'+(played?(p.pm>0?"+":"")+p.pm:"—")+'</td>';
+    case "ts": return '<td class="num">'+(played&&p.fga?'<span class="tsbar"><i><b style="width:'+clamp(x.ts,0,100)+'%"></b></i>'+x.ts+'%</span>':'<span class="dim">—</span>')+'</td>';
+    case "rail": return '<td class="railcell"><span class="railbar" style="width:'+(played?x.barW:0)+'%;background:'+x.railColor+'"></span></td>';
+    case "team": return '<td class="cell-txt" title="'+esc(t.zh)+'"><span class="teamcell">'+miniCrest(p.team)+'<span>'+esc(shortTeam(t.zh))+'</span></span></td>';
+    case "matchup": return '<td class="cell-txt" title="'+esc(matchupText(p,g,true))+'">'+esc(matchupText(p,g,false))+'</td>';
+    case "status": return '<td class="num">'+statusTag(p.status,true)+'</td>';
+  }
+  return '<td></td>';
+}
+function cardHTML(p,x){
+  var played=x.played, v=function(n){return played?n:"—";};
+  var main=[["得分",v(p.pts),"var(--amber)"],["篮板",v(p.reb),"var(--mint)"],["助攻",v(p.ast),"var(--blue)"],["分钟",v(p.min),"var(--teal)"]];
+  var rest=[
+    ["抢断",v(p.stl)],["盖帽",v(p.blk)],["失误",v(p.to)],["正负值",played?(p.pm>0?"+":"")+p.pm:"—"],
+    ["投篮",played?p.fgm+"-"+p.fga:"—"],["三分",played?p.tpm+"-"+p.tpa:"—"],
+    ["罚球",played?p.ftm+"-"+p.fta:"—"],["真实命中",played&&p.fga?x.ts+"%":"—"]
+  ];
+  return '<article class="pcard" data-id="'+esc(p.id)+'" tabindex="0" role="button" aria-label="'+esc(p.name)+' 详细数据">'+
+    '<div class="pcard-top"><div class="pcard-id">'+miniCrest(p.team)+
+      '<div class="pcard-id-txt"><div class="pcard-name">'+esc(p.name)+'</div>'+
+      '<div class="pcard-sub">'+esc(p.pos)+(p.starter?" · 首发":" · 替补")+' · '+esc(p.nameEn)+'</div></div></div>'+
+      statusTag(p.status,true)+'</div>'+
+    '<div class="pcard-main">'+main.map(function(a){
+      return '<div><div class="k" style="color:'+a[2]+'">'+a[0]+'</div><div class="v'+(a[0]==="得分"&&played&&p.pts>=25?" hi":"")+'">'+a[1]+'</div></div>';
+    }).join("")+'</div>'+
+    '<div class="pcard-grid">'+rest.map(function(a){
+      return '<div class="pcard-kv"><span class="k">'+a[0]+'</span><span class="v">'+a[1]+'</span></div>';
+    }).join("")+'</div>'+
+    '<div class="pcard-rail" style="--cat:'+x.railColor+'"><i style="width:'+(played?x.barW:0)+'%"></i></div>'+
+    '<div class="pcard-foot"><span><b>'+esc(x.t.zh)+'</b></span><span>'+esc(matchupText(p,x.g,true))+'</span><span>'+esc(STATUS_ZH[p.status])+'</span></div>'+
+  '</article>';
+}
+function bindRowEvents(root,sel){
+  Array.prototype.forEach.call(root.querySelectorAll(sel),function(el){
+    var id=el.getAttribute("data-id");
+    el.addEventListener("click",function(){openDrawer(id);});
+    el.addEventListener("keydown",function(e){
+      if(e.key==="Enter"||e.key===" "){e.preventDefault();openDrawer(id);}
+    });
+    el.addEventListener("mouseenter",function(){lastFocusedRow=id;});
+    el.addEventListener("focus",function(){lastFocusedRow=id;});
+  });
+}
+function renderTable(){
+  var body=document.getElementById("tableBody"),
+      empty=document.getElementById("tableEmpty"),
+      shell=document.getElementById("tableShell"),
+      cards=document.getElementById("cardList");
+  var rows=filteredPlayers();
+  var mobile=isMobile();
+  shell.style.display=mobile?"none":"";
+  cards.style.display=mobile?"grid":"none";
+  if(!rows.length){
+    body.innerHTML=""; cards.innerHTML="";
+    var html='<div class="empty">'+railSVG()+
+      '<div class="t">'+(state.slate.games.length?"没有符合筛选条件的球员":"当日没有比赛数据")+'</div>'+
+      '<div class="d">'+(state.slate.games.length?"调整球队 / 位置 / 分钟筛选后重试":"换个日期，或点击 TODAY 返回今天")+'</div></div>';
+    if(mobile){ cards.innerHTML='<div class="card-empty">'+html+'</div>'; empty.innerHTML=""; }
+    else { empty.innerHTML=html; }
+    return;
+  }
+  empty.innerHTML="";
+  var maxVal=Math.max.apply(null,rows.map(function(p){return metricValue(p,state.metric);}))||1;
+  var railColor=catOf(state.metric);
+  function ctx(p,i){
+    return {
+      i:i, t:team(p.team), g:state.slate.games.filter(function(x){return x.id===p.game;})[0],
+      played:p.status!=="scheduled"&&p.status!=="postponed",
+      barW:Math.round(clamp(metricValue(p,state.metric)/maxVal,0,1)*86),
+      pmCls:p.pm>0?"up":p.pm<0?"down":"", ts:tsPct(p), railColor:railColor
+    };
+  }
+  if(mobile){
+    cards.innerHTML=rows.map(function(p,i){return cardHTML(p,ctx(p,i));}).join("");
+    body.innerHTML="";
+    bindRowEvents(cards,".pcard");
+    return;
+  }
+  cards.innerHTML="";
+  var cols=visibleColumns();
+  body.innerHTML=rows.map(function(p,i){
+    var x=ctx(p,i);
+    return '<tr class="prow'+(i===0?" lead-row":"")+'" data-id="'+esc(p.id)+'" tabindex="0" role="button" aria-label="'+esc(p.name)+' 详细数据">'+
+      cols.map(function(c){return cellHTML(c.key,p,x);}).join("")+'</tr>';
+  }).join("");
+  bindRowEvents(body,"tr.prow");
+}
+function renderSummary(){
+  var games=state.slate.games;
+  var live=games.filter(function(g){return g.status==="live";}).length;
+  var fin=games.filter(function(g){return g.status==="final";}).length;
+  var sch=games.filter(function(g){return g.status==="scheduled";}).length;
+  document.getElementById("summary").innerHTML=
+    '<div class="kv"><span class="k">比赛场次</span><span class="v">'+games.length+'</span></div>'+
+    '<div class="kv"><span class="k">进行中</span><span class="v amber">'+live+'</span></div>'+
+    '<div class="kv"><span class="k">已结束</span><span class="v">'+fin+'</span></div>'+
+    '<div class="kv"><span class="k">未开始</span><span class="v">'+sch+'</span></div>'+
+    '<div class="kv"><span class="k">球员行数</span><span class="v">'+state.slate.players.length+'</span></div>'+
+    '<div class="kv"><span class="k">数据时间</span><span class="v">'+hhmmssTZ(state.slate.updatedAt,TZ_VIEW)+'</span></div>';
+}
+
+function syncSortUI(){
+  var m=METRICS[state.sortKey]||{zh:state.sortKey};
+  document.getElementById("sortBtnLabel").textContent="排序："+m.zh+" "+(state.sortDir==="desc"?"↓":"↑");
+  document.getElementById("sortNote").textContent="当前按"+m.zh+(state.sortDir==="desc"?"从高到低":"从低到高")+"排列。点击表头或使用排序菜单可切换字段，排序状态同步到 aria-sort。";
+  var menu=document.getElementById("sortMenu");
+  menu.innerHTML=SORTABLE.map(function(k){
+    return '<button data-k="'+k+'" class="'+(state.sortKey===k?"on":"")+'"><span style="display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:1px;background:'+catOf(k)+'"></span>'+METRICS[k].zh+'</span><span>'+METRICS[k].en+(state.sortKey===k?(state.sortDir==="desc"?" ↓":" ↑"):"")+'</span></button>';
+  }).join("");
+  Array.prototype.forEach.call(menu.querySelectorAll("button"),function(b){
+    b.addEventListener("click",function(){
+      var k=b.getAttribute("data-k");
+      if(state.sortKey===k) state.sortDir=state.sortDir==="desc"?"asc":"desc";
+      else { state.sortKey=k; state.sortDir="desc"; }
+      if(METRICS[k]) state.metric=k;
+      syncMetricSeg(); syncSortUI(); renderTable();
+      menu.classList.remove("open");
+      document.getElementById("sortBtn").setAttribute("aria-expanded","false");
+    });
+  });
+}
+function syncMetricSeg(){
+  Array.prototype.forEach.call(document.querySelectorAll("#metricSeg button"),function(b){
+    b.classList.toggle("on", b.getAttribute("data-metric")===state.metric);
+  });
+}
+function buildMetricSeg(){
+  document.getElementById("metricSeg").innerHTML=["pts","reb","ast","stl","blk","tpm","fgp"].map(function(k){
+    return '<button data-metric="'+k+'" class="'+(k===state.metric?"on":"")+'" style="--cat:'+catOf(k)+'">'+
+      '<span class="cdot"></span>'+METRICS[k].en+' '+METRICS[k].zh+'</button>';
+  }).join("");
+}
+
+/* ========== 10) 球员详情 ========== */
+function radarSVG(p){
+  var keys=["pts","reb","ast","stl","blk","tpm"], n=keys.length, cx=110, cy=104, R=76;
+  var vals=keys.map(function(k){return clamp((p[k]||0)/METRICS[k].max,0.06,1);});
+  function pt(i,r){var a=-Math.PI/2+i*2*Math.PI/n;return [cx+Math.cos(a)*R*r, cy+Math.sin(a)*R*r];}
+  var rings="";
+  [0.25,0.5,0.75,1].forEach(function(r){
+    var d=[];for(var i=0;i<n;i++){var q=pt(i,r);d.push(q[0].toFixed(1)+","+q[1].toFixed(1));}
+    rings+='<polygon points="'+	d.join(" ")+'" fill="none" stroke="var(--rule)" stroke-width="1"/>';
+  });
+  var axes="";
+  for(var i=0;i<n;i++){var q=pt(i,1);axes+='<line x1="'+cx+'" y1="'+cy+'" x2="'+q[0].toFixed(1)+'" y2="'+q[1].toFixed(1)+'" stroke="var(--rule)"/>';}
+  var poly=[];
+  for(var i=0;i<n;i++){var q=pt(i,vals[i]);poly.push(q[0].toFixed(1)+","+q[1].toFixed(1));}
+  var labels="";
+  for(var i=0;i<n;i++){
+    var q=pt(i,1.22);
+    labels+='<text x="'+q[0].toFixed(1)+'" y="'+(q[1]+3).toFixed(1)+'" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="var(--muted)">'+METRICS[keys[i]].en+'</text>';
+  }
+  return '<svg width="220" height="210" viewBox="0 0 220 210" aria-label="本场数据分布雷达图">'+rings+axes+
+    '<polygon points="'+poly.join(" ")+'" fill="var(--amber-soft)" stroke="var(--amber)" stroke-width="1.5"/>'+labels+'</svg>';
+}
+function openDrawer(id){
+  var p=state.slate.players.filter(function(x){return x.id===id;})[0];
+  if(!p) return;
+  state.selected=p.game;
+  var t=team(p.team), g=state.slate.games.filter(function(x){return x.id===p.game;})[0];
+  document.getElementById("drName").textContent=p.name;
+  document.getElementById("drEn").textContent=p.nameEn;
+  document.getElementById("drTeam").innerHTML=crest(p.team,22)+
+    '<span class="mono" style="font-size:12px;letter-spacing:.05em">'+esc(t.zh)+' · '+esc(p.pos)+'</span>'+
+    statusTag(p.status,true)+
+    '<span class="ts">'+(g?(p.team===g.home?"主场迎战 ":"客场挑战 "):"对阵 ")+esc(team(p.opp).zh)+
+      ' · 北京 '+(g?g.startBJ:"—")+' / 美东 '+(g?g.startUS:"—")+'</span>';
+  var played=p.status!=="scheduled"&&p.status!=="postponed";
+  var ts=tsPct(p);
+  var per36 = p.min>0 ? Math.round(p.pts/p.min*36*10)/10 : 0;
+  var splits=[
+    {k:"投篮",v:played?pct(p.fgm,p.fga):0,c:CAT.scoring},
+    {k:"三分",v:played?pct(p.tpm,p.tpa):0,c:CAT.scoring},
+    {k:"罚球",v:played?pct(p.ftm,p.fta):0,c:CAT.rebound},
+    {k:"TS%",v:played?ts:0,c:CAT.time}
+  ];
+  document.getElementById("drBody").innerHTML=
+    '<div class="dr-stats">'+
+      [["PTS",played?p.pts:"—",CAT.scoring],["REB",played?p.reb:"—",CAT.rebound],["AST",played?p.ast:"—",CAT.playmaking],["MIN",played?p.min:"—",CAT.time],
+       ["STL",played?p.stl:"—",CAT.defense],["BLK",played?p.blk:"—",CAT.defense],["TO",played?p.to:"—",CAT.defense],
+       ["+/-",played?(p.pm>0?"+":"")+p.pm:"—",CAT.plusminus]]
+      .map(function(x){
+        var color = x[0]==="+/-"&&played ? (p.pm>0?"var(--mint)":p.pm<0?"var(--coral)":"inherit") : "inherit";
+        return '<div class="dr-stat"><div class="k" style="color:'+x[2]+'">'+x[0]+'</div><div class="v" style="color:'+color+'">'+x[1]+'</div></div>';
+      }).join("")+
+    '</div>'+
+    '<div class="dr-sec" style="--cat:'+CAT.plain+'"><h4>本场数据分布</h4><div style="display:flex;justify-content:center">'+radarSVG(p)+'</div>'+
+      '<p class="note">按各项目参考上限归一，用于本场横向比较。</p></div>'+
+    '<div class="sec"></div>'+
+    '<div class="dr-sec" style="--cat:'+CAT.scoring+'"><h4>本场效率</h4>'+
+      '<div class="kv"><span class="k">投篮</span><span class="v">'+(played?p.fgm+"-"+p.fga+" ("+pct(p.fgm,p.fga)+"%)":"—")+'</span></div>'+
+      '<div class="kv"><span class="k">三分</span><span class="v">'+(played?p.tpm+"-"+p.tpa+" ("+pct(p.tpm,p.tpa)+"%)":"—")+'</span></div>'+
+      '<div class="kv"><span class="k">罚球</span><span class="v">'+(played?p.ftm+"-"+p.fta+" ("+pct(p.ftm,p.fta)+"%)":"—")+'</span></div>'+
+      '<div class="kv"><span class="k">真实命中 TS%</span><span class="v amber">'+(played&&p.fga?ts+"%":"—")+'</span></div>'+
+      '<div class="kv"><span class="k">每 36 分钟得分</span><span class="v">'+(played&&p.min>0?per36:"—")+'</span></div>'+
+    '</div>'+
+    '<div class="dr-sec" style="--cat:'+CAT.time+'"><h4>命中率分布</h4>'+splits.map(function(s){
+      return '<div class="split-row"><span class="k">'+s.k+'</span><span class="split-track"><span class="split-fill" style="width:'+clamp(s.v,0,100)+'%;background:'+s.c+'"></span></span><span class="v">'+(played?s.v+"%":"—")+'</span></div>';
+    }).join("")+'</div>';
+  document.getElementById("drawer").classList.add("open");
+  document.getElementById("backdrop").classList.add("open");
+  document.getElementById("drClose").focus();
+}
+function closeDrawer(){
+  document.getElementById("drawer").classList.remove("open");
+  document.getElementById("backdrop").classList.remove("open");
+  state.selected=null; renderStrip(); renderScoreboard(false);
+}
+
+/* ========== 11) 刷新与加载 ========== */
+function setConn(ok,msg){
+  var el=document.getElementById("connState");
+  el.textContent=ok?"连接正常":"连接中断";
+  el.className=ok?"ok":"bad";
+  document.getElementById("staleBar").classList.toggle("show",!ok);
+  if(msg) document.getElementById("staleMsg").textContent=msg;
+}
+function renderAll(animate){
+  renderHeader(); renderStrip(); renderSummary();
+  renderHead(); syncSortUI(); syncMetricSeg(); renderTable();
+  renderScoreboard(animate); renderPulse(animate);
+}
+function refreshTick(){
+  if(inflight) return;
+  inflight=true;
+  fetchSlate(state.key).then(function(slate){
+    state.slate=slate;
+    setConn(true);
+    var scroll=document.getElementById("tableShell").scrollLeft;
+    renderHeader(); renderSummary(); renderStrip();
+    renderTable(); renderScoreboard(false);
+    document.getElementById("tableShell").scrollLeft=scroll;
+    if(lastFocusedRow){
+      var f=document.querySelector('.prow[data-id="'+lastFocusedRow+'"], .pcard[data-id="'+lastFocusedRow+'"]');
+      if(f&&document.activeElement===document.body) f.focus({preventScroll:true});
+    }
+  }).catch(function(){
+    setConn(false,"数据连接中断 · 显示最近更新内容");
+  }).finally(function(){
+    inflight=false;
+    scheduleRefresh();
+  });
+}
+function scheduleRefresh(){
+  clearInterval(refreshTimer);
+  var live=state.slate.games.some(function(g){return g.status==="live";});
+  var ms = live ? DATA_SOURCE.refreshIntervalMs : DATA_SOURCE.idleIntervalMs;
+  ms = Math.max(ms, state.refreshMs||0);
+  document.getElementById("nextRefresh").textContent=(ms/1000)+"秒后（北京时间 "+hhmmTZ(new Date(Date.now()+ms),TZ_VIEW)+"）";
+  refreshTimer=setInterval(refreshTick,ms);
+}
+function loadDate(key,animate){
+  state.key=key; state.selected=null;
+  var ov=document.getElementById("loadOverlay");
+  ov.classList.add("show");
+  if(isMobile()){
+    var cl=document.getElementById("cardList");
+    document.getElementById("tableShell").style.display="none";
+    cl.style.display="grid";
+    cl.innerHTML='<div class="card-empty"><div class="empty"><div class="t">正在加载当日比赛数据…</div></div></div>';
+  }
+  document.getElementById("heroSub").textContent="正在加载 "+keyCN(key)+"（北京时间）的比赛数据…";
+  document.getElementById("dateInput").value=keyToInput(key);
+  boxCache={}; pulseCache={};
+  fetchSlate(key,{forceBox:true}).then(function(slate){
+    state.slate=slate;
+    ov.classList.remove("show");
+    setConn(true);
+    renderAll(animate!==false);
+    scheduleRefresh();
+  }).catch(function(){
+    ov.classList.remove("show");
+    state.slate={key:key,dateUSRange:[keyAdd(key,-1),key],games:[],players:[],updatedAt:new Date()};
+    renderAll(false);
+    setConn(false,"数据连接失败 · 请检查网络后重新连接");
+    scheduleRefresh();
+  });
+}
+
+/* ========== 12) 事件绑定 ========== */
+document.getElementById("datePrev").addEventListener("click",function(){ loadDate(keyAdd(state.key,-1)); });
+document.getElementById("dateNext").addEventListener("click",function(){
+  var nk=keyAdd(state.key,1);
+  if(nk>todayKey()) return;
+  loadDate(nk);
+});
+document.getElementById("dateToday").addEventListener("click",function(){ loadDate(todayKey()); });
+document.getElementById("btnCal").addEventListener("click",function(){
+  var i=document.getElementById("dateInput");
+  if(i.showPicker){ try{i.showPicker();}catch(e){i.focus();} } else i.focus();
+});
+document.getElementById("dateInput").addEventListener("change",function(){
+  var k=inputToKey(this.value);
+  if(k.length===8) loadDate(k);
+});
+document.getElementById("liveOnly").addEventListener("change",function(){
+  state.liveOnly=this.checked; renderStrip(); renderTable();
+});
+document.getElementById("btnRefresh").addEventListener("click",refreshTick);
+document.getElementById("btnReconnect").addEventListener("click",refreshTick);
+document.getElementById("btnMenu").addEventListener("click",function(){
+  document.getElementById("navLinks").classList.toggle("open");
+});
+document.getElementById("railToggle").addEventListener("click",function(){
+  var open=document.getElementById("railPanel").classList.toggle("open");
+  this.setAttribute("aria-expanded",open?"true":"false");
+  this.querySelector("span").textContent=open?"收起筛选与概览":"展开筛选与概览";
+});
+document.getElementById("btnTheme").addEventListener("click",function(){
+  setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark");
+});
+document.getElementById("btnRules").addEventListener("click",function(){document.getElementById("modalRules").classList.add("open");});
+document.getElementById("btnSettings").addEventListener("click",function(){document.getElementById("modalSettings").classList.add("open");});
+document.getElementById("rulesClose").addEventListener("click",function(){document.getElementById("modalRules").classList.remove("open");});
+document.getElementById("setClose").addEventListener("click",function(){document.getElementById("modalSettings").classList.remove("open");});
+document.getElementById("modalRules").addEventListener("click",function(e){if(e.target===this)this.classList.remove("open");});
+document.getElementById("modalSettings").addEventListener("click",function(e){if(e.target===this)this.classList.remove("open");});
+document.getElementById("setIntervalSeg").addEventListener("click",function(e){
+  var b=e.target.closest("button"); if(!b) return;
+  Array.prototype.forEach.call(this.querySelectorAll("button"),function(x){x.classList.remove("on");});
+  b.classList.add("on");
+  state.refreshMs=+b.getAttribute("data-iv")*1000;
+  DATA_SOURCE.refreshIntervalMs=state.refreshMs;
+  scheduleRefresh();
+});
+document.getElementById("setThemeSeg").addEventListener("click",function(e){
+  var b=e.target.closest("button"); if(!b) return;
+  setTheme(b.getAttribute("data-theme"));
+});
+function setTheme(t){
+  document.documentElement.dataset.theme=t;
+  try{ localStorage.setItem("nba-theme",t); }catch(e){}
+  Array.prototype.forEach.call(document.querySelectorAll("#setThemeSeg button"),function(b){
+    b.classList.toggle("on", b.getAttribute("data-theme")===t);
+  });
+  renderPulse(false);
+}
+document.getElementById("setMotion").addEventListener("change",function(){
+  document.documentElement.dataset.motion=this.checked?"on":"off";
+  if(this.checked) renderPulse(true);
+});
+document.getElementById("backdrop").addEventListener("click",closeDrawer);
+document.getElementById("drClose").addEventListener("click",closeDrawer);
+document.getElementById("metricSeg").addEventListener("click",function(e){
+  var b=e.target.closest("button"); if(!b) return;
+  var m=b.getAttribute("data-metric");
+  state.metric=m; state.sortKey=m; state.sortDir="desc";
+  syncMetricSeg(); syncSortUI(); renderTable();
+});
+document.getElementById("sortBtn").addEventListener("click",function(e){
+  e.stopPropagation();
+  var menu=document.getElementById("sortMenu");
+  var open=menu.classList.toggle("open");
+  this.setAttribute("aria-expanded",open?"true":"false");
+});
+document.addEventListener("click",function(){
+  var menu=document.getElementById("sortMenu");
+  if(menu.classList.contains("open")){
+    menu.classList.remove("open");
+    document.getElementById("sortBtn").setAttribute("aria-expanded","false");
+  }
+});
+document.getElementById("fTeam").addEventListener("change",function(){state.filters.team=this.value;renderTable();});
+document.getElementById("fPos").addEventListener("change",function(){state.filters.pos=this.value;renderTable();});
+document.getElementById("fStatus").addEventListener("change",function(){state.filters.status=this.value;renderTable();});
+document.getElementById("fMin").addEventListener("input",function(){state.filters.minMin=+this.value||0;renderTable();});
+document.getElementById("fRot").addEventListener("change",function(){state.filters.rot=this.checked;renderTable();});
+document.getElementById("fSearch").addEventListener("input",function(){state.filters.q=this.value.trim();renderTable();});
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape"){
+    closeDrawer();
+    document.getElementById("modalRules").classList.remove("open");
+    document.getElementById("modalSettings").classList.remove("open");
+    document.getElementById("sortMenu").classList.remove("open");
+    return;
+  }
+  var tag=(e.target.tagName||"").toLowerCase();
+  if(tag==="input"||tag==="select"||tag==="textarea") return;
+  if(e.key==="ArrowLeft") loadDate(keyAdd(state.key,-1));
+  if(e.key==="ArrowRight"){ var nk=keyAdd(state.key,1); if(nk<=todayKey()) loadDate(nk); }
+});
+window.addEventListener("scroll",function(){
+  document.getElementById("hdr").classList.toggle("condensed",window.scrollY>80);
+},{passive:true});
+var resizeTimer=null;
+window.addEventListener("resize",function(){
+  clearTimeout(resizeTimer);
+  resizeTimer=setTimeout(function(){
+    renderHead(); syncSortUI(); renderTable();
+  },140);
+});
+
+/* ========== 13) 启动 ========== */
+(function boot(){
+  var saved="light";
+  try{ saved=localStorage.getItem("nba-theme")||"light"; }catch(e){}
+  document.documentElement.dataset.theme=saved;
+  Array.prototype.forEach.call(document.querySelectorAll("#setThemeSeg button"),function(b){
+    b.classList.toggle("on", b.getAttribute("data-theme")===saved);
+  });
+  document.getElementById("dateInput").max=keyToInput(todayKey());
+  document.getElementById("srcName").textContent=DATA_SOURCE.name;
+  buildMetricSeg(); renderHead(); syncSortUI(); syncMetricSeg();
+  loadDate(todayKey(),true);
+})();
+
+})();
+</script>
+</body>
+</html>
