@@ -172,29 +172,14 @@ html[data-theme="dark"] input[type=date]{color-scheme:dark}
 .pevt .pmark{fill:var(--s1);stroke:var(--coral);stroke-width:1.5}
 .pdot{fill:var(--coral)}
 
-/* ---------- board / rail ---------- */
+/* ---------- board ---------- */
 .board{display:block;padding-bottom:56px}
-.rail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px;align-items:start}
-.rail>div{display:contents}
-.rail h3{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.rail h3::before{content:"";width:10px;height:2px;background:var(--cat,var(--blue))}
-.rail-block{border:1px solid var(--rule);border-radius:4px;background:var(--s1);padding:15px 16px;min-width:0}
-.rail-block.first{border-color:var(--rule)}
 .main-col{min-width:0}
-.rail-toggle{display:none}
 .kv{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:12px;padding:6px 0;font-family:var(--mono);font-size:11px;border-bottom:1px dashed var(--rule)}
 .kv:last-child{border-bottom:none}
 .kv .k{color:var(--muted);letter-spacing:.05em}
 .kv .v{color:var(--ink);font-variant-numeric:tabular-nums;text-align:right;min-width:52px}
 .kv .v.amber{color:var(--amber)}
-.field{margin-bottom:11px}
-.field label{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
-.field select,.field input[type=text],.field input[type=number]{width:100%;height:36px;background:var(--s1);border:1px solid var(--rule);border-radius:4px;padding:0 10px;font-family:var(--mono);font-size:11px;color:var(--ink)}
-.field select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 15px) 16px,calc(100% - 10px) 16px;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:28px}
-.field-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.legend{display:flex;flex-direction:column;gap:9px}
-.legend div{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.04em}
-.swatch{width:16px;height:3px;border-radius:2px;flex:none}
 .note{font-family:var(--mono);font-size:9.5px;line-height:1.75;color:var(--faint);letter-spacing:.03em}
 
 /* ---------- toolbar ---------- */
@@ -361,7 +346,6 @@ footer{border-top:1px solid var(--rule);background:var(--s1);margin-top:8px}
   .icon-btn .tip{display:none}
   .lead-grid{grid-template-columns:1fr}
   .board{display:block}
-  .rail{grid-template-columns:repeat(2,minmax(0,1fr))}
   .sb-leaders{grid-template-columns:repeat(3,1fr)}
   .sb-mid{grid-template-columns:1fr 96px 140px 96px 1fr}
 }
@@ -401,13 +385,6 @@ footer{border-top:1px solid var(--rule);background:var(--s1);margin-top:8px}
   .sb-leaders{grid-template-columns:repeat(2,1fr);gap:10px}
   .pulse{padding:16px}
   .pulse-svg svg{width:100%;height:auto}
-  .rail{display:none;gap:12px}
-  .rail.open{display:grid;grid-template-columns:1fr;gap:12px;margin-top:2px}
-  .rail-block{padding:13px 14px}
-  .rail-toggle{display:flex;width:100%;height:38px;align-items:center;justify-content:space-between;padding:0 12px;margin-bottom:16px;border:1px solid var(--rule);border-radius:4px;background:var(--s1);font-family:var(--mono);font-size:11px;color:var(--muted)}
-  .rail-toggle:hover{color:var(--ink);border-color:var(--rule-strong)}
-  .rail-toggle .arw{display:inline-flex;transition:transform .18s ease}
-  .rail-toggle[aria-expanded="true"] .arw{transform:rotate(180deg)}
   .toolbar{gap:10px}
   .toolbar>div:last-child{width:100%}
   .sort-wrap{flex:none}
@@ -519,70 +496,6 @@ html[data-motion="off"] .dot::after{opacity:.45;border-width:1px;transform:scale
   </section>
 
   <section class="board">
-    <button class="rail-toggle" id="railToggle" aria-expanded="false" aria-controls="railPanel">
-      <span>展开筛选与概览</span>
-      <span class="arw"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></span>
-    </button>
-    <aside class="rail" id="railPanel" aria-label="筛选与概览">
-      <div>
-        <div class="rail-block first">
-          <h3 style="--cat:var(--teal)">当日概览</h3>
-          <div id="summary"></div>
-        </div>
-        <div class="rail-block">
-          <h3 style="--cat:var(--violet)">图例 · 数据色谱</h3>
-          <div class="legend">
-            <div><span class="swatch" style="background:var(--amber)"></span>得分 / 投射 PTS · 3PM · FG% · TS%</div>
-            <div><span class="swatch" style="background:var(--mint)"></span>篮板 REB · 正向正负值</div>
-            <div><span class="swatch" style="background:var(--blue)"></span>助攻 AST · 未开始状态</div>
-            <div><span class="swatch" style="background:var(--violet)"></span>防守 STL · BLK · TO</div>
-            <div><span class="swatch" style="background:var(--teal)"></span>时间 MIN · 命中率轨道</div>
-            <div><span class="swatch" style="background:var(--coral)"></span>已结束 / 负向正负值</div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="rail-block first">
-          <h3 style="--cat:var(--blue)">球员筛选</h3>
-          <div class="field-2">
-            <div class="field">
-              <label for="fTeam">球队</label>
-              <select id="fTeam"><option value="all">全部</option></select>
-            </div>
-            <div class="field">
-              <label for="fPos">位置</label>
-              <select id="fPos">
-                <option value="all">全部</option>
-                <option value="G">后卫 G</option>
-                <option value="F">前锋 F</option>
-                <option value="C">中锋 C</option>
-              </select>
-            </div>
-          </div>
-          <div class="field-2">
-            <div class="field">
-              <label for="fStatus">比赛状态</label>
-              <select id="fStatus">
-                <option value="all">全部</option>
-                <option value="live">仅实时</option>
-                <option value="final">仅已结束</option>
-                <option value="scheduled">仅未开始</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="fMin">最低分钟</label>
-              <input type="number" id="fMin" min="0" max="48" step="1" value="0">
-            </div>
-          </div>
-          <label class="chk" style="width:100%;justify-content:flex-start"><input type="checkbox" id="fRot">仅显示首发球员</label>
-        </div>
-        <div class="rail-block">
-          <h3 style="--cat:var(--coral)">排序说明</h3>
-          <p class="note" id="sortNote">当前按得分从高到低排列。</p>
-        </div>
-      </div>
-    </aside>
-
     <div class="main-col">
       <div class="stale" id="staleBar">
         <span class="m" id="staleMsg">数据连接中断 · 显示最近更新内容</span>
@@ -1080,7 +993,7 @@ var state={
   key: todayKey(),
   slate:{key:todayKey(), dateUSRange:[], games:[], players:[], updatedAt:new Date()},
   sortKey:"pts", sortDir:"desc", metric:"pts",
-  filters:{team:"all",pos:"all",status:"all",minMin:0,rot:false,q:""},
+  filters:{q:""},
   liveOnly:false, selected:null, refreshMs:DATA_SOURCE.refreshIntervalMs
 };
 var refreshTimer=null, inflight=false, lastFocusedRow=null;
@@ -1357,11 +1270,6 @@ function filteredPlayers(){
   var f=state.filters;
   return state.slate.players.filter(function(p){
     if(state.liveOnly && p.status!=="live") return false;
-    if(f.team!=="all" && p.team!==f.team && p.opp!==f.team) return false;
-    if(f.pos!=="all" && p.pos!==f.pos) return false;
-    if(f.status!=="all" && p.status!==f.status) return false;
-    if(f.minMin>0 && p.min<f.minMin) return false;
-    if(f.rot && !p.starter) return false;
     if(f.q){
       var q=f.q.toLowerCase(), t=team(p.team);
       if(p.name.indexOf(f.q)<0 && p.nameEn.toLowerCase().indexOf(q)<0 &&
@@ -1450,8 +1358,8 @@ function renderTable(){
   if(!rows.length){
     body.innerHTML=""; cards.innerHTML="";
     var html='<div class="empty">'+railSVG()+
-      '<div class="t">'+(state.slate.games.length?"没有符合筛选条件的球员":"当日没有比赛数据")+'</div>'+
-      '<div class="d">'+(state.slate.games.length?"调整球队 / 位置 / 分钟筛选后重试":"换个日期，或点击 TODAY 返回今天")+'</div></div>';
+      '<div class="t">'+(state.slate.games.length?"没有找到匹配的球员":"当日没有比赛数据")+'</div>'+
+      '<div class="d">'+(state.slate.games.length?"换个关键词搜索，或点击 TODAY 返回今天":"换个日期，或点击 TODAY 返回今天")+'</div></div>';
     if(mobile){ cards.innerHTML='<div class="card-empty">'+html+'</div>'; empty.innerHTML=""; }
     else { empty.innerHTML=html; }
     return;
@@ -1482,24 +1390,9 @@ function renderTable(){
   }).join("");
   bindRowEvents(body,"tr.prow");
 }
-function renderSummary(){
-  var games=state.slate.games;
-  var live=games.filter(function(g){return g.status==="live";}).length;
-  var fin=games.filter(function(g){return g.status==="final";}).length;
-  var sch=games.filter(function(g){return g.status==="scheduled";}).length;
-  document.getElementById("summary").innerHTML=
-    '<div class="kv"><span class="k">比赛场次</span><span class="v">'+games.length+'</span></div>'+
-    '<div class="kv"><span class="k">进行中</span><span class="v amber">'+live+'</span></div>'+
-    '<div class="kv"><span class="k">已结束</span><span class="v">'+fin+'</span></div>'+
-    '<div class="kv"><span class="k">未开始</span><span class="v">'+sch+'</span></div>'+
-    '<div class="kv"><span class="k">球员行数</span><span class="v">'+state.slate.players.length+'</span></div>'+
-    '<div class="kv"><span class="k">数据时间</span><span class="v">'+hhmmssTZ(state.slate.updatedAt,TZ_VIEW)+'</span></div>';
-}
-
 function syncSortUI(){
   var m=METRICS[state.sortKey]||{zh:state.sortKey};
   document.getElementById("sortBtnLabel").textContent="排序："+m.zh+" "+(state.sortDir==="desc"?"↓":"↑");
-  document.getElementById("sortNote").textContent="当前按"+m.zh+(state.sortDir==="desc"?"从高到低":"从低到高")+"排列。点击表头或使用排序菜单可切换字段，排序状态同步到 aria-sort。";
   var menu=document.getElementById("sortMenu");
   menu.innerHTML=SORTABLE.map(function(k){
     return '<button data-k="'+k+'" class="'+(state.sortKey===k?"on":"")+'"><span style="display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:1px;background:'+catOf(k)+'"></span>'+METRICS[k].zh+'</span><span>'+METRICS[k].en+(state.sortKey===k?(state.sortDir==="desc"?" ↓":" ↑"):"")+'</span></button>';
@@ -1613,7 +1506,7 @@ function setConn(ok,msg){
   if(msg) document.getElementById("staleMsg").textContent=msg;
 }
 function renderAll(animate){
-  renderHeader(); renderStrip(); renderSummary();
+  renderHeader(); renderStrip();
   renderHead(); syncSortUI(); syncMetricSeg(); renderTable();
   renderScoreboard(animate); renderPulse(animate);
 }
@@ -1624,7 +1517,7 @@ function refreshTick(){
     state.slate=slate;
     setConn(true);
     var scroll=document.getElementById("tableShell").scrollLeft;
-    renderHeader(); renderSummary(); renderStrip();
+    renderHeader(); renderStrip();
     renderTable(); renderScoreboard(false);
     document.getElementById("tableShell").scrollLeft=scroll;
     if(lastFocusedRow){
@@ -1698,11 +1591,6 @@ document.getElementById("btnReconnect").addEventListener("click",refreshTick);
 document.getElementById("btnMenu").addEventListener("click",function(){
   document.getElementById("navLinks").classList.toggle("open");
 });
-document.getElementById("railToggle").addEventListener("click",function(){
-  var open=document.getElementById("railPanel").classList.toggle("open");
-  this.setAttribute("aria-expanded",open?"true":"false");
-  this.querySelector("span").textContent=open?"收起筛选与概览":"展开筛选与概览";
-});
 document.getElementById("btnTheme").addEventListener("click",function(){
   setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark");
 });
@@ -1757,11 +1645,6 @@ document.addEventListener("click",function(){
     document.getElementById("sortBtn").setAttribute("aria-expanded","false");
   }
 });
-document.getElementById("fTeam").addEventListener("change",function(){state.filters.team=this.value;renderTable();});
-document.getElementById("fPos").addEventListener("change",function(){state.filters.pos=this.value;renderTable();});
-document.getElementById("fStatus").addEventListener("change",function(){state.filters.status=this.value;renderTable();});
-document.getElementById("fMin").addEventListener("input",function(){state.filters.minMin=+this.value||0;renderTable();});
-document.getElementById("fRot").addEventListener("change",function(){state.filters.rot=this.checked;renderTable();});
 document.getElementById("fSearch").addEventListener("input",function(){state.filters.q=this.value.trim();renderTable();});
 document.addEventListener("keydown",function(e){
   if(e.key==="Escape"){
